@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS usuarios(
 	nombre VARCHAR(50) NOT NULL,
 	apellido VARCHAR(50) NOT NULL,
 	email VARCHAR(50) NULL,
-	telefono VARCHAR(11) NULL
+	telefono VARCHAR(11) NULL,
 	direccion VARCHAR(100) NULL,
 	fecha_alta DATETIME NOT NULL,
 	fecha_baja DATETIME NULL,
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS maquinas(
 
 CREATE TABLE IF NOT EXISTS procesadores(
 	id INT NOT NULL AUTO_INCREMENT,
-	id_maquina INT NOT NULL,
+	id_maquina VARCHAR(255) NOT NULL,
 	fecha_cambio DATETIME NOT NULL,
 	tipo VARCHAR(255) NULL,
 	velocidad VARCHAR(255) NULL,
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS procesadores(
 
 CREATE TABLE IF NOT EXISTS memorias(
 	id INT NOT NULL AUTO_INCREMENT,
-	id_maquina INT NOT NULL,
+	id_maquina VARCHAR(255) NOT NULL,
 	fecha_cambio DATETIME NOT NULL,
 	capacidad VARCHAR(255) NULL,
 	tipo VARCHAR(255) NULL,
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS memorias(
 
 CREATE TABLE IF NOT EXISTS discos(
 	id INT NOT NULL AUTO_INCREMENT,
-	id_maquina INT NOT NULL,
+	id_maquina VARCHAR(255) NOT NULL,
 	fecha_cambio DATETIME NOT NULL,
 	nombre VARCHAR(255) NULL,
 	fabricante VARCHAR(255) NULL,
@@ -96,12 +96,11 @@ CREATE TABLE IF NOT EXISTS discos(
 
 CREATE TABLE IF NOT EXISTS bios(
 	id INT NOT NULL AUTO_INCREMENT,
-	id_maquina INT NOT NULL,
+	id_maquina VARCHAR(255) NOT NULL,
 	fecha_cambio DATETIME NOT NULL,
 	nombre VARCHAR(255) NULL,
 	fabricante VARCHAR(255) NULL,
 	modelo VARCHAR(255) NULL,
-	numero_serial VARCHAR(255) NULL,
 	asset_tag VARCHAR(255) NULL,
 	version VARCHAR(255) NULL,
 	numero_serial VARCHAR(255) NULL,
@@ -113,7 +112,7 @@ CREATE TABLE IF NOT EXISTS bios(
 
 CREATE TABLE IF NOT EXISTS placas_red(
 	id INT NOT NULL AUTO_INCREMENT,
-	id_maquina INT NOT NULL,
+	id_maquina VARCHAR(255) NOT NULL,
 	fecha_cambio DATETIME NOT NULL,
 	direccion_mac VARCHAR(255) NULL,
 	direccion_ip VARCHAR(255) NULL,
@@ -132,7 +131,7 @@ CREATE TABLE IF NOT EXISTS placas_red(
 
 CREATE TABLE IF NOT EXISTS placas_video(
 	id INT NOT NULL AUTO_INCREMENT,
-	id_maquina INT NOT NULL,
+	id_maquina VARCHAR(255) NOT NULL,
 	fecha_cambio DATETIME NOT NULL,
 	nombre VARCHAR(255) NULL,
 	memoria VARCHAR(255) NULL,
@@ -145,7 +144,7 @@ CREATE TABLE IF NOT EXISTS placas_video(
 
 CREATE TABLE IF NOT EXISTS placas_sonido(
 	id INT NOT NULL AUTO_INCREMENT,
-	id_maquina INT NOT NULL,
+	id_maquina VARCHAR(255) NOT NULL,
 	fecha_cambio DATETIME NOT NULL,
 	nombre VARCHAR(255) NULL,
 	fabricante VARCHAR(255) NULL,
@@ -157,7 +156,7 @@ CREATE TABLE IF NOT EXISTS placas_sonido(
 
 CREATE TABLE IF NOT EXISTS monitores(
 	id INT NOT NULL AUTO_INCREMENT,
-	id_maquina INT NOT NULL,
+	id_maquina VARCHAR(255) NOT NULL,
 	fecha_cambio DATETIME NOT NULL,
 	nombre VARCHAR(255) NULL,
 	modelo VARCHAR(255) NULL,
@@ -170,7 +169,7 @@ CREATE TABLE IF NOT EXISTS monitores(
 
 CREATE TABLE IF NOT EXISTS perifericos(
 	id INT NOT NULL AUTO_INCREMENT,
-	id_maquina INT NOT NULL,
+	id_maquina VARCHAR(255) NOT NULL,
 	fecha_cambio DATETIME NOT NULL,
 	nombre VARCHAR(255) NULL,
 	fabricante VARCHAR(255) NULL,
