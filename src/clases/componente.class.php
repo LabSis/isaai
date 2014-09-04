@@ -4,6 +4,8 @@
  *
  * @author Diego Barrionuevo
  */
-interface Componente {
-    
+abstract class Componente {
+
+    protected $_fecha_sincronizacion;
+
 }

@@ -5,7 +5,7 @@
  *
  * @author Diego Barrionuevo
  */
-class Procesador implements Componente {
+class Procesador extends Componente {
 
     private $_id;
     private $_tipo;
