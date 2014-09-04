@@ -1,26 +1,21 @@
 <?php
 
 /**
- * Description of procesador
+ * Representa un procesador en nuestro sistema.
  *
  * @author Diego Barrionuevo
+ * @version 1.0
  */
 class Procesador extends Componente {
 
-    private $_id;
     private $_tipo;
     private $_velocidad;
     private $_numero;
 
-    function __construct($_id, $_tipo, $_velocidad, $_numero) {
-        $this->_id = $_id;
+    function __construct($_tipo, $_velocidad, $_numero) {
         $this->_tipo = $_tipo;
         $this->_velocidad = $_velocidad;
         $this->_numero = $_numero;
-    }
-
-    public function get_id() {
-        return $this->_id;
     }
 
     public function get_tipo() {
@@ -33,10 +28,6 @@ class Procesador extends Componente {
 
     public function get_numero() {
         return $this->_numero;
-    }
-
-    public function set_id($_id) {
-        $this->_id = $_id;
     }
 
     public function set_tipo($_tipo) {

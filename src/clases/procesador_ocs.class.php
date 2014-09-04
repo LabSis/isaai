@@ -4,6 +4,7 @@
  * Description of procesador_ocs
  *
  * @author Diego Barrionuevo
+ * @version 1.0
  */
 class ProcesadorOcs implements ComponenteMaterializable {
 
