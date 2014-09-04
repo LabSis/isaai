@@ -4,7 +4,8 @@
  * Esta clase representa un períferico, ejemplo teclado, mouse, etc, en nuestro 
  * sistema.
  *
- * @author store
+ * @author Milagros Zea Cárdenas
+ * @version 1.0
  */
 class Perisferico extends Componente {
 

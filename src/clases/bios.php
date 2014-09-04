@@ -4,6 +4,7 @@
  * Esta clase representa a una bios en un computadora real.
  *
  * @author Milagros Zea Cárdenas
+ * @version 1.0
  */
 class Bios extends Componente {
 
