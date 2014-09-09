@@ -15,7 +15,8 @@ class Perisferico extends Componente {
     private $_descripcion;
     private $_interfaz;
 
-    function __construct($_nombre, $_fabricante, $_tipo, $_descripcion, $_interfaz) {
+    function __construct($_id, $_nombre, $_fabricante, $_tipo, $_descripcion, $_interfaz) {
+        parent::__construct($_id);
         $this->_nombre = $_nombre;
         $this->_fabricante = $_fabricante;
         $this->_tipo = $_tipo;
@@ -61,6 +62,15 @@ class Perisferico extends Componente {
 
     public function set_interfaz($_interfaz) {
         $this->_interfaz = $_interfaz;
+    }
+
+    public function equals($componente) {
+        $igual = true;
+        $igual &= $this->_descripcion === $componente->get_descripcion();
+        $igual &= $this->_fabricante === $componente->get_decripcion();
+        $igual &= $this->_interfaz === $componente->get_interfaz();
+        $igual &= $this->_nombre === $componente->get_nombre();
+        $igual &= $this->_tipo === $componente->get_tipo();
     }
 
 }

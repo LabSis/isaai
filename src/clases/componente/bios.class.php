@@ -15,7 +15,8 @@ class Bios extends Componente {
     private $_version;
     private $_numero_serial;
 
-    function __construct($_nombre, $_fabricante, $modelo, $_asset_tag, $_version, $_numero_serial) {
+    function __construct($_id, $_nombre, $_fabricante, $modelo, $_asset_tag, $_version, $_numero_serial) {
+        parent::__construct($_id);
         $this->_nombre = $_nombre;
         $this->_fabricante = $_fabricante;
         $this->modelo = $modelo;
@@ -70,6 +71,15 @@ class Bios extends Componente {
 
     public function set_numero_serial($_numero_serial) {
         $this->_numero_serial = $_numero_serial;
+    }
+
+    public function equals($componente) {
+        $igual = true;
+        $igual &= $this->_asset_tag === $componente->get_asset_tag();
+        $igual &= $this->_fabricante === $componente->get_fabricante();
+        $igual &= $this->_nombre === $componente->get_nombre();
+        $igual &= $this->_numero_serial === $componente->get_numero_serial();
+        $igual &= $this->_version === $componente->get_version();
     }
 
 }

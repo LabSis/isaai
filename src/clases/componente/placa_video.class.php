@@ -12,7 +12,8 @@ class PlacaVideo extends Componente {
     private $_memoria;
     private $_chipset;
 
-    function __construct($_nombre, $_memoria, $_chipset) {
+    function __construct($_id, $_nombre, $_memoria, $_chipset) {
+        parent::__construct($_id);
         $this->_nombre = $_nombre;
         $this->_memoria = $_memoria;
         $this->_chipset = $_chipset;
@@ -40,6 +41,14 @@ class PlacaVideo extends Componente {
 
     public function set_chipset($_chipset) {
         $this->_chipset = $_chipset;
+    }
+
+    public function equals($componente) {
+        $igual = true;
+        $igual &= $this->_chipset === $componente->get_chipset();
+        $igual &= $this->memoria === $componente->get_memoria();
+        $igual &= $this->nombre === $componente->get_nombre();
+        return $igual;
     }
 
 }

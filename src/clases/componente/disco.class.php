@@ -17,7 +17,8 @@ class Disco extends Componente {
     private $_numero_serial;
     private $_firmware;
 
-    function __construct($_nombre, $_fabricante, $_modelo, $_descripcion, $_tipo, $_tamanio, $_numero_serial, $_firmware) {
+    function __construct($_id, $_nombre, $_fabricante, $_modelo, $_descripcion, $_tipo, $_tamanio, $_numero_serial, $_firmware) {
+        parent::__construct($_id);
         $this->_nombre = $_nombre;
         $this->_fabricante = $_fabricante;
         $this->_modelo = $_modelo;
@@ -90,6 +91,18 @@ class Disco extends Componente {
 
     public function set_firmware($_firmware) {
         $this->_firmware = $_firmware;
+    }
+
+    public function equals($componente) {
+        $igual = true;
+        $igual &= $this->_descripcion === $componente->get_descripcion();
+        $igual &= $this->_fabricante === $componente->get_fabricante();
+        $igual &= $this->_firmware === $componente->get_firmware();
+        $igual &= $this->_modelo === $componente->get_modelo();
+        $igual &= $this->_nombre === $componente->get_nombre();
+        $igual &= $this->_numero_serial === $componente->get_numero_serial();
+        $igual &= $this->_tamanio === $componente->get_tamnio();
+        $igual &= $this->_tipo === $componente->get_tipo();
     }
 
 }
