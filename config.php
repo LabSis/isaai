@@ -56,5 +56,7 @@ function __autoload($nombre_clase) {
     }
 }
 
-//conexion con el ocs
-Conexion::init('localhost', 'root', '', 'ocsweb');
+define('CONEXION_ISAAI', 'isaai');
+define('CONEXION_OCS', 'ocs');
+Conexion::agregar_instancia(CONEXION_ISAAI, new Conexion('localhost', 'root', '', 'isaai'));
+Conexion::agregar_instancia(CONEXION_OCS, new Conexion('localhost', 'root', '', 'ocsweb'));

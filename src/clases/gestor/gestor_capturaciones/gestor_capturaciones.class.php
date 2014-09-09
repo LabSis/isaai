@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Gestiona la capturación de máquinas.
  * Posee métodos para obtener datos de las bases de datos de OCS y ISAAI. 
@@ -11,14 +12,39 @@
  * @version 1.0
  */
 class GestorCapturaciones {
-    
-    public function capturar(){
-        
-        
+
+    public function capturar() {
+
+        //filtrar las maquinas que posiblemente hayan cambiado, a partir de la fecha de 
+        //sincornizacion
+        //obtener lista de ids de esas maquinas y materializarlas
+        //devolver lista de maquinas tanto del ocs como del isaai al controlador
+        $cargador_lista_isaai = new CargadorListaIsaai();
+        $lista_resultados_isaai = $cargador_lista_isaai->cargar_lista(null);
+        $cargador_lista_ocs = new CargadorListaOcs();
+        $lista_resultados_ocs = $cargador_lista_ocs->cargar_lista(null);
+        $cantidad = 0;
+        for ($i = 0; $i < count($lista_resultados_ocs); $i++) {
+            // Buscar..
+            $j = 0;
+            while ($j < count($lista_resultados_isaai) && $lista_resultados_ocs[$i]["id"] !== $lista_resultados_isaai[$j]["id"]) {
+
+                $j++;
+            }
+
+            if ($j === count($lista_resultados_isaai)) {
+                //agregar nueva maquina
+                $cantidad++;
+            } else {
+                //comparo la fechas
+            }
+        }
+        echo $cantidad;
     }
-    
-    public function cargar_listas_posibles_cambios_ocs(){
-        
+
+    public static function hash($mapa) {
+        $hash = md5(implode('', $mapa));
+        return $hash;
     }
-    
+
 }

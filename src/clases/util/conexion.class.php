@@ -32,13 +32,13 @@ class Conexion {
     const FILTRO_BUSQUEDA_MAYOR_QUE = 5;
     const FILTRO_BUSQUEDA_MENOR_QUE = 6;
 
-    private static $_instancia;
-    private static $_host = 'localhost';
-    private static $_nombre_usuario = 'root';
-    private static $_clave_usuario = '';
-    private static $_base_datos = '';
-    private static $_modo_desarrollo = false;
-    private static $_conjunto_caracteres = 'utf8';
+    private static $_instancias = array();
+    private $_host = 'localhost';
+    private $_nombre_usuario = 'root';
+    private $_clave_usuario = '';
+    private $_base_datos = '';
+    private $_modo_desarrollo = false;
+    private $_conjunto_caracteres = 'utf8';
     private $_conexion;
     private $_modo_autoconexion;
     private $_id_insercion;
@@ -57,14 +57,20 @@ class Conexion {
      * 
      * @return Conexion Instancia única de Conexion.
      */
-    public static function get_instacia() {
-        if (is_null(self::$_host) || is_null(self::$_nombre_usuario) || is_null(self::$_clave_usuario) || is_null(self::$_base_datos)) {
+    public static function get_instacia($nombre_conexion) {
+        if (isset(self::$_instancias[$nombre_conexion])) {
+            $instancia_actual = self::$_instancias[$nombre_conexion];
+            if (is_null($instancia_actual->_host) || is_null($instancia_actual->_nombre_usuario) || is_null($instancia_actual->_clave_usuario) || is_null($instancia_actual->_base_datos)) {
+                die("Error Fatal: Error al tratar de inicar la conexión con la base de datos");
+            }
+            return $instancia_actual;
+        } else {
             die("Error Fatal: Error al tratar de inicar la conexión con la base de datos");
         }
-        if (is_null(self::$_instancia)) {
-            self::$_instancia = new Conexion();
-        }
-        return self::$_instancia;
+    }
+
+    public static function agregar_instancia($nombre_conexion, $conexion) {
+        self::$_instancias[$nombre_conexion] = $conexion;
     }
 
     /**
@@ -85,15 +91,16 @@ class Conexion {
      * la conexión con la base de datos. Valor por defecto: 'utf8'.
      */
     public static function init($_host, $_nombre_usuario, $_clave_usuario, $_base_datos, $_modo_desarrollo = false, $conjunto_caracteres = 'utf8') {
-        self::$_host = $_host;
-        self::$_nombre_usuario = $_nombre_usuario;
-        self::$_clave_usuario = $_clave_usuario;
-        self::$_base_datos = $_base_datos;
-        self::$_modo_desarrollo = $_modo_desarrollo;
-        self::$_conjunto_caracteres = $conjunto_caracteres;
+        return Conexion($_host, $_nombre_usuario, $_clave_usuario, $_base_datos, $_modo_desarrollo, $conjunto_caracteres);
     }
 
-    private function __construct() {
+    public function __construct($_host, $_nombre_usuario, $_clave_usuario, $_base_datos, $_modo_desarrollo = false, $conjunto_caracteres = 'utf8') {
+        $this->_host = $_host;
+        $this->_nombre_usuario = $_nombre_usuario;
+        $this->_clave_usuario = $_clave_usuario;
+        $this->_base_datos = $_base_datos;
+        $this->_modo_desarrollo = $_modo_desarrollo;
+        $this->_conjunto_caracteres = $conjunto_caracteres;
         //Todos estos son valores de instancia por defecto.
         $this->_conexion = null;
         $this->_id_insercion = -1;
@@ -103,17 +110,17 @@ class Conexion {
     }
 
     public function conectar() {
-        $this->_conexion = new mysqli(self::$_host, self::$_nombre_usuario, self::$_clave_usuario, self::$_base_datos);
+        $this->_conexion = new mysqli($this->_host, $this->_nombre_usuario, $this->_clave_usuario, $this->_base_datos);
         if (!is_null($this->_conexion->connect_error)) {
             $this->error("Error al tratar de conectar con la base de datos, con "
                     . "los siguientes parámetros de conexión: "
-                    . "-host:" . self::$_host . ", "
-                    . "-usuario:" . self::$_nombre_usuario . ", "
-                    . "-base_datos:" . self::$_base_datos . ". "
+                    . "-host:" . $this->_host . ", "
+                    . "-usuario:" . $this->_nombre_usuario . ", "
+                    . "-base_datos:" . $this->_base_datos . ". "
                     , $this->_conexion->connect_errno, $this->_conexion->connect_error);
             return false;
         }
-        $this->_conexion->set_charset(self::$_conjunto_caracteres);
+        $this->_conexion->set_charset($this->_conjunto_caracteres);
         return true;
     }
 
@@ -564,7 +571,7 @@ class Conexion {
         if ($mensaje_error === '') {
             $mensaje_error = $this->_conexion->error;
         }
-        if (self::$_modo_desarrollo) {
+        if ($this->_modo_desarrollo) {
             $this->_error[] = $mensaje . ': (' . $codigo_error . '): ' . $mensaje_error . PHP_EOL;
         } else {
             $this->_error[] = $mensaje . PHP_EOL;
@@ -619,9 +626,9 @@ class Conexion {
      * @return string Cadena con los parámetros de conexión.
      */
     public static function info() {
-        $conexion_actual = "host: " . self::$_host . PHP_EOL
-                . "usuario: " . self::$_nombre_usuario . PHP_EOL
-                . "base datos: " . self::$_base_datos . PHP_EOL;
+        $conexion_actual = "host: " . $this->_host . PHP_EOL
+                . "usuario: " . $this->_nombre_usuario . PHP_EOL
+                . "base datos: " . $this->_base_datos . PHP_EOL;
         return $conexion_actual;
     }
 
