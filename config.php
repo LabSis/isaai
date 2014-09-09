@@ -33,7 +33,12 @@ $global_ruta_web = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $global_nombre_siti
 date_default_timezone_set('America/Argentina/Catamarca');
 
 //funcion para encontrar las clases
+$global_paquetes = array('', 'util', 'componente', 'maquina', 'usuario',
+    'gestor', 'gestor/gestor_capturaciones',
+    'ocs', 'ocs/componente', 'ocs/gestor', 'ocs/gestor/gestor_capturaciones');
+
 function __autoload($nombre_clase) {
+    global $global_paquetes;
     $clase = '';
     $caracteres = str_split($nombre_clase);
     for ($i = 0; $i < count($caracteres); $i++) {
@@ -42,8 +47,14 @@ function __autoload($nombre_clase) {
         }
         $clase .= strtolower($caracteres[$i]);
     }
-    require_once  'src/clases/' . $clase . '.class.php';
+    for ($i = 0; $i < count($global_paquetes); $i++) {
+        $posible_archivo = 'src/clases/' . $global_paquetes[$i] . '/' . $clase . '.class.php';
+        if (file_exists($posible_archivo)) {
+            require_once $posible_archivo;
+            break;
+        }
+    }
 }
 
 //conexion con el ocs
-Conexion::init('localhost','root','','ocsweb');
+Conexion::init('localhost', 'root', '', 'ocsweb');

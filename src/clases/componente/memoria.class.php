@@ -17,7 +17,8 @@ class Memoria extends Componente {
     private $_velocidad;
     private $_nombre;
 
-    function __construct($_capacidad, $_tipo, $_descripcion, $_numero_serial, $_numero_ranura, $_velocidad, $_nombre) {
+    function __construct($_id, $_capacidad, $_tipo, $_descripcion, $_numero_serial, $_numero_ranura, $_velocidad, $_nombre) {
+        parent::__construct($_id);
         $this->_capacidad = $_capacidad;
         $this->_tipo = $_tipo;
         $this->_descripcion = $_descripcion;
@@ -81,6 +82,17 @@ class Memoria extends Componente {
 
     public function set_nombre($_nombre) {
         $this->_nombre = $_nombre;
+    }
+
+    public function equals($componente) {
+        $igual = true;
+        $igual &= ($this->_capacidad === $componente->get_capacidad());
+        $igual &= ($this->_tipo === $componente->get_tipo());
+        $igual &= ($this->_descripcion === $componente->get_descripcion());
+        $igual &= ($this->_numero_serial === $componente->get_numero_serial());
+        $igual &= ($this->_velocidad === $componente->get_velocidad());
+        $igual &= ($this->_nombre === $componente->get_nombre());
+        return $igual;
     }
 
 }

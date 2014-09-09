@@ -8,11 +8,11 @@
  */
 class ProcesadorOcs implements ComponenteMaterializable {
 
-    public function materializar() {
+    public static function materializar() {
         //consultas a la bd de ocs para materializar objeto
         $conexion = Conexion::get_instacia();
         $resultado = $conexion->consultar_simple("SELECT processort,processors,processorn FROM hardware");
-        $procesador = new Procesador($resultado[0]['processort'], $resultado[0]['processors'], $resultado[0]['processorn']);
+        $procesador = new Procesador(null, $resultado[0]['processort'], $resultado[0]['processors'], $resultado[0]['processorn']);
         return $procesador;
     }
 

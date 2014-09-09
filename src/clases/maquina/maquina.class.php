@@ -9,6 +9,7 @@
  */
 class Maquina {
 
+    private $_id;
     private $_fecha_alta;
     private $_nombre_maquina;
     private $_fecha_ultimo_contacto;
@@ -22,9 +23,9 @@ class Maquina {
     private $_discos;
     private $_monitores;
     private $_sistema_operativo;
-    
 
-    function __construct($_fecha_alta, $_nombre_maquina, $_fecha_ultimo_contacto, $_procesadores, $_bios, $_placas_red, $_placas_sonido, $_placas_video, $_memorias, $_perisfericos, $_discos, $_monitores, $_sistema_operativo) {
+    function __construct($_id, $_fecha_alta, $_nombre_maquina, $_fecha_ultimo_contacto, $_procesadores, $_bios, $_placas_red, $_placas_sonido, $_placas_video, $_memorias, $_perisfericos, $_discos, $_monitores, $_sistema_operativo) {
+        $this->_id = $_id;
         $this->_fecha_alta = $_fecha_alta;
         $this->_nombre_maquina = $_nombre_maquina;
         $this->_fecha_ultimo_contacto = $_fecha_ultimo_contacto;
@@ -40,7 +41,11 @@ class Maquina {
         $this->_sistema_operativo = $_sistema_operativo;
     }
 
-        public function get_fecha_alta() {
+    public function get_id() {
+        return $this->_id;
+    }
+
+    public function get_fecha_alta() {
         return $this->_fecha_alta;
     }
 
@@ -82,6 +87,10 @@ class Maquina {
 
     public function get_discos() {
         return $this->_discos;
+    }
+
+    public function set_id($_id) {
+        $this->_id = $_id;
     }
 
     public function set_fecha_alta($_fecha_alta) {
@@ -135,6 +144,7 @@ class Maquina {
     public function set_monitores($_monitores) {
         $this->_monitores = $_monitores;
     }
+
     public function get_sistema_operativo() {
         return $this->_sistema_operativo;
     }
@@ -142,6 +152,5 @@ class Maquina {
     public function set_sistema_operativo($_sistema_operativo) {
         $this->_sistema_operativo = $_sistema_operativo;
     }
-
 
 }

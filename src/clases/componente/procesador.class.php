@@ -12,7 +12,8 @@ class Procesador extends Componente {
     private $_velocidad;
     private $_numero;
 
-    function __construct($_tipo, $_velocidad, $_numero) {
+    function __construct($_id, $_tipo, $_velocidad, $_numero) {
+        parent::__construct($_id);
         $this->_tipo = $_tipo;
         $this->_velocidad = $_velocidad;
         $this->_numero = $_numero;
@@ -40,6 +41,14 @@ class Procesador extends Componente {
 
     public function set_numero($_numero) {
         $this->_numero = $_numero;
+    }
+
+    public function equals($componente) {
+        $igual = true;
+        $igual &= $this->_tipo === $componente->get_tipo();
+        $igual &= $this->_velocidad === $componente->get_velocidad();
+        $igual &= $this->_numero === $componente->get_numero();
+        return $igual;
     }
 
 }

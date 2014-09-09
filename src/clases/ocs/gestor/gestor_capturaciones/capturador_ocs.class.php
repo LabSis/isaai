@@ -8,9 +8,8 @@
 class CapturadorOcs implements Capturador {
 
     public function obtenerMaquina() {
-        $procesadorOcs = new ProcesadorOcs();
-        $procesador = $procesadorOcs->materializar();
-        $maquina = new Maquina($procesador);
+        $maquina = new Maquina(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        $maquina->set_procesadores(ProcesadorOcs::materializar());
         return $maquina;
     }
 

@@ -9,5 +9,5 @@ interface ComponenteMaterializable {
     /**
      * Devuelve un Componente
      */
-    public function materializar();
+    public static function materializar();
 }
