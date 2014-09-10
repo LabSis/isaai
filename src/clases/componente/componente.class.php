@@ -16,7 +16,14 @@ abstract class Componente {
         $this->_fecha_sincronizacion = null;
         $this->_fecha_cambio = null;
     }
-    
-    public abstract function equals($componente);
 
+    public function get_fecha_cambio() {
+        return $this->_fecha_cambio;
+    }
+
+    public function set_fecha_cambio($_fecha_cambio) {
+        $this->_fecha_cambio = $_fecha_cambio;
+    }
+
+    public abstract function equals($componente);
 }

@@ -9,5 +9,5 @@ interface ComponenteMaterializable {
     /**
      * Devuelve un Componente
      */
-    public static function materializar();
+    public static function materializar($_maquina);
 }
