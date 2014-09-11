@@ -1,3 +1,4 @@
+USE ocsweb;
 DELIMITER //
 CREATE PROCEDURE listar()
 BEGIN

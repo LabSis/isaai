@@ -48,5 +48,6 @@ class Monitor extends Componente {
         $igual &= $this->_modelo === $componente->get_modelo();
         $igual &= $this->_nombre === $componente->get_nombre();
         $igual &= $this->_resolucion === $componente->get_resolucion();
+        return $igual;
     }
 }

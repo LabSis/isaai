@@ -15,13 +15,18 @@ class CargadorListaOcs implements CargadorLista {
      */
     public function cargar_lista($excluidos) {
         $conexion = Conexion::get_instacia(CONEXION_OCS);
-        $resultados = $conexion->consultar_simple("SELECT id, ipaddr, lastcome FROM hardware");
+        $resultados = $conexion->consultar_simple("SELECT id, ipaddr, uuid, name, osname, lastcome FROM hardware");
         $lista_resultados_ocs = array();
         for ($i = 0; $i < count($resultados); $i++) {
             $mapa = array();
             //definir todos los datos posbiles que la funcion hash pueda requerir
-            $mapa['id'] = $resultados[$i]['ipaddr'];
-            $lista_resultados_ocs[GestorCapturaciones::hash($mapa)] = $resultados[$i]['lastcome'];
+            //uuid, name, ipaddr, id, osname
+            $mapa['id'] = $resultados[$i]['id'];
+            $mapa['osname'] = $resultados[$i]['osname'];
+            $mapa['uuid'] = $resultados[$i]['uuid'];
+            $mapa['ipaddr'] = $resultados[$i]['ipaddr'];
+            $resultados[$i]['clave_unica'] = GestorCapturaciones::hash($mapa);
+            $lista_resultados_ocs[GestorCapturaciones::hash($mapa)] = $resultados[$i];
         }
         return $lista_resultados_ocs;
     }

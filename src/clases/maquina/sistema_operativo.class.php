@@ -8,12 +8,22 @@
  */
 class SistemaOperativo {
 
+    private $_id;
     private $_nombre;   //255 caracteres como limite
     private $_version;  //50 caracteres como limite
 
-    function __construct($_nombre, $_version) {
+    function __construct($_id, $_nombre, $_version) {
+        $this->_id = $_id;
         $this->_nombre = $_nombre;
         $this->_version = $_version;
+    }
+
+    public function get_id() {
+        return $this->_id;
+    }
+
+    public function set_id($_id) {
+        $this->_id = $_id;
     }
 
     public function get_nombre() {

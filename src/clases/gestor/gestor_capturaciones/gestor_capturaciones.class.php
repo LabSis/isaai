@@ -5,7 +5,7 @@
  * Posee métodos para obtener datos de las bases de datos de OCS y ISAAI. 
  * Devuelve un array de máquinas que posiblemente hayan cambiado. 
  * Cada objeto máquina está compuesto por procesadores, memorias RAM, 
- * bios, etc.).
+ * bios, etc.
 
  *
  * @author Diego Barrionuevo, Germán Parisi
@@ -27,13 +27,14 @@ class GestorCapturaciones {
         for ($i = 0; $i < count($lista_resultados_ocs); $i++) {
             // Buscar..
             $j = 0;
-            while ($j < count($lista_resultados_isaai) && $lista_resultados_ocs[$i]["id"] !== $lista_resultados_isaai[$j]["id"]) {
-
+            while ($j < count($lista_resultados_isaai) && $lista_resultados_ocs[$i]['clave_unica'] !== $lista_resultados_isaai[$j]["id"]) {
                 $j++;
             }
-
             if ($j === count($lista_resultados_isaai)) {
                 //agregar nueva maquina
+                $capturadorOcs = new CapturadorOcs();
+                $maquina_nueva = $capturadorOcs->obtenerMaquina($lista_resultados_ocs[$i]["id"]);
+                $maquina_nueva->insertar();
                 $cantidad++;
             } else {
                 //comparo la fechas

@@ -11,7 +11,7 @@ class BiosOCS implements ComponenteMaterializable {
 
     public static function materializar($_maquina) {
         $conexion = Conexion::get_instacia(CONEXION_OCS);
-        $consulta = $this->obtener_consulta($_maquina->get_sistema_operativo()->get_nombre(), $_maquina->get_sistema_operativo()->get_nombre(), $_maquina->get_sistema_operativo()->get_version());
+        $consulta = $this->obtener_consulta($_maquina->get_nombre(), $_maquina->get_sistema_operativo()->get_nombre(), $_maquina->get_sistema_operativo()->get_version());
         $resultado = $conexion->consultar_simple($consulta);
         //cargo el objeto bios...
         $bios = new Bios();

@@ -3,7 +3,8 @@
 /**
  * Description of cargador_lista_isaai
  *
- * @author Diego
+ * @author Diego Barrionuevo
+ * @version 1.0
  */
 class CargadorListaIsaai implements CargadorLista {
 
