@@ -10,16 +10,16 @@ class Bios extends Componente {
 
     private $_nombre;
     private $_fabricante;
-    private $modelo;
+    private $_modelo;
     private $_asset_tag;
     private $_version;
     private $_numero_serial;
 
-    function __construct($_id, $_nombre, $_fabricante, $modelo, $_asset_tag, $_version, $_numero_serial) {
+    function __construct($_id, $_nombre, $_fabricante, $_modelo, $_asset_tag, $_version, $_numero_serial) {
         parent::__construct($_id);
         $this->_nombre = $_nombre;
         $this->_fabricante = $_fabricante;
-        $this->modelo = $modelo;
+        $this->_modelo = $_modelo;
         $this->_asset_tag = $_asset_tag;
         $this->_version = $_version;
         $this->_numero_serial = $_numero_serial;
@@ -33,8 +33,8 @@ class Bios extends Componente {
         return $this->_fabricante;
     }
 
-    public function getModelo() {
-        return $this->modelo;
+    public function get_modelo() {
+        return $this->_modelo;
     }
 
     public function get_asset_tag() {
@@ -57,8 +57,8 @@ class Bios extends Componente {
         $this->_fabricante = $_fabricante;
     }
 
-    public function setModelo($modelo) {
-        $this->modelo = $modelo;
+    public function set_modelo($modelo) {
+        $this->_modelo = $modelo;
     }
 
     public function set_asset_tag($_asset_tag) {

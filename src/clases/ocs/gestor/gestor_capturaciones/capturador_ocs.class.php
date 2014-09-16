@@ -8,10 +8,10 @@
  */
 class CapturadorOcs implements Capturador {
 
-    public function obtenerMaquina($id_maquina) {
+    public function obtenerMaquina($idMaquina) {
         $maquina = new Maquina(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-        $maquina->set_procesadores(ProcesadorOcs::materializar($id_maquina));
-        $maquina->set_bios(BiosOCS::materializar($id_maquina));
+        $maquina->set_procesadores(ProcesadorOcs::materializar($idMaquina));
+        //$maquina->set_bios(BiosOcs::materializar($idMaquina));
         return $maquina;
     }
 

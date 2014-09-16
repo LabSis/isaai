@@ -8,21 +8,27 @@
 abstract class Componente {
 
     protected $_id;
-    protected $_fecha_sincronizacion;
-    protected $_fecha_cambio;
+    protected $_fecha_alta;
 
     function __construct($_id) {
         $this->_id = $_id;
-        $this->_fecha_sincronizacion = null;
-        $this->_fecha_cambio = null;
+        $this->_fecha_alta = null;
     }
 
-    public function get_fecha_cambio() {
-        return $this->_fecha_cambio;
+    public function get_id() {
+        return $this->_id;
     }
 
-    public function set_fecha_cambio($_fecha_cambio) {
-        $this->_fecha_cambio = $_fecha_cambio;
+    public function get_fecha_alta() {
+        return $this->_fecha_alta;
+    }
+
+    public function set_id($_id) {
+        $this->_id = $_id;
+    }
+
+    public function set_fecha_alta($_fecha_alta) {
+        $this->_fecha_alta = $_fecha_alta;
     }
 
     public abstract function equals($componente);

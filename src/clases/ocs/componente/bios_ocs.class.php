@@ -7,17 +7,18 @@
  * @author Milagros Zea
  * @version 1.0
  */
-class BiosOCS implements ComponenteMaterializable {
+class BiosOcs implements ComponenteMaterializable {
 
-    public static function materializar($_maquina) {
+    public static function materializar($idMaquina) {
         $conexion = Conexion::get_instacia(CONEXION_OCS);
-        $consulta = $this->obtener_consulta($_maquina->get_nombre(), $_maquina->get_sistema_operativo()->get_nombre(), $_maquina->get_sistema_operativo()->get_version());
+        $consulta = self::obtener_consulta(
+                        $idMaquina->_mapa['NAME'], $idMaquina->_mapa['OSNAME'], $idMaquina->_mapa['OSVERSION']);
         $resultado = $conexion->consultar_simple($consulta);
         //cargo el objeto bios...
-        $bios = new Bios();
+        $bios = new Bios(null, null, null, null, null, null, null);
         $bios->set_nombre($resultado[0]['smanufacturer']);
         $bios->set_fabricante($resultado[0]['bmanufacturer']);
-        $bios->setModelo($resultado[0]['smodel']);
+        $bios->set_modelo($resultado[0]['smodel']);
         $bios->set_asset_tag($resultado[0]['assettag']);
         $bios->set_version($resultado[0]['bversion']);
         $bios->set_numero_serial($resultado[0]['ssn']);
@@ -32,16 +33,17 @@ class BiosOCS implements ComponenteMaterializable {
      * @param type $_version_sistema_operativo
      * @return type
      */
-    private function obtener_consulta($_nombre_maquina, $_sistema_operativo, $_version_sistema_operativo) {
-        return 'SELECT smanufacturer, bmanufacturer, smodel, assettag,'
-                . ' bversion, ssn  FROM bios WHERE bios.hardware_id = '
-                . '(SELECT id FROM hardware WHERE hardware.name ='
-                . $_nombre_maquina . ' AND hardware.osname= ' . $_sistema_operativo
-                . ' AND hardware.osversion= ' . $_version_sistema_operativo
-                . ' AND hardware.lastcome = (SELECT MAX(hardware.lastcome) '
-                . 'FROM hardware WHERE hardware.name = ' . $_nombre_maquina
-                . ' AND hardware.osname= ' . $_sistema_operativo
-                . ' AND hardware.osversion= ' . $_version_sistema_operativo . '))';
+    private static function obtener_consulta($_nombre_maquina, $_sistema_operativo, $_version_sistema_operativo) {
+        $consulta = 'SELECT h.id, smanufacturer, bmanufacturer, smodel, assettag,'
+                . ' bversion, ssn  FROM bios AS b INNER JOIN hardware AS h ON '
+                . ' b.hardware_id = h.id WHERE h.name ="'
+                . $_nombre_maquina . '" AND h.osname= "' . $_sistema_operativo
+                . '" AND h.osversion= "' . $_version_sistema_operativo
+                . '" AND h.lastcome = '
+                . '(SELECT MAX(hardware.lastcome) '
+                . 'FROM hardware WHERE hardware.id = h.id)';
+        echo "<br/>$consulta";
+        return $consulta;
     }
 
 }

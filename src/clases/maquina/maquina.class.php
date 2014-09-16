@@ -11,6 +11,8 @@ class Maquina {
 
     private $_id;
     private $_fecha_alta;
+    //private $_fecha_sincronizacion;
+    //private $_fecha_cambio;
     private $_nombre_maquina;
     private $_fecha_ultimo_contacto;
     private $_procesadores;

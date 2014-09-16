@@ -23,6 +23,7 @@ class CargadorListaOcs implements CargadorLista {
             //uuid, name, ipaddr, id, osname
             $mapa['id'] = $resultados[$i]['id'];
             $mapa['osname'] = $resultados[$i]['osname'];
+            $mapa['osversion'] = $resultados[$i]['osversion'];
             $mapa['uuid'] = $resultados[$i]['uuid'];
             $mapa['ipaddr'] = $resultados[$i]['ipaddr'];
             $resultados[$i]['clave_unica'] = GestorCapturaciones::hash($mapa);

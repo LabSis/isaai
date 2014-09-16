@@ -33,7 +33,9 @@ class GestorCapturaciones {
             if ($j === count($lista_resultados_isaai)) {
                 //agregar nueva maquina
                 $capturadorOcs = new CapturadorOcs();
-                $maquina_nueva = $capturadorOcs->obtenerMaquina($lista_resultados_ocs[$i]["id"]);
+                $idMaquinaOcs = new IdMaquinaOcs();
+                $idMaquinaOcs->autosetear($lista_resultados_ocs[$i]);
+                $maquina_nueva = $capturadorOcs->obtenerMaquina($idMaquinaOcs);
                 $maquina_nueva->insertar();
                 $cantidad++;
             } else {
