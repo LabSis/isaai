@@ -10,6 +10,6 @@ interface ComponenteMaterializable {
     /**
      * Devuelve un Componente
      */
-    public static function materializar($mapa_unicidad);
+    public static function materializar($id_maquina);
     //public static function desmaterializar($componene);
 }

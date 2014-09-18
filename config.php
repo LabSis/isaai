@@ -35,6 +35,7 @@ date_default_timezone_set('America/Argentina/Catamarca');
 //funcion para encontrar las clases
 $global_paquetes = array('', 'util', 'componente', 'maquina', 'usuario',
     'gestor', 'gestor/gestor_capturaciones',
+    'isaai', 'isaai/componente',
     'ocs', 'ocs/componente', 'ocs/gestor', 'ocs/gestor/gestor_capturaciones');
 
 function __autoload($nombre_clase) {

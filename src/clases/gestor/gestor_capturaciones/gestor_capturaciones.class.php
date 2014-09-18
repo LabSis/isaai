@@ -32,11 +32,14 @@ class GestorCapturaciones {
             }
             if ($j === count($lista_resultados_isaai)) {
                 //agregar nueva maquina
-//                $capturador_ocs = new CapturadorOcs();
-//                $id_maquina_ocs = new IdMaquinaOcs($lista_resultados_ocs[$i]['ID']);
-//                $maquina_nueva = $capturador_ocs->obtener_maquina($id_maquina_ocs);
-//                $maquina_nueva->insertar();
-                $cantidad++;
+                if ($cantidad === 0) {
+                    $capturador_ocs = new CapturadorOcs();
+                    $id_maquina_ocs = new IdMaquinaOcs($lista_resultados_ocs[$i]['ID']);
+                    $maquina_nueva = $capturador_ocs->obtener_maquina($id_maquina_ocs);
+                    //Out::println($maquina_nueva->get_procesadores()->get_velocidad());
+                    $maquina_nueva->insertar();
+                    $cantidad++;
+                }
             } else {
                 //comparo la fechas
             }

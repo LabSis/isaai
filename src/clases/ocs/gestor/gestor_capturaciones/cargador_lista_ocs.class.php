@@ -18,7 +18,7 @@ class CargadorListaOcs implements CargadorLista {
         $resultados = $conexion->consultar_simple("SELECT * FROM hardware");
         for ($i = 0; $i < count($resultados); $i++) {
             $id_maquina_ocs = new IdMaquinaOcs($resultados[$i]['ID']);
-            $id_maquina_ocs->cargar_mapa_valores_de_consulta($resultados[$i]);
+            $id_maquina_ocs->agregrar_valores_unicidad($resultados[$i]);
             $id_maquina_ocs->generar_id_hash();
             $resultados[$i]['clave_unica'] = $id_maquina_ocs->get_id_hash();
         }

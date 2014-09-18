@@ -159,16 +159,16 @@ class Maquina {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $conexion->transaccion_comenzar();
         $ok = true;
-        $ok &= ProcesadorIsaai::desmaterializar($this->_procesadores);
         $datos_insercion = array(
             'id' => $this->_id,
             'fecha_cambio' => '2014-06-10',
-            'id_sistema_operativo' => $this->_sistema_operativo->get_id(),
-            'nombre_maquina' => $this->_sistema_operativo->get_id(),
-            'fecha_alta' => $this->_sistema_operativo->get_id(),
-            'fecha_ultimo_contacto' => $this->_sistema_operativo->get_id()
+            'id_sistema_operativo' => '1',
+            'nombre_maquina' => 'hardcodeando...',
+            'fecha_alta' => '2014-06-10',
+            'fecha_ultimo_contacto' => '2013-10-10'
         );
         $ok &= $conexion->insertar('maquina', $datos_insercion);
+        $ok &= ProcesadorIsaai::desmaterializar($this->_procesadores);
         if ($ok) {
             $conexion->transaccion_confirmar();
         } else {

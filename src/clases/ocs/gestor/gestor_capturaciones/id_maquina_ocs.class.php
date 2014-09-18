@@ -49,17 +49,16 @@ class IdMaquinaOcs extends IdMaquina {
         }
     }
 
-    public function cargar_mapa_valores() {
-        $mapa_valores = array();
+    public function cargar_valores_unicidad() {
         $conexion = Conexion::get_instacia(CONEXION_OCS);
         //hago la consulta sobre la tabla hardware
         $resultados = $conexion->consultar_simple("SELECT * FROM hardware WHERE ID = {$this->_id_maquina_ocs}");
         //escogo la primera máquina, ésta debería ser única, siendo que contiene la pk de la tabla hardware
         $registro_maquina_unica = $resultados[0];
-        $this->cargar_mapa_valores_de_consulta($registro_maquina_unica);
+        $this->agregrar_valores_unicidad($registro_maquina_unica);
     }
 
-    public function cargar_mapa_valores_de_consulta($valores_consulta) {
+    public function agregrar_valores_unicidad($valores_consulta) {
         $mapa_valores = array();
         $registro_maquina_unica = $valores_consulta;
         foreach (self::$_parametros_considerados as $parametro) {
@@ -69,13 +68,13 @@ class IdMaquinaOcs extends IdMaquina {
         $this->_mapa_valores = $mapa_valores;
     }
 
-    public function generar_condicion() {
+    public function generar_condicion_unicidad_sql() {
         $mapa_valores = $this->_mapa_valores;
         $condicion = " 1=1 ";
         foreach ($mapa_valores as $campo => $valor) {
-            $condicion .= " AND {$campo} = '{$valor}'";
+            $condicion .= " AND hardware.{$campo} = '{$valor}'";
         }
-        return $condicion;
+        $this->_condicion_unicidad = $condicion;
     }
 
     public function generar_id_hash() {
@@ -87,10 +86,16 @@ class IdMaquinaOcs extends IdMaquina {
     }
 
     public function get_condicion_unicidad_sql() {
+        if ($this->_condicion_unicidad === null) {
+            $this->_condicion_unicidad = $this->generar_condicion_unicidad_sql();
+        }
         return $this->_condicion_unicidad;
     }
 
     public function get_id_hash() {
+        if ($this->_id_hash === null) {
+            $this->_id_hash = $this->generar_id_hash();
+        }
         return $this->_id_hash;
     }
 
