@@ -12,15 +12,15 @@ class PerisfericoISAAI implements ComponenteMaterializable {
     public static function materializar($_maquina) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $id_maquina = $_maquina->get_id();
-        $resultado = $conexion->consultar('perisfericos', 'id, fecha_cambio, nombre, fabricante, tipo, descripcion, interfaz', 'id=' . $id_maquina);
+        $resultado = $conexion->consultar('perifericos', 'id, fecha_cambio, nombre, fabricante, tipo, descripcion, interfaz', 'id=' . $id_maquina);
         //new Perisferico($_id, $_nombre, $_fabricante, $_tipo, $_descripcion, $_interfaz)
-        $perisferico = new Perisferico($resultado['id'], null, null, null, null, null);
-        $perisferico->set_descripcion('descripcion');
-        $perisferico->set_fabricante('fabricante');
-        $perisferico->set_interfaz('interfaz');
-        $perisferico->set_nombre('nombre');
-        $perisferico->set_tipo('tipo');
-        $perisferico->set_fecha_cambio($resultado['fecha_cambio']);
+        $perisferico = new Perisferico($resultado[0]['id'], null, null, null, null, null);
+        $perisferico->set_descripcion($resultado[0]['descripcion']);
+        $perisferico->set_fabricante($resultado[0]['fabricante']);
+        $perisferico->set_interfaz($resultado[0]['interfaz']);
+        $perisferico->set_nombre($resultado[0]['nombre']);
+        $perisferico->set_tipo($resultado[0]['tipo']);
+        $perisferico->set_fecha_cambio($resultado[$resultado[0]['fecha_cambio']]);
         return $perisferico;
     }
 
