@@ -9,7 +9,8 @@
 /**
  * Description of generador_hash
  *
- * @author Diego
+ * @author Diego Barrionuevo
+ * @version 1.0
  */
 abstract class GeneradorHash {
 
