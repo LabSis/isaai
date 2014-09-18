@@ -13,8 +13,7 @@
  */
 class GestorCapturaciones {
 
-    public function capturar() {
-
+    public function obtener_listas() {
         //filtrar las maquinas que posiblemente hayan cambiado, a partir de la fecha de 
         //sincornizacion
         //obtener lista de ids de esas maquinas y materializarlas
@@ -27,22 +26,22 @@ class GestorCapturaciones {
         for ($i = 0; $i < count($lista_resultados_ocs); $i++) {
             // Buscar..
             $j = 0;
-            while ($j < count($lista_resultados_isaai) && $lista_resultados_ocs[$i]['clave_unica'] !== $lista_resultados_isaai[$j]["id"]) {
+            while ($j < count($lista_resultados_isaai) &&
+            $lista_resultados_ocs[$i]['clave_unica'] !== $lista_resultados_isaai[$j]['clave_unica']) {
                 $j++;
             }
             if ($j === count($lista_resultados_isaai)) {
                 //agregar nueva maquina
-                $capturadorOcs = new CapturadorOcs();
-                $idMaquinaOcs = new IdMaquinaOcs();
-                $idMaquinaOcs->autosetear($lista_resultados_ocs[$i]);
-                $maquina_nueva = $capturadorOcs->obtenerMaquina($idMaquinaOcs);
-                $maquina_nueva->insertar();
+//                $capturador_ocs = new CapturadorOcs();
+//                $id_maquina_ocs = new IdMaquinaOcs($lista_resultados_ocs[$i]['ID']);
+//                $maquina_nueva = $capturador_ocs->obtener_maquina($id_maquina_ocs);
+//                $maquina_nueva->insertar();
                 $cantidad++;
             } else {
                 //comparo la fechas
             }
         }
-        echo $cantidad;
+        Out::println($cantidad . " nuevas maquinas");
     }
 
     public static function hash($mapa) {

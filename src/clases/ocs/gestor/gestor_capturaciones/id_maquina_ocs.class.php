@@ -16,6 +16,9 @@ class IdMaquinaOcs extends IdMaquina {
     private $_id_maquina_ocs;
     private $_condicion_unicidad;
     private $_id_hash;
+    private $_mapa_valores; //sus claves son los campos en la tabla hardware, y 
+    //sus valores son los correspondientes al registro del id a ser consultado
+    public static $_parametros_considerados;
     public static $correspondencias_tabla_ocs = array(
         'VERSION_SO' => 'osversion',
         'NOMBRE_SO' => 'osname',
@@ -28,33 +31,46 @@ class IdMaquinaOcs extends IdMaquina {
     );
 
     function __construct($id_maquina) {
+        if (self::$_parametros_considerados === null) {
+            self::cargar_parametros_considerados();
+        }
         $this->_id_maquina_ocs = $id_maquina;
-        $this->_condicion_unicidad = $this->generar_condicion();
-        $this->_id_hash = $this->generar_id_hash();
     }
 
-    private function get_mapa_valores() {
-        $mapa_valores = array();
-        $conexion = Conexion::get_instacia(CONEXION_OCS);
-        //hago la consulta sobre la tabla hardware
-        $resultados = $conexion->consultar_simple("SELECT *  FROM hardware WHERE id = {$this->_id_maquina_ocs}");
-        //escogo la primera máquina, ésta debería ser única, siendo que contiene la pk de la tabla hardware
-        $registro_maquina_unica = $resultados[0];
-        //hago la lectura del archivo config_ocs.ini para setear el mapa de valores
+    private static function cargar_parametros_considerados() {
+        self::$_parametros_considerados = array();
         $lectura_config_ocs_ini = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/isaai/config/config_ocs.ini', true);
         $conjunto_parametros = $lectura_config_ocs_ini["unicidad"];
         foreach ($conjunto_parametros as $nombre_parametro => $valor_parametro) {
             //verifica que el parámetro esté seteado en On (de manera case insentivie)
             if (strcasecmp($valor_parametro, "On") === 0) {
-                $nombre_campo = self::$correspondencias_tabla_ocs[strtoupper($nombre_parametro)];
-                $mapa_valores[$nombre_campo] = $registro_maquina_unica[strtoupper($nombre_campo)];
+                self::$_parametros_considerados[] = strtoupper($nombre_parametro);
             }
         }
-        return $mapa_valores;
     }
 
-    private function generar_condicion() {
-        $mapa_valores = $this->get_mapa_valores();
+    public function cargar_mapa_valores() {
+        $mapa_valores = array();
+        $conexion = Conexion::get_instacia(CONEXION_OCS);
+        //hago la consulta sobre la tabla hardware
+        $resultados = $conexion->consultar_simple("SELECT * FROM hardware WHERE ID = {$this->_id_maquina_ocs}");
+        //escogo la primera máquina, ésta debería ser única, siendo que contiene la pk de la tabla hardware
+        $registro_maquina_unica = $resultados[0];
+        $this->cargar_mapa_valores_de_consulta($registro_maquina_unica);
+    }
+
+    public function cargar_mapa_valores_de_consulta($valores_consulta) {
+        $mapa_valores = array();
+        $registro_maquina_unica = $valores_consulta;
+        foreach (self::$_parametros_considerados as $parametro) {
+            $nombre_campo_ocs = self::$correspondencias_tabla_ocs[strtoupper($parametro)];
+            $mapa_valores[$nombre_campo_ocs] = $registro_maquina_unica[strtoupper($nombre_campo_ocs)];
+        }
+        $this->_mapa_valores = $mapa_valores;
+    }
+
+    public function generar_condicion() {
+        $mapa_valores = $this->_mapa_valores;
         $condicion = " 1=1 ";
         foreach ($mapa_valores as $campo => $valor) {
             $condicion .= " AND {$campo} = '{$valor}'";
@@ -62,10 +78,12 @@ class IdMaquinaOcs extends IdMaquina {
         return $condicion;
     }
 
-    private function generar_id_hash() {
-        $mapa_valores = $this->get_mapa_valores();
+    public function generar_id_hash() {
+        //cualquier problema del orden de los valores para cargar el hash es 
+        //resolvería aquí
+        $mapa_valores = $this->_mapa_valores;
         $cadena = implode("", $mapa_valores);
-        return GeneradorHash::generar_hash($cadena);
+        $this->_id_hash = GeneradorHash::generar_hash($cadena);
     }
 
     public function get_condicion_unicidad_sql() {

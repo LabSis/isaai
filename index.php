@@ -2,10 +2,8 @@
 
 require_once 'config.php';
 
-//$gestor_capturaciones = new GestorCapturaciones();
-//$gestor_capturaciones->capturar();
+$gestor_capturaciones = new GestorCapturaciones();
+$gestor_capturaciones->obtener_listas();
 
-$capturadorOcs = new CapturadorOcs();
-$idMaquinaOcs = new IdMaquinaOcs(227);
-$maquina = $capturadorOcs->obtenerMaquina($idMaquinaOcs);
-echo '<br/>'.$maquina->get_procesadores()->get_velocidad();
+//$id_maquina_ocs = new IdMaquinaOcs(31);
+//echo $id_maquina_ocs->get_id_hash();
