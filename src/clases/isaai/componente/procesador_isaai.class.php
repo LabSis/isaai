@@ -12,11 +12,11 @@ class ProcesadorIsaai implements ComponenteMaterializable {
         
     }
 
-    public static function desmaterializar($procesador) {
+    public static function desmaterializar($maquina, $procesador) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $datos_insercion = array(
-            'id_maquina' => 'nose',
-            'fecha_cambio' => '2014-06-12',
+            'id_maquina' => $maquina->get_id(),
+            'fecha_cambio' => $maquina->get_fecha_cambio(),
             'tipo' => $procesador->get_tipo(),
             'velocidad' => $procesador->get_velocidad(),
             'numero' => $procesador->get_numero()

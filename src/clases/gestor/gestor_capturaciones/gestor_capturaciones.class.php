@@ -36,8 +36,7 @@ class GestorCapturaciones {
                     $capturador_ocs = new CapturadorOcs();
                     $id_maquina_ocs = new IdMaquinaOcs($lista_resultados_ocs[$i]['ID']);
                     $maquina_nueva = $capturador_ocs->obtener_maquina($id_maquina_ocs);
-                    //Out::println($maquina_nueva->get_procesadores()->get_velocidad());
-                    $maquina_nueva->insertar();
+                    Out::println($maquina_nueva->insertar());
                     $cantidad++;
                 }
             } else {

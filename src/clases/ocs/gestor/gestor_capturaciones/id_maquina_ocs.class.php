@@ -87,14 +87,14 @@ class IdMaquinaOcs extends IdMaquina {
 
     public function get_condicion_unicidad_sql() {
         if ($this->_condicion_unicidad === null) {
-            $this->_condicion_unicidad = $this->generar_condicion_unicidad_sql();
+            $this->generar_condicion_unicidad_sql();
         }
         return $this->_condicion_unicidad;
     }
 
     public function get_id_hash() {
         if ($this->_id_hash === null) {
-            $this->_id_hash = $this->generar_id_hash();
+            $this->generar_id_hash();
         }
         return $this->_id_hash;
     }

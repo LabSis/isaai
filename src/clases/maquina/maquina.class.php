@@ -12,7 +12,7 @@ class Maquina {
     private $_id;
     private $_fecha_alta;
     //private $_fecha_sincronizacion;
-    //private $_fecha_cambio;
+    private $_fecha_cambio;
     private $_nombre_maquina;
     private $_fecha_ultimo_contacto;
     private $_procesadores;
@@ -26,21 +26,22 @@ class Maquina {
     private $_monitores;
     private $_sistema_operativo;
 
-    function __construct($_id, $_fecha_alta, $_nombre_maquina, $_fecha_ultimo_contacto, $_procesadores, $_bios, $_placas_red, $_placas_sonido, $_placas_video, $_memorias, $_perisfericos, $_discos, $_monitores, $_sistema_operativo) {
-        $this->_id = $_id;
-        $this->_fecha_alta = $_fecha_alta;
-        $this->_nombre_maquina = $_nombre_maquina;
-        $this->_fecha_ultimo_contacto = $_fecha_ultimo_contacto;
-        $this->_procesadores = $_procesadores;
-        $this->_bios = $_bios;
-        $this->_placas_red = $_placas_red;
-        $this->_placas_sonido = $_placas_sonido;
-        $this->_placas_video = $_placas_video;
-        $this->_memorias = $_memorias;
-        $this->_perisfericos = $_perisfericos;
-        $this->_discos = $_discos;
-        $this->_monitores = $_monitores;
-        $this->_sistema_operativo = $_sistema_operativo;
+    function __construct() {
+        $this->_id = null;
+        $this->_fecha_cambio = null;
+        $this->_fecha_alta = null;
+        $this->_nombre_maquina = null;
+        $this->_fecha_ultimo_contacto = null;
+        $this->_procesadores = null;
+        $this->_bios = null;
+        $this->_placas_red = null;
+        $this->_placas_sonido = null;
+        $this->_placas_video = null;
+        $this->_memorias = null;
+        $this->_perisfericos = null;
+        $this->_discos = null;
+        $this->_monitores = null;
+        $this->_sistema_operativo = null;
     }
 
     public function get_id() {
@@ -155,23 +156,33 @@ class Maquina {
         $this->_sistema_operativo = $_sistema_operativo;
     }
 
+    public function get_fecha_cambio() {
+        return $this->_fecha_cambio;
+    }
+
+    public function set_fecha_cambio($_fecha_cambio) {
+        $this->_fecha_cambio = $_fecha_cambio;
+    }
+
     public function insertar() {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $conexion->transaccion_comenzar();
         $ok = true;
+        $this->_fecha_cambio = '2012-10-12';
         $datos_insercion = array(
             'id' => $this->_id,
-            'fecha_cambio' => '2014-06-10',
+            'fecha_cambio' => $this->_fecha_cambio,
             'id_sistema_operativo' => '1',
             'nombre_maquina' => 'hardcodeando...',
             'fecha_alta' => '2014-06-10',
             'fecha_ultimo_contacto' => '2013-10-10'
         );
-        $ok &= $conexion->insertar('maquina', $datos_insercion);
-        $ok &= ProcesadorIsaai::desmaterializar($this->_procesadores);
+        $ok &= $conexion->insertar('maquinas', $datos_insercion);
+        $ok &= ProcesadorIsaai::desmaterializar($this, $this->_procesadores);
         if ($ok) {
             $conexion->transaccion_confirmar();
         } else {
+            print_r($conexion->get_error());
             $conexion->transaccion_revertir();
         }
         return $ok;

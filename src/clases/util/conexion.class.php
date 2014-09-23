@@ -279,7 +279,7 @@ class Conexion {
         $valores_campos = "";
         foreach ($datos as $nombre_campo => $valor_campo) {
             if (is_null($valor_campo) || (is_string($valor_campo) && $valor_campo === '') || (is_int($valor_campo) && $valor_campo === -1)) {
-                //$valores_campos .= " NULL, 2;
+                //$valores_campos .= " NULL, 2;/
             } else {
                 $nombres_campos .= "{$nombre_campo}, ";
                 if (is_numeric($valor_campo)) {
