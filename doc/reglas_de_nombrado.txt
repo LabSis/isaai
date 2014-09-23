@@ -1,0 +1,62 @@
+Reglas de nombrado para el proyecto ISFD 
+
+################################# Código PHP ###################################
+Sobre los Archivos:
+Archivo de clases: [nombre_clase].class.php
+Archivo de controladores: [rol_usuario]_[accion].ctrl.php
+Archivo de templates: [nombre_template].tmpl.php
+
+Sobre las variables:
+Variables PHP: $[nombre_variable]
+Variables Globales PHP: $global_[nombre]
+Variables accedidas por el template: $template_[nombre]
+
+Sobre las clases PHP:
+Nombre de clase: [NombreClase]
+Atributos: $_[nombre_atributo]
+Métodos: [nombre_metodo()]
+Parámetros: $[parametro]
+Consideraciones:
+        * Explicar brevemente qué representa la clase
+	* Colocar @author y @version de la clase
+	* Explicar brevemente qué hace y qué devuele cada metodo
+	* Colocar @param [tipo] para cada parametro
+	* Colocar @return [tipo] para el valor devuelto
+        * Colocar @throws [excepción] para las excepciones lanzadas.
+        * Colocar @deprecated since version <num> para aquello que está
+desaconsejado y no debe usarse.
+
+################################# Código HTML ##################################
+Sobre los campos HTML:
+Campo name en HTML: [tipo_control]_[nombre]
+El campo id debe ser escrito de igual forma al campo name. Cada elemento que
+tenga un campo name definido debe tener definido un campo id y viceversa.
+
+Tipos de controles HTML (prefijos):
+txt: <input type="text" />
+lbl: <label ></label>
+btn: <input type="button" />
+chk: <input type="checkbox" />
+rad: <input type="radio" />
+lst: <select></select>
+opt: <option></option>
+tbl: <table></table>
+hid: <input type="hid">
+frm: <input type="frm">
+txa: <textarea></textarea>
+
+Los demás elementos HTML no requieren ningún prefijo. Sin embargo, el campo
+name e id, si son definidos, deben ser claros, en español y representar su
+funcionalidad y no donde están ubicados. Por ejemplo: un nombre recomendable
+para un panel ubicado arriba que contiene un conjunto de menús sería
+"panelMenus" y no "panelSuperior", ya que este panel puede cambiar de posición
+en un futuro. A esta regla puede haber excepciones.
+
+
+################################# Código CSS ###################################
+
+<No documentado todavía>
+
+############################ Código Javascript #################################
+
+<No documentado todavía>

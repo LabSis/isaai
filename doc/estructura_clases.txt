@@ -1,0 +1,19 @@
+Todas las clases en PHP cumplen lo siquiente y en ese orden:
+
+1) Se definen los atributos.
+2) Se define un constructor vacío, el cual inicializa todos los atributos
+a null, a excepción de los arreglos que los inicializa vacío.
+3) Se definen los métodos add.
+4) Se definen los métodos get/is.
+5) Se definen los métodos set.
+6) Se definen los métodos de inserción.
+7) Se definen los métodos estáticos materializar.
+8) Se definen los métodos estáticos obtenedores (éstos van a la base de datos).
+9) Se define el método equals.
+10) Se define el método to_string.
+11) Se definen los métodos privados.
+
+Todos los puntos anteriores son opcionales a excepción del 1, 2, 4 y 5.
+
+
+Las clases llaman a procedimiento almacenados 
