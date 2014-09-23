@@ -291,7 +291,6 @@ class Conexion {
         }
         $insercion .= " (" . rtrim($nombres_campos, ", ") . ") ";
         $insercion .= "VALUES (" . rtrim($valores_campos, ", ") . ")";
-        Out::println($insercion);
         return $this->insertar_simple($insercion);
     }
 

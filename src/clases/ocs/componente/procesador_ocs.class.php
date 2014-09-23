@@ -17,4 +17,8 @@ class ProcesadorOcs implements ComponenteMaterializable {
         return $procesador;
     }
 
+    public static function desmaterializar($maquina, $componene) {
+        
+    }
+
 }

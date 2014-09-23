@@ -35,7 +35,7 @@ date_default_timezone_set('America/Argentina/Catamarca');
 //funcion para encontrar las clases
 $global_paquetes = array('', 'util', 'componente', 'maquina', 'usuario',
     'gestor', 'gestor/gestor_capturaciones',
-    'isaai', 'isaai/componente',
+    'isaai', 'isaai/componente', 'isaai/gestor', 'isaai/gestor/gestor_capturaciones',
     'ocs', 'ocs/componente', 'ocs/gestor', 'ocs/gestor/gestor_capturaciones');
 
 function __autoload($nombre_clase) {
@@ -59,5 +59,5 @@ function __autoload($nombre_clase) {
 
 define('CONEXION_ISAAI', 'isaai');
 define('CONEXION_OCS', 'ocs');
-Conexion::agregar_instancia(CONEXION_ISAAI, new Conexion('localhost', 'root', '', 'isaai'));
-Conexion::agregar_instancia(CONEXION_OCS, new Conexion('localhost', 'root', '', 'ocsweb'));
+Conexion::agregar_instancia(CONEXION_ISAAI, new Conexion('localhost', 'root', '', 'isaai', true));
+Conexion::agregar_instancia(CONEXION_OCS, new Conexion('localhost', 'root', '', 'ocsweb', true));

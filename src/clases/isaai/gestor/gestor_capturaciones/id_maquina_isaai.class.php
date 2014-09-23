@@ -13,8 +13,7 @@ class IdMaquinaIsaai extends IdMaquina {
     private $_id_hash;
 
     function __construct($id_maquina) {
-        echo $_SERVER['PHP_SELF'];
-        $this->$_id_maquina = $id_maquina;
+        $this->_id_maquina = $id_maquina;
         $this->_condicion_unicidad = null;
         $this->_id_hash = $id_maquina;
     }

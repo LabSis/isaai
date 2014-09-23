@@ -99,4 +99,8 @@ class IdMaquinaOcs extends IdMaquina {
         return $this->_id_hash;
     }
 
+    public function get_id_maquina_ocs() {
+        return $this->_id_maquina_ocs;
+    }
+
 }

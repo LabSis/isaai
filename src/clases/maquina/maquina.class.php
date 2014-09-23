@@ -173,7 +173,7 @@ class Maquina {
             'id' => $this->_id,
             'fecha_cambio' => $this->_fecha_cambio,
             'id_sistema_operativo' => '1',
-            'nombre_maquina' => 'hardcodeando...',
+            'nombre_maquina' => $this->_nombre_maquina,
             'fecha_alta' => '2014-06-10',
             'fecha_ultimo_contacto' => '2013-10-10'
         );
@@ -182,7 +182,6 @@ class Maquina {
         if ($ok) {
             $conexion->transaccion_confirmar();
         } else {
-            print_r($conexion->get_error());
             $conexion->transaccion_revertir();
         }
         return $ok;

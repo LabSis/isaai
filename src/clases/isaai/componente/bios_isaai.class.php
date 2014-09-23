@@ -6,7 +6,7 @@
  * @author Milagros Zea
  * @version 1.0
  */
-class biosISAAI implements ComponenteMaterializable {
+class BiosISAAI implements ComponenteMaterializable {
 
     public static function materializar($_maquina) {
         //Consultas a la BD_ISAAI para materializar el objeto.
@@ -23,6 +23,10 @@ class biosISAAI implements ComponenteMaterializable {
         $bios->set_version($resultado['version']);
         $bios->set_fecha_cambio($resultado['fecha_cambio']);
         return $bios;
+    }
+
+    public static function desmaterializar($maquina, $componene) {
+        
     }
 
 }

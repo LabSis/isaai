@@ -21,7 +21,7 @@ abstract class GeneradorHash {
      * @return String Retorna un cadena con 128 caracteres.
      */
     public static function generar_hash($cadena) {
-        return md5($cadena);
+        return md5(strtoupper($cadena));
     }
 
 }
