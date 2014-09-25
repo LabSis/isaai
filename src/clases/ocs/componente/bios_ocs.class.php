@@ -17,9 +17,19 @@ class BiosOcs implements ComponenteMaterializable {
                 . " b.hardware_id = hardware.id WHERE {$condicion}";
         $resultado = $conexion->consultar_simple($consulta);
         //cargo el objeto bios...
-        $bios = new Bios(null, $resultado[0]['smanufacturer'], $resultado[0]['bmanufacturer'], $resultado[0]['smodel'],
-                $resultado[0]['assettag'], $resultado[0]['bversion'], $resultado[0]['ssn']);
+        $bios = new Bios(null, null, null, null, null, null, null);
+        $bios->set_id(null);
+        $bios->set_nombre($resultado[0]['smanufacturer']);
+        $bios->set_fabricante($resultado[0]['bmanufacturer']);
+        $bios->set_modelo($resultado[0]['smodel']);
+        $bios->set_asset_tag($resultado[0]['assettag']);
+        $bios->set_version($resultado[0]['bversion']);
+        $bios->set_numero_serial($resultado[0]['ssn']);
         return $bios;
+    }
+
+    public function desmaterializar($maquina, $componene) {
+        ;
     }
 
     /**
@@ -30,17 +40,16 @@ class BiosOcs implements ComponenteMaterializable {
      * @param type $_version_sistema_operativo
      * @return type
      */
-    private static function obtener_consulta($_nombre_maquina, $_sistema_operativo, $_version_sistema_operativo) {
-        $consulta = 'SELECT h.id, smanufacturer, bmanufacturer, smodel, assettag,'
-                . ' bversion, ssn  FROM bios AS b INNER JOIN hardware AS h ON '
-                . ' b.hardware_id = h.id WHERE h.name ="'
-                . $_nombre_maquina . '" AND h.osname= "' . $_sistema_operativo
-                . '" AND h.osversion= "' . $_version_sistema_operativo
-                . '" AND h.lastcome = '
-                . '(SELECT MAX(hardware.lastcome) '
-                . 'FROM hardware WHERE hardware.id = h.id)';
-        echo "<br/>$consulta";
-        return $consulta;
-    }
-
+//    private static function obtener_consulta($_nombre_maquina, $_sistema_operativo, $_version_sistema_operativo) {
+//        $consulta = 'SELECT h.id, smanufacturer, bmanufacturer, smodel, assettag,'
+//                . ' bversion, ssn  FROM bios AS b INNER JOIN hardware AS h ON '
+//                . ' b.hardware_id = h.id WHERE h.name ="'
+//                . $_nombre_maquina . '" AND h.osname= "' . $_sistema_operativo
+//                . '" AND h.osversion= "' . $_version_sistema_operativo
+//                . '" AND h.lastcome = '
+//                . '(SELECT MAX(hardware.lastcome) '
+//                . 'FROM hardware WHERE hardware.id = h.id)';
+//        echo "<br/>$consulta";
+//        return $consulta;
+//    }
 }

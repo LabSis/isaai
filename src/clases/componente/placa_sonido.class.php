@@ -6,7 +6,7 @@
  * @author Diego Barrionuevo
  * @version 1.0
  */
-class placa_sonido extends Componente {
+class PlacaSonido extends Componente {
 
     private $_nombre;
     private $_fabricante;
