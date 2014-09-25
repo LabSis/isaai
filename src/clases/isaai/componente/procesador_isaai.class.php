@@ -9,7 +9,12 @@
 class ProcesadorIsaai implements ComponenteMaterializable {
 
     public static function materializar($_maquina) {
-        
+        $conexion = Conexion::get_instacia(CONEXION_OCS);
+        $condicion = $_maquina->get_condicion_unicidad_sql();
+        $consulta = "SELECT tipo, velocidad, nucleos FROM maquinas WHERE {$condicion}";
+        $resultado = $conexion->consultar_simple($consulta);
+        $procesador = new Procesador(null, $resultado[0]["tipo"], $resultado[0]["velocidad"], $resultado[0]["nucleos"]);
+        return $procesador;
     }
 
     public static function desmaterializar($maquina, $procesador) {
@@ -19,7 +24,7 @@ class ProcesadorIsaai implements ComponenteMaterializable {
             'fecha_cambio' => $maquina->get_fecha_cambio(),
             'tipo' => $procesador->get_tipo(),
             'velocidad' => $procesador->get_velocidad(),
-            'numero' => $procesador->get_numero()
+            'nucleos' => $procesador->get_numero()
         );
         return $conexion->insertar('procesadores', $datos_insercion);
     }

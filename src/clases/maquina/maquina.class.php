@@ -108,7 +108,7 @@ class Maquina {
         return $this->_procesadores;
     }
 
-    public function set_id(String $_id) {
+    public function set_id($_id) {
         $this->_id = $_id;
     }
 
@@ -177,9 +177,9 @@ class Maquina {
             'id' => $this->_id,
             'fecha_cambio' => $this->_fecha_cambio,
             'id_sistema_operativo' => '1',
-            'nombre_maquina' => $this->_nombre,
+            'nombre' => $this->_nombre,
             'fecha_alta' => '2014-06-10',
-            'fecha_ultimo_contacto' => '2013-10-10'
+            'fecha_sincronizacion' => '2013-10-10'
         );
         $ok &= $conexion->insertar('maquinas', $datos_insercion);
         $ok &= ProcesadorIsaai::desmaterializar($this, $this->_procesadores);

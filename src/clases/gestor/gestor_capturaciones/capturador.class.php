@@ -10,5 +10,5 @@ interface Capturador {
     /**
      * Devuelte una Maquina con todos sus componentes
      */
-    public function obtener_maquina($id_maquina);
+    public static function obtener_maquina($id_maquina);
 }

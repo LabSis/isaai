@@ -37,9 +37,9 @@ CREATE TABLE IF NOT EXISTS maquinas(
 	id VARCHAR(255) NOT NULL,
 	fecha_cambio DATETIME NOT NULL,
 	id_sistema_operativo INT NOT NULL,
-	nombre_maquina VARCHAR(255) NULL,
+	nombre VARCHAR(255) NULL,
 	fecha_alta DATETIME NOT NULL,
-	fecha_ultimo_contacto DATETIME NULL,
+	fecha_sincronizacion DATETIME NULL, /* fecha_ultimo_contacto */
 	PRIMARY KEY(id,fecha_cambio),
 	FOREIGN KEY (id_sistema_operativo) REFERENCES sistemas_operativos (id)
 		ON DELETE RESTRICT
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS procesadores(
 	fecha_cambio DATETIME NOT NULL,
 	tipo VARCHAR(255) NULL,
 	velocidad VARCHAR(255) NULL,
-	numero VARCHAR(255) NULL,
+	nucleos VARCHAR(255) NULL,
 	PRIMARY KEY(id,id_maquina,fecha_cambio),
 	FOREIGN KEY (id_maquina,fecha_cambio) REFERENCES maquinas (id,fecha_cambio)
 		ON DELETE RESTRICT
