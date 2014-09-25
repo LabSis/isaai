@@ -172,17 +172,18 @@ class Maquina {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $conexion->transaccion_comenzar();
         $ok = true;
-        $this->_fecha_cambio = '2012-10-12';
         $datos_insercion = array(
             'id' => $this->_id,
-            'fecha_cambio' => $this->_fecha_cambio,
+            'fecha_cambio' => Util::convertir_fecha_a_mysql($this->_fecha_cambio),
             'id_sistema_operativo' => '1',
             'nombre' => $this->_nombre,
-            'fecha_alta' => '2014-06-10',
-            'fecha_sincronizacion' => '2013-10-10'
+            'fecha_alta' => Util::convertir_fecha_a_mysql($this->_fecha_alta),
+            'fecha_sincronizacion' => $this->_fecha_sincronizacion
         );
         $ok &= $conexion->insertar('maquinas', $datos_insercion);
-        $ok &= ProcesadorIsaai::desmaterializar($this, $this->_procesadores);
+        for ($i = 0; $i < count($this->_procesadores); $i++) {
+            $ok &= ProcesadorIsaai::desmaterializar($this, $this->_procesadores[$i]);
+        }
         if ($ok) {
             $conexion->transaccion_confirmar();
         } else {

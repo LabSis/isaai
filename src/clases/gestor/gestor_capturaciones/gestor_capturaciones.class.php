@@ -13,7 +13,17 @@
  */
 class GestorCapturaciones {
     
+    /**
+     * Devuelve una arreglo con las listas de las máquinas tanto del OCS como 
+     * del ISAAI que posiblemenete 
+     * hayan cambiado. También se encarga de agregar en la base de datos ISAAI 
+     * aquellas máquinas nuevas en el OCS.
+     * @return Array Arreglo que contiene en el índice cero una lista de 
+     * máquinas obtenidas del OCS, y en el índice dos contiene una lsita de 
+     * máquinas obtenidas del ISAAI.
+     */
     public function obtener_listas() {
+        $lista_maquinas = array();
         $lista_maquinas_ocs = array();
         $lista_maquinas_isaai = array();
         $capturador_ocs = new CapturadorOcs();
@@ -38,6 +48,8 @@ class GestorCapturaciones {
                 //agregar nueva maquina
                 $id_maquina_ocs = new IdMaquinaOcs($lista_resultados_ocs[$i]['ID']);
                 $maquina_nueva = $capturador_ocs->obtener_maquina($id_maquina_ocs);
+                $maquina_nueva->set_fecha_cambio(Util::get_fecha_actual_formato_dd_mm_aaaa());
+                $maquina_nueva->set_fecha_alta(Util::get_fecha_actual_formato_dd_mm_aaaa());
                 if ($maquina_nueva->insertar() == true) {
                     $cantidad_agregadas++;
                 }else{
@@ -45,17 +57,21 @@ class GestorCapturaciones {
                 }
             } else {
                 //comparar la fechas
+                $cantidad_comparaciones++;
                 if ($lista_resultados_ocs[$i]['LASTCOME'] != $lista_resultados_isaai[$j]['fecha_sincronizacion']) {
-                    $cantidad_comparaciones++;
                     $id_maquina_ocs = new IdMaquinaOcs($lista_resultados_ocs[$i]['ID']);
                     $lista_maquinas_ocs[] = $capturador_ocs->obtener_maquina($id_maquina_ocs);
-                    $id_maquina_isaai = new IdMaquinaIsaai($lista_resultados_isaai[$i]['id'], $lista_resultados_isaai[$i]['fecha_cambio']);
+                    $id_maquina_isaai = new IdMaquinaIsaai($lista_resultados_isaai[$j]['id'], $lista_resultados_isaai[$j]['fecha_cambio']);
                     $lista_maquinas_isaai[] = $capturador_isaai->obtener_maquina($id_maquina_isaai);
                 }
             }
         }
         echo "Agregue: $cantidad_agregadas<br/>";
-        echo "Compare: $cantidad_comparaciones</br>";
+        echo "Compare: $cantidad_comparaciones de las cuales ".count($lista_maquinas_isaai)." podrían haber cambiado.</br>";
+        $lista_maquinas[] = $lista_maquinas_ocs;
+        $lista_maquinas[] = $lista_maquinas_isaai;
+        Out::print_array($lista_maquinas_isaai);
+        return $lista_maquinas;
     }
 
 }

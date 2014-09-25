@@ -41,5 +41,13 @@ class SistemaOperativo {
     public function set_version($_version) {
         $this->_version = $_version;
     }
+    
+    public static function materializar($id_maquina){
+        $conexion = Conexion::get_instacia(CONEXION_ISAAI);
+        $consulta = "SELECT so.id, so.nombre, so.version FROM sistemas_operativos AS so INNER JOIN maquinas AS m ON so.id = m.id_sistema_operativo WHERE m.id = '{$id_maquina->get_id_hash()}'";
+        $resultado = $conexion->consultar_simple($consulta);
+        $sistema_operativo = new SistemaOperativo($resultado[0]["id"], $resultado[0]["nombre"], $resultado[0]["version"]);
+        return $sistema_operativo;
+    }
 
 }

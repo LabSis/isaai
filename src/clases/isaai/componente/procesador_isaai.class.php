@@ -21,7 +21,7 @@ class ProcesadorIsaai implements ComponenteMaterializable {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $datos_insercion = array(
             'id_maquina' => $maquina->get_id(),
-            'fecha_cambio' => $maquina->get_fecha_cambio(),
+            'fecha_cambio' => Util::convertir_fecha_a_mysql($maquina->get_fecha_cambio()),
             'tipo' => $procesador->get_tipo(),
             'velocidad' => $procesador->get_velocidad(),
             'nucleos' => $procesador->get_numero()
