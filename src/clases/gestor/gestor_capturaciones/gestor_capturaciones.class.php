@@ -12,7 +12,7 @@
  * @version 1.0
  */
 class GestorCapturaciones {
-    
+
     /**
      * Devuelve una arreglo con las listas de las máquinas tanto del OCS como 
      * del ISAAI que posiblemenete 
@@ -26,6 +26,7 @@ class GestorCapturaciones {
         $lista_maquinas = array();
         $lista_maquinas_ocs = array();
         $lista_maquinas_isaai = array();
+        $lista_maquinas_nuevas = array();
         $capturador_ocs = new CapturadorOcs();
         $capturador_isaai = new CapturadorIsaai();
         //filtrar las maquinas que posiblemente hayan cambiado, a partir de la fecha de 
@@ -52,7 +53,8 @@ class GestorCapturaciones {
                 $maquina_nueva->set_fecha_alta(Util::get_fecha_actual_formato_dd_mm_aaaa());
                 if ($maquina_nueva->insertar() == true) {
                     $cantidad_agregadas++;
-                }else{
+                    $lista_maquinas_nuevas[] = $maquina_nueva;
+                } else {
                     Out::print_array(Conexion::get_instacia(CONEXION_ISAAI)->get_error());
                 }
             } else {
@@ -67,10 +69,10 @@ class GestorCapturaciones {
             }
         }
         echo "Agregue: $cantidad_agregadas<br/>";
-        echo "Compare: $cantidad_comparaciones de las cuales ".count($lista_maquinas_isaai)." podrían haber cambiado.</br>";
+        echo "Compare: $cantidad_comparaciones de las cuales " . count($lista_maquinas_isaai) . " podrían haber cambiado.</br>";
         $lista_maquinas[] = $lista_maquinas_ocs;
         $lista_maquinas[] = $lista_maquinas_isaai;
-        Out::print_array($lista_maquinas_isaai);
+        $lista_maquinas[] = $lista_maquinas_nuevas;
         return $lista_maquinas;
     }
 

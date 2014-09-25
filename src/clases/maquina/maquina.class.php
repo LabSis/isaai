@@ -108,6 +108,10 @@ class Maquina {
         return $this->_procesadores;
     }
 
+    public function get_procesador($i) {
+        return $this->_procesadores[$i];
+    }
+
     public function set_id($_id) {
         $this->_id = $_id;
     }

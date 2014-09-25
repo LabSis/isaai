@@ -22,7 +22,8 @@ class GestorComparaciones {
     public function obtener_cambios($maquinas_ocs, $maquinas_isaai, $maquinas_nuevas) {
         assert(count($maquinas_ocs) == count($maquinas_isaai));
         $cambios = array();
-        foreach ($maquinas_isaai as $maquina) {
+        /* maquinas nuevas? */
+        foreach ($maquinas_nuevas as $maquina) {
             $cambio = new Cambio();
             $cambio->set_maquina_actual($maquina);
             $cambios[] = $cambio;
@@ -33,6 +34,7 @@ class GestorComparaciones {
             $maquina_isaai = $maquinas_isaai[$i];
             $comparador = new ComparadorMaquinas();
             if ($comparador->verificar_igualdad($maquina_ocs, $maquina_isaai)) {
+                $cambio = new Cambio();
                 $cambio->set_maquina_anterior($maquina_isaai);
                 $cambio->set_maquina_actual($maquina_ocs);
                 $cambio->set_componentes_cambiados($comparador->get_componentes_cambiados());
@@ -43,4 +45,3 @@ class GestorComparaciones {
     }
 
 }
-

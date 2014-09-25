@@ -34,7 +34,7 @@ date_default_timezone_set('America/Argentina/Catamarca');
 
 //funcion para encontrar las clases
 $global_paquetes = array('', 'util', 'componente', 'maquina', 'usuario',
-    'gestor', 'gestor/gestor_capturaciones',
+    'gestor', 'gestor/gestor_capturaciones', 'gestor/gestor_comparaciones',
     'isaai', 'isaai/componente', 'isaai/gestor', 'isaai/gestor/gestor_capturaciones',
     'ocs', 'ocs/componente', 'ocs/gestor', 'ocs/gestor/gestor_capturaciones');
 
