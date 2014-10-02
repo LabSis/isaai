@@ -16,7 +16,11 @@ class ProcesadorIsaai implements ComponenteMaterializable {
                 . "p.id_maquina = m.id AND p.fecha_cambio = m.fecha_cambio "
                 . "WHERE {$condicion}";
         $resultado = $conexion->consultar_simple($consulta);
-        $procesador = new Procesador(null, $resultado[0]["tipo"], $resultado[0]["velocidad"], $resultado[0]["nucleos"]);
+        $procesador = new Procesador(null, null, null, null);
+        $procesador->set_id(null);
+        $procesador->set_numero($resultado[0]["nucleos"]);
+        $procesador->set_tipo($resultado[0]["tipo"]);
+        $procesador->set_velocidad($resultado[0]["velocidad"]);
         return $procesador;
     }
 

@@ -9,19 +9,24 @@
  */
 class PerisfericoIsaai implements ComponenteMaterializable {
 
-    public static function materializar($_maquina) {
+    public static function materializar($id_maquina) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
-        $id_maquina = $_maquina->get_id();
-        $resultado = $conexion->consultar('perifericos', 'id, fecha_cambio, nombre, fabricante, tipo, descripcion, interfaz', 'id=' . $id_maquina);
-        //new Perisferico($_id, $_nombre, $_fabricante, $_tipo, $_descripcion, $_interfaz)
-        $perisferico = new Periferico($resultado[0]['id'], null, null, null, null, null);
-        $perisferico->set_descripcion($resultado[0]['descripcion']);
-        $perisferico->set_fabricante($resultado[0]['fabricante']);
-        $perisferico->set_interfaz($resultado[0]['interfaz']);
-        $perisferico->set_nombre($resultado[0]['nombre']);
-        $perisferico->set_tipo($resultado[0]['tipo']);
-        $perisferico->set_fecha_cambio($resultado[$resultado[0]['fecha_cambio']]);
-        return $perisferico;
+        $condicion = $id_maquina->get_condicion_unicidad_sql();
+        $consulta = "SELECT p.nombre, p.fabricante, p.tipo, "
+                . "p.descripcion, p.interfaz, p.fecha_cambio FROM perifericos AS p "
+                . "INNER JOIN maquinas AS maquinas ON "
+                . "p.id_maquina = maquinas.id AND p.fecha_cambio = maquinas.fecha_cambio "
+                . "WHERE {$condicion}";
+        $resultado = $conexion->consultar_simple($consulta);
+        $periferico = new Periferico();
+        $periferico->set_id(null);
+        $periferico->set_nombre($resultado[0]['nombre']);
+        $periferico->set_fabricante($resultado[0]['fabricante']);
+        $periferico->set_tipo($resultado[0]['tipo']);
+        $periferico->set_descripcion($resultado[0]['descripcion']);
+        $periferico->set_interfaz($resultado[0]['interfaz']);
+        $periferico->set_fecha_cambio($resultado[$resultado[0]['fecha_cambio']]);
+        return $periferico;
     }
 
     public static function desmaterializar($maquina, $periferico) {

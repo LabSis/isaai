@@ -7,23 +7,28 @@
  * @author Milagros Zea
  * @version 1.0
  */
-class DiscoISAAI implements ComponenteMaterializable {
+class DiscoIsaai implements ComponenteMaterializable {
 
-    public static function materializar($_maquina) {
-        //Consultas a la BD_ISAAI para materializar el objeto.
+    public static function materializar($id_maquina) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
-        $id_maquina = $_maquina->get_id();
-        $resultado = $conexion->consultar('discos', 'id, fecha_cambio, nombre, fabricante, modelo, descripcion, tipo, tamanio, numero_serial, firmware', 'id=' . $id_maquina);
+        $condicion = $id_maquina->get_condicion_unicidad_sql();
+        $consulta = "SELECT d.nombre, d.fabricante, d.modelo, d.descripcion, "
+                . "d.tipo, d.firmware, d.tamanio, d.numero_serial, d.fecha_cambio FROM discos AS d "
+                . "INNER JOIN maquinas AS maquinas ON "
+                . "d.id_maquina = maquinas.id AND d.fecha_cambio = maquinas.fecha_cambio "
+                . "WHERE {$condicion}";
+        $resultado = $conexion->consultar_simple($consulta);
         //new Disco($_id, $_nombre, $_fabricante, $_modelo, $_descripcion, $_tipo, $_tamanio, $_numero_serial, $_firmware)
-        $disco = new Disco($resultado['id'], null, null, null, null, null, null, null, null);
-        $disco->set_descripcion($resultado['descripcion']);
-        $disco->set_fabricante($resultado['fabricante']);
-        $disco->set_firmware($resultado['firmware']);
-        $disco->set_modelo($resultado['modelo']);
+        $disco = new Disco();
+        $disco->set_id(null);
         $disco->set_nombre($resultado['nombre']);
-        $disco->set_numero_serial($resultado['numero_serial']);
-        $disco->set_tamanio($resultado['tamanio']);
+        $disco->set_fabricante($resultado['fabricante']);
+        $disco->set_modelo($resultado['modelo']);
+        $disco->set_descripcion($resultado['descripcion']);
         $disco->set_tipo($resultado['tipo']);
+        $disco->set_firmware($resultado['firmware']);
+        $disco->set_tamanio($resultado['tamanio']);
+        $disco->set_numero_serial($resultado['numero_serial']);
         $disco->set_fecha_cambio($resultado['fecha_cambio']);
         return $disco;
     }

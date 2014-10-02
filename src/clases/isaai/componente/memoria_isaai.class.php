@@ -9,19 +9,24 @@
  */
 class MemoriaIsaai implements ComponenteMaterializable {
 
-    public static function materializar($_maquina) {
+    public static function materializar($id_maquina) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
-        $id_maquina = $_maquina->get_id();
-        $resultado = $conexion->consultar('memorias', 'id, fecha_cambio, capacidad, tipo, descripcion, numero_serial, numero_renura, velocidad, nombre', 'id=' . $id_maquina);
-        // new Memoria($_id, $_capacidad, $_tipo, $_descripcion, $_numero_serial, $_numero_ranura, $_velocidad, $_nombre)
-        $memoria = new Memoria($resultado['id'], null, null, null, null, null, null, null);
+        $condicion = $id_maquina->get_condicion_unicidad_sql();
+        $consulta = "SELECT m.capacidad, m.tipo, m.descripcion, m.numero_serial, "
+                . "m.numero_ranura, m.velocidad, m.nombre, m.fecha_cambio FROM memorias AS m "
+                . "INNER JOIN maquinas AS maquinas ON "
+                . "m.id_maquina = maquinas.id AND m.fecha_cambio = maquinas.fecha_cambio "
+                . "WHERE {$condicion}";
+        $resultado = $conexion->consultar_simple($consulta);
+        $memoria = new Memoria();
+        $memoria->set_id(null);
         $memoria->set_capacidad($resultado['capacidad']);
-        $memoria->set_descripcion($resultado['decripcion']);
-        $memoria->set_nombre($resultado['nombre']);
-        $memoria->set_numero_ranura($resultado['numero_renura']);
-        $memoria->set_numero_serial($resultado['numero_serial']);
         $memoria->set_tipo($resultado['tipo']);
+        $memoria->set_descripcion($resultado['decripcion']);
+        $memoria->set_numero_serial($resultado['numero_serial']);
+        $memoria->set_numero_ranura($resultado['numero_ranura']);
         $memoria->set_velocidad($resultado['velocidad']);
+        $memoria->set_nombre($resultado['nombre']);
         $memoria->set_fecha_cambio($resultado['fecha_cambio']);
         return $memoria;
     }
