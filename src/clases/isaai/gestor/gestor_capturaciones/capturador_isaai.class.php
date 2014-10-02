@@ -22,9 +22,12 @@ class CapturadorIsaai implements Capturador {
         $sistema_operativo = SistemaOperativo::materializar($id_maquina);
         $maquina->set_sistema_operativo($sistema_operativo);
 
-        $procesador = array();
-        $procesador[] = ProcesadorIsaai::materializar($id_maquina);
-        $maquina->set_procesadores($procesador);
+        /*** Falta implementar logica para que recorra y llene todos los procesadores ***/
+        $procesadores = array();
+        $procesadores[] = ProcesadorIsaai::materializar($id_maquina);
+        $maquina->set_procesadores($procesadores);
+        
+        /*** Falta hacer que llene los demas componentes ***/
         return $maquina;
     }
 

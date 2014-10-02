@@ -50,5 +50,12 @@ class Procesador extends Componente {
         $igual &= $this->_numero === $componente->get_numero();
         return $igual;
     }
+    
+    public function to_string(){
+        $salida = "Tipo: {$this->_tipo}";
+        $salida .= ", Velocidad: {$this->_velocidad}";
+        $salida .= ", Nucleos: {$this->_numero}";
+        return $salida;
+    }
 
 }

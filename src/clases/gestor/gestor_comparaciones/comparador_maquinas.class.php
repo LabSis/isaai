@@ -34,7 +34,8 @@ class ComparadorMaquinas {
 //        }
         for ($i = 0; $i < count($maquina1->get_procesadores()); $i++) {
             if(!$maquina1->get_procesador($i)->equals($maquina2->get_procesador($i))){
-                $this->_componentes_cambiados[] = $maquina2->get_procesador($i);
+                $this->_componentes_cambiados[] = $maquina1->get_procesador($i);
+                $iguales = false;
             }
         }
         return $iguales;
