@@ -12,11 +12,11 @@ class PlacaVideo extends Componente {
     private $_memoria;
     private $_chipset;
 
-    function __construct($_id, $_nombre, $_memoria, $_chipset) {
-        parent::__construct($_id);
-        $this->_nombre = $_nombre;
-        $this->_memoria = $_memoria;
-        $this->_chipset = $_chipset;
+    function __construct() {
+        parent::__construct(null);
+        $this->_nombre = null;
+        $this->_memoria = null;
+        $this->_chipset = null;
     }
 
     public function get_nombre() {

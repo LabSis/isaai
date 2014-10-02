@@ -12,11 +12,11 @@ class Procesador extends Componente {
     private $_velocidad;
     private $_numero;
 
-    function __construct($_id, $_tipo, $_velocidad, $_numero) {
-        parent::__construct($_id);
-        $this->_tipo = $_tipo;
-        $this->_velocidad = $_velocidad;
-        $this->_numero = $_numero;
+    function __construct() {
+        parent::__construct(null);
+        $this->_tipo = null;
+        $this->_velocidad = null;
+        $this->_numero = null;
     }
 
     public function get_tipo() {

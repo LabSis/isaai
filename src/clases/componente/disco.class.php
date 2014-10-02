@@ -17,16 +17,16 @@ class Disco extends Componente {
     private $_numero_serial;
     private $_firmware;
 
-    function __construct($_id, $_nombre, $_fabricante, $_modelo, $_descripcion, $_tipo, $_tamanio, $_numero_serial, $_firmware) {
-        parent::__construct($_id);
-        $this->_nombre = $_nombre;
-        $this->_fabricante = $_fabricante;
-        $this->_modelo = $_modelo;
-        $this->_descripcion = $_descripcion;
-        $this->_tipo = $_tipo;
-        $this->_tamanio = $_tamanio;
-        $this->_numero_serial = $_numero_serial;
-        $this->_firmware = $_firmware;
+    function __construct() {
+        parent::__construct(null);
+        $this->_nombre = null;
+        $this->_fabricante = null;
+        $this->_modelo = null;
+        $this->_descripcion = null;
+        $this->_tipo = null;
+        $this->_tamanio = null;
+        $this->_numero_serial = null;
+        $this->_firmware = null;
     }
 
     public function get_nombre() {

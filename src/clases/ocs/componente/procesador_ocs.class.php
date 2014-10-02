@@ -13,12 +13,16 @@ class ProcesadorOcs implements ComponenteMaterializable {
         $condicion = $id_maquina_ocs->get_condicion_unicidad_sql();
         $consulta = "SELECT processort, processors, processorn FROM hardware WHERE {$condicion}";
         $resultado = $conexion->consultar_simple($consulta);
-        $procesador = new Procesador(null, null, null, null);
+        //OCS siempre devuelve un sólo procesador para cada máquina, pues sólo 
+        //es un registro en la tabla hardware.
+        $procesadores = array();
+        $procesador = new Procesador();
         $procesador->set_id(null);
         $procesador->set_tipo($resultado[0]['processort']);
         $procesador->set_velocidad($resultado[0]['processors']);
         $procesador->set_numero($resultado[0]['processorn']);
-        return $procesador;
+        $procesadores[] = $procesador;
+        return $procesadores;
     }
 
     public static function desmaterializar($maquina, $componene) {

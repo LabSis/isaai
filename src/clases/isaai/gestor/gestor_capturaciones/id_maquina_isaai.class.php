@@ -14,7 +14,7 @@ class IdMaquinaIsaai extends IdMaquina {
      *
      * @var string Condición sql que debe ponerse en una cláusula where para 
      * obtener la máquina correcta, en la consulta que posea este where la tabla 
-     * maquinas debe debe tener un alias 'm' para evitar anbigüedades
+     * maquinas debe debe tener un alias 'maquina' para evitar anbigüedades
      */
     private $_condicion_unicidad;
     private $_id_hash;
@@ -26,7 +26,7 @@ class IdMaquinaIsaai extends IdMaquina {
         $this->_id_hash = $id_maquina;
     }
     public function get_condicion_unicidad_sql() {
-        $this->_condicion_unicidad = " 1=1 AND m.id = '{$this->_id_maquina}' AND m.fecha_cambio = '{$this->_fecha_cambio}'";
+        $this->_condicion_unicidad = " 1=1 AND maquina.id = '{$this->_id_maquina}' AND maquina.fecha_cambio = '{$this->_fecha_cambio}'";
         return $this->_condicion_unicidad;
     }
 

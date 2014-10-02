@@ -7,7 +7,7 @@
  * @author Milagros Zea Cárdenas
  * @version 1.0
  */
-class Perisferico extends Componente {
+class Periferico extends Componente {
 
     private $_nombre;
     private $_fabricante;
@@ -15,13 +15,13 @@ class Perisferico extends Componente {
     private $_descripcion;
     private $_interfaz;
 
-    function __construct($_id, $_nombre, $_fabricante, $_tipo, $_descripcion, $_interfaz) {
-        parent::__construct($_id);
-        $this->_nombre = $_nombre;
-        $this->_fabricante = $_fabricante;
-        $this->_tipo = $_tipo;
-        $this->_descripcion = $_descripcion;
-        $this->_interfaz = $_interfaz;
+    function __construct() {
+        parent::__construct(null);
+        $this->_nombre = null;
+        $this->_fabricante = null;
+        $this->_tipo = null;
+        $this->_descripcion = null;
+        $this->_interfaz = null;
     }
 
     public function get_nombre() {

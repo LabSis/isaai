@@ -11,15 +11,19 @@ class PlacaSonidoOcs implements ComponenteMaterializable {
     public static function materializar($id_maquina) {
         $conexion = Conexion::get_instacia(CONEXION_OCS);
         $condicion = $id_maquina->get_condicion_unicidad_sql();
-        $consulta = "SELECT manufacturer, name, description"
-                . " FROM sounds AS b INNER JOIN hardware AS hardware ON "
-                . " b.hardware_id = hardware.id WHERE {$condicion}";
-        $resultado = $conexion->consultar_simple($consulta);
-        $placa_sonido = new PlacaSonido(null, null, null);
-        $placa_sonido->set_id(null);
-        $placa_sonido->set_nombre($resultado[0]['name']);
-        $placa_sonido->set_fabricante($resultado[0]['manufacturer']);
-        return $placa_sonido;
+        $consulta = "SELECT s.manufacturer, s.name, s.description"
+                . " FROM sounds AS s INNER JOIN hardware AS hardware ON "
+                . " s.hardware_id = hardware.id WHERE {$condicion}";
+        $resultados = $conexion->consultar_simple($consulta);
+        $placas_sonido = array();
+        for ($i = 0; $i < count($resultados); $i++) {
+            $placa_sonido = new PlacaSonido();
+            $placa_sonido->set_id(null);
+            $placa_sonido->set_nombre($resultados[0]['name']);
+            $placa_sonido->set_fabricante($resultados[0]['manufacturer']);
+            $placas_sonido[] = $placa_sonido;
+        }
+        return $placas_sonido;
     }
 
     public static function desmaterializar($maquina, $componene) {

@@ -11,10 +11,10 @@ class PlacaSonido extends Componente {
     private $_nombre;
     private $_fabricante;
 
-    function __construct($_id, $_nombre, $_fabricante) {
-        parent::__construct($_id);
-        $this->_nombre = $_nombre;
-        $this->_fabricante = $_fabricante;
+    function __construct() {
+        parent::__construct(null);
+        $this->_nombre = null;
+        $this->_fabricante = null;
     }
 
     public function get_nombre() {

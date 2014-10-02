@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS memorias(
 	tipo VARCHAR(255) NULL,
 	descripcion VARCHAR(255) NULL,
 	numero_serial VARCHAR(255) NULL,
-	numero_renura VARCHAR(255) NULL,
+	numero_ranura VARCHAR(255) NULL,
 	velocidad VARCHAR(255) NULL,
 	nombre VARCHAR(255) NULL,
 	PRIMARY KEY(id,id_maquina,fecha_cambio),

@@ -17,15 +17,15 @@ class Memoria extends Componente {
     private $_velocidad;
     private $_nombre;
 
-    function __construct($_id, $_capacidad, $_tipo, $_descripcion, $_numero_serial, $_numero_ranura, $_velocidad, $_nombre) {
-        parent::__construct($_id);
-        $this->_capacidad = $_capacidad;
-        $this->_tipo = $_tipo;
-        $this->_descripcion = $_descripcion;
-        $this->_numero_serial = $_numero_serial;
-        $this->_numero_ranura = $_numero_ranura;
-        $this->_velocidad = $_velocidad;
-        $this->_nombre = $_nombre;
+    function __construct() {
+        parent::__construct(null);
+        $this->_capacidad = null;
+        $this->_tipo = null;
+        $this->_descripcion = null;
+        $this->_numero_serial = null;
+        $this->_numero_ranura = null;
+        $this->_velocidad = null;
+        $this->_nombre = null;
     }
 
     public function get_capacidad() {

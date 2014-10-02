@@ -7,7 +7,7 @@
  * @author Milagros Zea
  * @version 1.0
  */
-class MonitorISAAI implements ComponenteMaterializable {
+class MonitorIsaai implements ComponenteMaterializable {
 
     //se pasa como parametro la maquina a la que pertenece el componente.
     public static function materializar($_maquina) {
@@ -21,6 +21,18 @@ class MonitorISAAI implements ComponenteMaterializable {
         $monitor->set_resolucion($resultado['resolucion']);
         $monitor->set_fecha_cambio($resultado['fecha_cambio']);
         return $monitor;
+    }
+
+    public static function desmaterializar($maquina, $monitor) {
+        $conexion = Conexion::get_instacia(CONEXION_ISAAI);
+        $datos_insercion = array(
+            'id_maquina' => $maquina->get_id(),
+            'fecha_cambio' => Util::convertir_fecha_a_mysql($maquina->get_fecha_cambio()),
+            'modelo' => $monitor->get_modelo(),
+            'nombre' => $monitor->get_nombre(),
+            'resoluion' => $monitor->get_resolucion()
+        );
+        return $conexion->insertar('monitores', $datos_insercion);
     }
 
 }

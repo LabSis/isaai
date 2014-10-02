@@ -29,10 +29,6 @@ class GestorCapturaciones {
         $lista_maquinas_nuevas = array();
         $capturador_ocs = new CapturadorOcs();
         $capturador_isaai = new CapturadorIsaai();
-        //filtrar las maquinas que posiblemente hayan cambiado, a partir de la fecha de 
-        //sincornizacion
-        //obtener lista de ids de esas maquinas y materializarlas
-        //devolver lista de maquinas tanto del ocs como del isaai al controlador
         $cantidad_agregadas = 0;
         $cantidad_comparaciones = 0;
         $cargador_lista_isaai = new CargadorListaIsaai();

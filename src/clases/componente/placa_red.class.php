@@ -18,17 +18,17 @@ class PlacaRed extends Componente {
     private $_tipo;
     private $_velocidad;
 
-    function __construct($_id, $_direccion_ip, $_direccion_mac, $_direccion_red, $_direccion_dns, $_mascara, $_gateway, $_descripcion, $_tipo, $_velocidad) {
-        parent::__construct($_id);
-        $this->_direccion_ip = $_direccion_ip;
-        $this->_direccion_mac = $_direccion_mac;
-        $this->_direccion_red = $_direccion_red;
-        $this->_direccion_dns = $_direccion_dns;
-        $this->_mascara = $_mascara;
-        $this->_gateway = $_gateway;
-        $this->_descripcion = $_descripcion;
-        $this->_tipo = $_tipo;
-        $this->_velocidad = $_velocidad;
+    function __construct() {
+        parent::__construct(null);
+        $this->_direccion_ip = null;
+        $this->_direccion_mac = null;
+        $this->_direccion_red = null;
+        $this->_direccion_dns = null;
+        $this->_mascara = null;
+        $this->_gateway = null;
+        $this->_descripcion = null;
+        $this->_tipo = null;
+        $this->_velocidad = null;
     }
 
     public function get_direccion_ip() {

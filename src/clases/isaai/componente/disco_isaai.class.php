@@ -28,4 +28,21 @@ class DiscoISAAI implements ComponenteMaterializable {
         return $disco;
     }
 
+    public static function desmaterializar($maquina, $disco) {
+        $conexion = Conexion::get_instacia(CONEXION_ISAAI);
+        $datos_insercion = array(
+            'id_maquina' => $maquina->get_id(),
+            'fecha_cambio' => Util::convertir_fecha_a_mysql($maquina->get_fecha_cambio()),
+            'nombre' => $disco->get_nombre(),
+            'fabricante' => $disco->get_fabricante(),
+            'modelo' => $disco->get_modelo(),
+            'descripcion' => $disco->get_descripcion(),
+            'tipo' => $disco->get_tipo(),
+            'tamanio' => $disco->get_tamanio(),
+            'numero_serial' => $disco->get_numero_serial(),
+            'firmware' => $disco->get_firmware()
+        );
+        return $conexion->insertar('discos', $datos_insercion);
+    }
+
 }

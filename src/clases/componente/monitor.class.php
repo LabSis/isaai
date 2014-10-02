@@ -12,11 +12,11 @@ class Monitor extends Componente {
     private $_modelo;
     private $_resolucion;
 
-    function __construct($_id, $_nombre, $_modelo, $_resolucion) {
-        parent::__construct($_id);
-        $this->_nombre = $_nombre;
-        $this->_modelo = $_modelo;
-        $this->_resolucion = $_resolucion;
+    function __construct() {
+        parent::__construct(null);
+        $this->_nombre = null;
+        $this->_modelo = null;
+        $this->_resolucion = null;
     }
 
     public function get_nombre() {

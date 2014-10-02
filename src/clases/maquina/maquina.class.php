@@ -185,6 +185,28 @@ class Maquina {
             'fecha_sincronizacion' => $this->_fecha_sincronizacion
         );
         $ok &= $conexion->insertar('maquinas', $datos_insercion);
+        $ok &= BiosIsaai::desmaterializar($this, $this->_bios);
+        for ($i = 0; $i < count($this->_discos); $i++) {
+            $ok &= DiscoIsaai::desmaterializar($this, $this->_discos[$i]);
+        }
+        for ($i = 0; $i < count($this->_memorias); $i++) {
+            $ok &= MemoriaIsaai::desmaterializar($this, $this->_memorias[$i]);
+        }
+        for ($i = 0; $i < count($this->_monitores); $i++) {
+            $ok &= MonitorIsaai::desmaterializar($this, $this->_monitores[$i]);
+        }
+        for ($i = 0; $i < count($this->_perifericos); $i++) {
+            $ok &= PerisfericoIsaai::desmaterializar($this, $this->_perifericos[$i]);
+        }
+        for ($i = 0; $i < count($this->_placas_red); $i++) {
+            $ok &= PlacaRedIsaai::desmaterializar($this, $this->_placas_red[$i]);
+        }
+        for ($i = 0; $i < count($this->_placas_sonido); $i++) {
+            $ok &= PlacaSonidoIsaai::desmaterializar($this, $this->_placas_sonido[$i]);
+        }
+        for ($i = 0; $i < count($this->_placas_video); $i++) {
+            $ok &= PlacaVideoIsaai::desmaterializar($this, $this->_placas_video[$i]);
+        }
         for ($i = 0; $i < count($this->_procesadores); $i++) {
             $ok &= ProcesadorIsaai::desmaterializar($this, $this->_procesadores[$i]);
         }

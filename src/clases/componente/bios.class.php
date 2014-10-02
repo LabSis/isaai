@@ -15,14 +15,14 @@ class Bios extends Componente {
     private $_version;
     private $_numero_serial;
 
-    function __construct($_id, $_nombre, $_fabricante, $_modelo, $_asset_tag, $_version, $_numero_serial) {
-        parent::__construct($_id);
-        $this->_nombre = $_nombre;
-        $this->_fabricante = $_fabricante;
-        $this->_modelo = $_modelo;
-        $this->_asset_tag = $_asset_tag;
-        $this->_version = $_version;
-        $this->_numero_serial = $_numero_serial;
+    function __construct() {
+        parent::__construct(null);
+        $this->_nombre = null;
+        $this->_fabricante = null;
+        $this->_modelo = null;
+        $this->_asset_tag = null;
+        $this->_version = null;
+        $this->_numero_serial = null;
     }
 
     public function get_nombre() {

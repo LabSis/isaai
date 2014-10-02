@@ -12,26 +12,29 @@ class DiscoOcs implements ComponenteMaterializable {
     public static function materializar($id_maquina) {
         $conexion = Conexion::get_instacia(CONEXION_OCS);
         $condicion = $id_maquina->get_condicion_unicidad_sql();
-        $consulta = "SELECT manufacturer, name ,model, description,"
-                . " type, disksize, serialnumber, firmware FROM storages AS s INNER JOIN hardware AS hardware ON "
+        $consulta = "SELECT s.manufacturer, s.name, s.model, s.description, "
+                . " s.type, s.disksize, s.serialnumber, s.firmware FROM storages AS s INNER JOIN hardware AS hardware ON "
                 . " s.hardware_id = hardware.id WHERE {$condicion}";
-        $resultado = $conexion->consultar_simple($consulta);
-        //cargo el objeto disco...
-        $disco = new Disco(null, null, null, null, null, null, null, null, null);
-        $disco->set_id(null);
-        $disco->set_nombre($resultado[0]['name']);
-        $disco->set_fabricante($resultado[0]['manufacturer']);
-        $disco->set_modelo($resultado[0]['model']);
-        $disco->set_descripcion($resultado[0]['description']);
-        $disco->set_tipo($resultado[0]['type']);
-        $disco->set_tamanio($resultado[0]['disksize']);
-        $disco->set_numero_serial($resultado[0]['serialnumber']);
-        $disco->set_firmware($resultado[0]['firmware']);
-        return $disco;
+        $resultados = $conexion->consultar_simple($consulta);
+        $discos = array();
+        for ($i = 0; $i < count($resultados); $i++) {
+            $disco = new Disco();
+            $disco->set_id(null);
+            $disco->set_nombre($resultados[$i]['name']);
+            $disco->set_fabricante($resultados[$i]['manufacturer']);
+            $disco->set_modelo($resultados[$i]['model']);
+            $disco->set_descripcion($resultados[$i]['description']);
+            $disco->set_tipo($resultados[$i]['type']);
+            $disco->set_tamanio($resultados[$i]['disksize']);
+            $disco->set_numero_serial($resultados[$i]['serialnumber']);
+            $disco->set_firmware($resultados[$i]['firmware']);
+            $discos[] = $disco;
+        }
+        return $discos;
     }
 
     public static function desmaterializar($maquina, $componene) {
-        ;
+        
     }
 
 }

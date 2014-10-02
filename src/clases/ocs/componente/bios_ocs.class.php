@@ -17,7 +17,7 @@ class BiosOcs implements ComponenteMaterializable {
                 . " b.hardware_id = hardware.id WHERE {$condicion}";
         $resultado = $conexion->consultar_simple($consulta);
         //cargo el objeto bios...
-        $bios = new Bios(null, null, null, null, null, null, null);
+        $bios = new Bios();
         $bios->set_id(null);
         $bios->set_nombre($resultado[0]['smanufacturer']);
         $bios->set_fabricante($resultado[0]['bmanufacturer']);
@@ -28,8 +28,7 @@ class BiosOcs implements ComponenteMaterializable {
         return $bios;
     }
 
-    public function desmaterializar($maquina, $componene) {
-        ;
+    public static function desmaterializar($maquina, $componene) {
     }
 
     /**
