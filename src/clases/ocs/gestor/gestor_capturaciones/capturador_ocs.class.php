@@ -18,7 +18,13 @@ class CapturadorOcs implements Capturador {
         $maquina = new Maquina();
         $maquina->set_id($id_maquina_ocs->get_id_hash());
         $maquina->set_nombre($resultados[0]["NAME"]);
-        $maquina->set_fecha_alta(null);
+        //La fecha de alta del OCS forma parte del atributo DEVIDEID de la tabla hardware
+        $devideid = $resultados[0]["DEVICEID"];
+        $partes_devide_id = explode("-", $devideid);
+        $longitud_partes_devide_id = count($partes_devide_id) - 1;
+        $fecha_alta = $partes_devide_id[$longitud_partes_devide_id - 3] . '/' . $partes_devide_id[$longitud_partes_devide_id - 4] . '/' . $partes_devide_id[$longitud_partes_devide_id - 5];
+        $maquina->set_fecha_alta($fecha_alta);
+        //fecha de cambio es null
         $maquina->set_fecha_cambio(null);
         $maquina->set_fecha_sincronizacion($resultados[0]["LASTCOME"]);
 
@@ -36,16 +42,16 @@ class CapturadorOcs implements Capturador {
 
         $monitores = MonitorOcs::materializar($id_maquina_ocs);
         $maquina->set_monitores($monitores);
-        
+
         $perifericos = PerifericoOcs::materializar($id_maquina_ocs);
         $maquina->set_perifericos($perifericos);
-        
+
         $placas_red = PlacaRedOcs::materializar($id_maquina_ocs);
         $maquina->set_placas_red($placas_red);
-        
+
         $placas_sonido = PlacaSonidoOcs::materializar($id_maquina_ocs);
         $maquina->set_placas_sonido($placas_sonido);
-        
+
         $placas_video = PlacaVideoOcs::materializar($id_maquina_ocs);
         $maquina->set_placas_video($placas_video);
 

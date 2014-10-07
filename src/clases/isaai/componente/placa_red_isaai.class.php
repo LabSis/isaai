@@ -14,23 +14,27 @@ class PlacaRedIsaai implements ComponenteMaterializable {
         $consulta = "SELECT pr.direccion_ip, pr.direccion_mac, pr.direccion_red, pr.direccion_dns, "
                 . "pr.mascara, pr.gateway, pr.descripcion, pr.tipo, pr.velocidad, "
                 . "pr.fecha_cambio FROM placas_red AS pr "
-                . "INNER JOIN maquinas AS maquinas ON "
-                . "pr.id_maquina = maquinas.id AND pr.fecha_cambio = maquinas.fecha_cambio "
+                . "INNER JOIN maquinas AS maquina ON "
+                . "pr.id_maquina = maquina.id AND pr.fecha_cambio = maquina.fecha_cambio "
                 . "WHERE {$condicion}";
-        $resultado = $conexion->consultar_simple($consulta);
-        $placa_red = new PlacaRed(null, null, null, null, null, null, null, null, null, null);
-        $placa_red->set_id(null);
-        $placa_red->set_direccion_ip($resultado[0]['direccion_ip']);
-        $placa_red->set_direccion_mac($resultado[0]['direccion_mac']);
-        $placa_red->set_direccion_red($resultado[0]['direccion_red']);
-        $placa_red->set_direccion_dns($resultado[0]['direccion_dns']);
-        $placa_red->set_mascara($resultado[0]['mascara']);
-        $placa_red->set_gateway($resultado[0]['gateway']);
-        $placa_red->set_descripcion($resultado[0]['descripcion']);
-        $placa_red->set_tipo($resultado[0]['tipo']);
-        $placa_red->set_velocidad($resultado[0]['velocidad']);
-        $placa_red->set_fecha_cambio($resultado[0]['fecha_cambio']);
-        return $placa_red;
+        $resultados = $conexion->consultar_simple($consulta);
+        $placas_red = array();
+        for ($i = 0; $i < count($resultados); $i++) {
+            $placa_red = new PlacaRed();
+            $placa_red->set_id(null);
+            $placa_red->set_direccion_ip($resultados[$i]['direccion_ip']);
+            $placa_red->set_direccion_mac($resultados[$i]['direccion_mac']);
+            $placa_red->set_direccion_red($resultados[$i]['direccion_red']);
+            $placa_red->set_direccion_dns($resultados[$i]['direccion_dns']);
+            $placa_red->set_mascara($resultados[$i]['mascara']);
+            $placa_red->set_gateway($resultados[$i]['gateway']);
+            $placa_red->set_descripcion($resultados[$i]['descripcion']);
+            $placa_red->set_tipo($resultados[$i]['tipo']);
+            $placa_red->set_velocidad($resultados[$i]['velocidad']);
+//            $placa_red->set_fecha_cambio($resultados[$i]['fecha_cambio']);
+            $placas_red[] = $placa_red;
+        }
+        return $placas_red;
     }
 
     public static function desmaterializar($maquina, $placa_red) {
@@ -48,10 +52,6 @@ class PlacaRedIsaai implements ComponenteMaterializable {
             'velocidad' => $placa_red->get_velocidad()
         );
         return $conexion->insertar('placas_red', $datos_insercion);
-    }
-
-    public static function materializar($id_maquina) {
-        
     }
 
 }

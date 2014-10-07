@@ -7,26 +7,30 @@
  * @author Milagros Zea
  * @version  1.0
  */
-class PerisfericoIsaai implements ComponenteMaterializable {
+class PerifericoIsaai implements ComponenteMaterializable {
 
     public static function materializar($id_maquina) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $condicion = $id_maquina->get_condicion_unicidad_sql();
         $consulta = "SELECT p.nombre, p.fabricante, p.tipo, "
                 . "p.descripcion, p.interfaz, p.fecha_cambio FROM perifericos AS p "
-                . "INNER JOIN maquinas AS maquinas ON "
-                . "p.id_maquina = maquinas.id AND p.fecha_cambio = maquinas.fecha_cambio "
+                . "INNER JOIN maquinas AS maquina ON "
+                . "p.id_maquina = maquina.id AND p.fecha_cambio = maquina.fecha_cambio "
                 . "WHERE {$condicion}";
-        $resultado = $conexion->consultar_simple($consulta);
-        $periferico = new Periferico();
-        $periferico->set_id(null);
-        $periferico->set_nombre($resultado[0]['nombre']);
-        $periferico->set_fabricante($resultado[0]['fabricante']);
-        $periferico->set_tipo($resultado[0]['tipo']);
-        $periferico->set_descripcion($resultado[0]['descripcion']);
-        $periferico->set_interfaz($resultado[0]['interfaz']);
-        $periferico->set_fecha_cambio($resultado[$resultado[0]['fecha_cambio']]);
-        return $periferico;
+        $resultados = $conexion->consultar_simple($consulta);
+        $perifericos = array();
+        for ($i = 0; $i < count($resultados); $i++) {
+            $periferico = new Periferico();
+            $periferico->set_id(null);
+            $periferico->set_nombre($resultados[$i]['nombre']);
+            $periferico->set_fabricante($resultados[$i]['fabricante']);
+            $periferico->set_tipo($resultados[$i]['tipo']);
+            $periferico->set_descripcion($resultados[$i]['descripcion']);
+            $periferico->set_interfaz($resultados[$i]['interfaz']);
+//            $periferico->set_fecha_cambio($resultados[$resultados[$i]['fecha_cambio']]);
+            $perifericos[] = $periferico;
+        }
+        return $perifericos;
     }
 
     public static function desmaterializar($maquina, $periferico) {

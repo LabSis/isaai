@@ -14,23 +14,26 @@ class DiscoIsaai implements ComponenteMaterializable {
         $condicion = $id_maquina->get_condicion_unicidad_sql();
         $consulta = "SELECT d.nombre, d.fabricante, d.modelo, d.descripcion, "
                 . "d.tipo, d.firmware, d.tamanio, d.numero_serial, d.fecha_cambio FROM discos AS d "
-                . "INNER JOIN maquinas AS maquinas ON "
-                . "d.id_maquina = maquinas.id AND d.fecha_cambio = maquinas.fecha_cambio "
+                . "INNER JOIN maquinas AS maquina ON "
+                . "d.id_maquina = maquina.id AND d.fecha_cambio = maquina.fecha_cambio "
                 . "WHERE {$condicion}";
-        $resultado = $conexion->consultar_simple($consulta);
-        //new Disco($_id, $_nombre, $_fabricante, $_modelo, $_descripcion, $_tipo, $_tamanio, $_numero_serial, $_firmware)
-        $disco = new Disco();
-        $disco->set_id(null);
-        $disco->set_nombre($resultado['nombre']);
-        $disco->set_fabricante($resultado['fabricante']);
-        $disco->set_modelo($resultado['modelo']);
-        $disco->set_descripcion($resultado['descripcion']);
-        $disco->set_tipo($resultado['tipo']);
-        $disco->set_firmware($resultado['firmware']);
-        $disco->set_tamanio($resultado['tamanio']);
-        $disco->set_numero_serial($resultado['numero_serial']);
-        $disco->set_fecha_cambio($resultado['fecha_cambio']);
-        return $disco;
+        $resultados = $conexion->consultar_simple($consulta);
+        $discos = array();
+        for ($i = 0; $i < count($resultados); $i++) {
+            $disco = new Disco();
+            $disco->set_id(null);
+            $disco->set_nombre($resultados[$i]['nombre']);
+            $disco->set_fabricante($resultados[$i]['fabricante']);
+            $disco->set_modelo($resultados[$i]['modelo']);
+            $disco->set_descripcion($resultados[$i]['descripcion']);
+            $disco->set_tipo($resultados[$i]['tipo']);
+            $disco->set_firmware($resultados[$i]['firmware']);
+            $disco->set_tamanio($resultados[$i]['tamanio']);
+            $disco->set_numero_serial($resultados[$i]['numero_serial']);
+//            $disco->set_fecha_cambio($resultados[$i]['fecha_cambio']);
+            $discos[] = $disco;
+        }
+        return $discos;
     }
 
     public static function desmaterializar($maquina, $disco) {

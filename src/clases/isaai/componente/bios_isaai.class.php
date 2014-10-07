@@ -9,24 +9,23 @@
 class BiosIsaai implements ComponenteMaterializable {
 
     public static function materializar($id_maquina) {
-        //Consultas a la BD_ISAAI para materializar el objeto.
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $condicion = $id_maquina->get_condicion_unicidad_sql();
         $consulta = "SELECT b.nombre,  b.fabricante, b.modelo, b.asset_tag, "
                 . "b.version, b.numero_serial, b.fecha_cambio FROM bios AS b "
-                . "INNER JOIN maquinas AS maquinas ON "
-                . "b.id_maquina = maquinas.id AND b.fecha_cambio = maquinas.fecha_cambio "
+                . "INNER JOIN maquinas AS maquina ON "
+                . "b.id_maquina = maquina.id AND b.fecha_cambio = maquina.fecha_cambio "
                 . "WHERE {$condicion}";
         $resultado = $conexion->consultar_simple($consulta);
         $bios = new Bios();
         $bios->set_id(null);
-        $bios->set_nombre($resultado['nombre']);
-        $bios->set_fabricante($resultado['fabricante']);
-        $bios->set_modelo($resultado['modelo']);
-        $bios->set_asset_tag($resultado['asset_tag']);
-        $bios->set_version($resultado['version']);
-        $bios->set_numero_serial($resultado['numero_serial']);
-        $bios->set_fecha_cambio($resultado['fecha_cambio']);
+        $bios->set_nombre($resultado[0]['nombre']);
+        $bios->set_fabricante($resultado[0]['fabricante']);
+        $bios->set_modelo($resultado[0]['modelo']);
+        $bios->set_asset_tag($resultado[0]['asset_tag']);
+        $bios->set_version($resultado[0]['version']);
+        $bios->set_numero_serial($resultado[0]['numero_serial']);
+//        $bios->set_fecha_cambio($resultado[0]['fecha_cambio']);
         return $bios;
     }
 

@@ -13,17 +13,20 @@ class PlacaSonidoIsaai implements ComponenteMaterializable {
         $condicion = $id_maquina->get_condicion_unicidad_sql();
         $consulta = "SELECT ps.nombre, ps.fabricante, "
                 . "ps.fecha_cambio FROM placas_sonido AS ps "
-                . "INNER JOIN maquinas AS maquinas ON "
-                . "ps.id_maquina = maquinas.id AND ps.fecha_cambio = maquinas.fecha_cambio "
+                . "INNER JOIN maquinas AS maquina ON "
+                . "ps.id_maquina = maquina.id AND ps.fecha_cambio = maquina.fecha_cambio "
                 . "WHERE {$condicion}";
-        $resultado = $conexion->consultar_simple($consulta);
-        //new Monitor($_id, $_nombre, $_modelo, $_resolucion)
-        $placa_sonido = new PlacaSonido();
-        $placa_sonido->set_id(null);
-        $placa_sonido->set_nombre($resultado[0]['nombre']);
-        $placa_sonido->set_fabricante($resultado[0]['fabricante']);
-        $placa_sonido->set_fecha_cambio($resultado[0]['fecha_cambio']);
-        return $placa_sonido;
+        $resultados = $conexion->consultar_simple($consulta);
+        $placas_sonido = array();
+        for ($i = 0; $i < count($resultados); $i++) {
+            $placa_sonido = new PlacaSonido();
+            $placa_sonido->set_id(null);
+            $placa_sonido->set_nombre($resultados[$i]['nombre']);
+            $placa_sonido->set_fabricante($resultados[$i]['fabricante']);
+//            $placa_sonido->set_fecha_cambio($resultados[$i]['fecha_cambio']);
+            $placas_sonido[] = $placa_sonido;
+        }
+        return $placas_sonido;
     }
 
     public static function desmaterializar($maquina, $placa_sonido) {

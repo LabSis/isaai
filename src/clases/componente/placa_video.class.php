@@ -46,8 +46,8 @@ class PlacaVideo extends Componente {
     public function equals($componente) {
         $igual = true;
         $igual &= $this->_chipset === $componente->get_chipset();
-        $igual &= $this->memoria === $componente->get_memoria();
-        $igual &= $this->nombre === $componente->get_nombre();
+        $igual &= $this->_memoria === $componente->get_memoria();
+        $igual &= $this->_nombre === $componente->get_nombre();
         return $igual;
     }
 

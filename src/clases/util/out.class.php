@@ -13,7 +13,6 @@ class Out {
     }
 
     public static function print_array($array) {
-        Out::println("Cantidad de elementos: " .count($array));
         echo '<pre>';
         print_r($array);
         echo '</pre>';

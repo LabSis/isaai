@@ -67,10 +67,11 @@ class Periferico extends Componente {
     public function equals($componente) {
         $igual = true;
         $igual &= $this->_descripcion === $componente->get_descripcion();
-        $igual &= $this->_fabricante === $componente->get_decripcion();
+        $igual &= $this->_fabricante === $componente->get_fabricante();
         $igual &= $this->_interfaz === $componente->get_interfaz();
         $igual &= $this->_nombre === $componente->get_nombre();
         $igual &= $this->_tipo === $componente->get_tipo();
+        return $igual;
     }
 
 }
