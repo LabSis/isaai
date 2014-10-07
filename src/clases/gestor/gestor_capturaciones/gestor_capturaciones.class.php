@@ -42,17 +42,19 @@ class GestorCapturaciones {
                 $j++;
             }
             if ($j === count($lista_resultados_isaai)) {
-                //agregar nueva maquina
-                $id_maquina_ocs = new IdMaquinaOcs($lista_resultados_ocs[$i]['ID']);
-                $maquina_nueva = $capturador_ocs->obtener_maquina($id_maquina_ocs);
-                $maquina_nueva->set_fecha_cambio(Util::get_fecha_actual_formato_dd_mm_aaaa());
-                $maquina_nueva->set_fecha_alta(Util::get_fecha_actual_formato_dd_mm_aaaa());
-                if ($maquina_nueva->insertar() == true) {
-                    $cantidad_agregadas++;
-                    $lista_maquinas_nuevas[] = $maquina_nueva;
-                } else {
-                    Out::print_array(Conexion::get_instacia(CONEXION_ISAAI)->get_error());
-                }
+                //if ($cantidad_agregadas < 1) {
+                    //agregar nueva maquina
+                    $id_maquina_ocs = new IdMaquinaOcs($lista_resultados_ocs[$i]['ID']);
+                    $maquina_nueva = $capturador_ocs->obtener_maquina($id_maquina_ocs);
+                    $maquina_nueva->set_fecha_cambio(Util::get_fecha_actual_formato_dd_mm_aaaa());
+                    $maquina_nueva->set_fecha_alta(Util::get_fecha_actual_formato_dd_mm_aaaa());
+                    if ($maquina_nueva->insertar() == true) {
+                        $cantidad_agregadas++;
+                        $lista_maquinas_nuevas[] = $maquina_nueva;
+                    } else {
+                        Out::print_array(Conexion::get_instacia(CONEXION_ISAAI)->get_error());
+                    }
+                //}
             } else {
                 //comparar la fechas
                 $cantidad_comparaciones++;

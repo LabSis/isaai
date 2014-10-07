@@ -59,5 +59,5 @@ function __autoload($nombre_clase) {
 
 define('CONEXION_ISAAI', 'isaai');
 define('CONEXION_OCS', 'ocs');
-Conexion::agregar_instancia(CONEXION_ISAAI, new Conexion('localhost', 'root', '', 'isaai', true));
-Conexion::agregar_instancia(CONEXION_OCS, new Conexion('localhost', 'root', '', 'ocsweb', true));
+Conexion::agregar_instancia(CONEXION_ISAAI, Conexion::init('localhost', 'root', '', 'isaai', true));
+Conexion::agregar_instancia(CONEXION_OCS, Conexion::init('localhost', 'root', '', 'ocsweb', true));

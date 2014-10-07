@@ -12,16 +12,20 @@ class ProcesadorIsaai implements ComponenteMaterializable {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $condicion = $id_maquina->get_condicion_unicidad_sql();
         $consulta = "SELECT p.tipo, p.velocidad, p.nucleos FROM procesadores AS p "
-                . "INNER JOIN maquinas AS m ON "
-                . "p.id_maquina = m.id AND p.fecha_cambio = m.fecha_cambio "
+                . "INNER JOIN maquinas AS maquina ON "
+                . "p.id_maquina = maquina.id AND p.fecha_cambio = maquina.fecha_cambio "
                 . "WHERE {$condicion}";
-        $resultado = $conexion->consultar_simple($consulta);
-        $procesador = new Procesador(null, null, null, null);
-        $procesador->set_id(null);
-        $procesador->set_numero($resultado[0]["nucleos"]);
-        $procesador->set_tipo($resultado[0]["tipo"]);
-        $procesador->set_velocidad($resultado[0]["velocidad"]);
-        return $procesador;
+        $resultados = $conexion->consultar_simple($consulta);
+        $procesadores = array();
+        for ($i = 0; $i < count($resultados); $i++) {
+            $procesador = new Procesador();
+            $procesador->set_id(null);
+            $procesador->set_numero($resultados[$i]["nucleos"]);
+            $procesador->set_tipo($resultados[$i]["tipo"]);
+            $procesador->set_velocidad($resultados[$i]["velocidad"]);
+            $procesadores[] = $procesador;
+        }
+        return $procesadores;
     }
 
     public static function desmaterializar($maquina, $procesador) {

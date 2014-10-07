@@ -91,10 +91,10 @@ class Conexion {
      * la conexión con la base de datos. Valor por defecto: 'utf8'.
      */
     public static function init($_host, $_nombre_usuario, $_clave_usuario, $_base_datos, $_modo_desarrollo = false, $conjunto_caracteres = 'utf8') {
-        return Conexion($_host, $_nombre_usuario, $_clave_usuario, $_base_datos, $_modo_desarrollo, $conjunto_caracteres);
+        return new Conexion($_host, $_nombre_usuario, $_clave_usuario, $_base_datos, $_modo_desarrollo, $conjunto_caracteres);
     }
 
-    public function __construct($_host, $_nombre_usuario, $_clave_usuario, $_base_datos, $_modo_desarrollo = false, $conjunto_caracteres = 'utf8') {
+    private function __construct($_host, $_nombre_usuario, $_clave_usuario, $_base_datos, $_modo_desarrollo = false, $conjunto_caracteres = 'utf8') {
         $this->_host = $_host;
         $this->_nombre_usuario = $_nombre_usuario;
         $this->_clave_usuario = $_clave_usuario;

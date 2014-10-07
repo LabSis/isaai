@@ -14,21 +14,25 @@ class MemoriaIsaai implements ComponenteMaterializable {
         $condicion = $id_maquina->get_condicion_unicidad_sql();
         $consulta = "SELECT m.capacidad, m.tipo, m.descripcion, m.numero_serial, "
                 . "m.numero_ranura, m.velocidad, m.nombre, m.fecha_cambio FROM memorias AS m "
-                . "INNER JOIN maquinas AS maquinas ON "
-                . "m.id_maquina = maquinas.id AND m.fecha_cambio = maquinas.fecha_cambio "
+                . "INNER JOIN maquinas AS maquina ON "
+                . "m.id_maquina = maquina.id AND m.fecha_cambio = maquina.fecha_cambio "
                 . "WHERE {$condicion}";
-        $resultado = $conexion->consultar_simple($consulta);
-        $memoria = new Memoria();
-        $memoria->set_id(null);
-        $memoria->set_capacidad($resultado['capacidad']);
-        $memoria->set_tipo($resultado['tipo']);
-        $memoria->set_descripcion($resultado['decripcion']);
-        $memoria->set_numero_serial($resultado['numero_serial']);
-        $memoria->set_numero_ranura($resultado['numero_ranura']);
-        $memoria->set_velocidad($resultado['velocidad']);
-        $memoria->set_nombre($resultado['nombre']);
-        $memoria->set_fecha_cambio($resultado['fecha_cambio']);
-        return $memoria;
+        $resultados = $conexion->consultar_simple($consulta);
+        $memorias = array();
+        for ($i = 0; $i < count($resultados); $i++) {
+            $memoria = new Memoria();
+            $memoria->set_id(null);
+            $memoria->set_capacidad($resultados[$i]['capacidad']);
+            $memoria->set_tipo($resultados[$i]['tipo']);
+            $memoria->set_descripcion($resultados[$i]['descripcion']);
+            $memoria->set_numero_serial($resultados[$i]['numero_serial']);
+            $memoria->set_numero_ranura($resultados[$i]['numero_ranura']);
+            $memoria->set_velocidad($resultados[$i]['velocidad']);
+            $memoria->set_nombre($resultados[$i]['nombre']);
+//            $memoria->set_fecha_cambio($resultados[$i]['fecha_cambio']);
+            $memorias[] = $memoria;
+        }
+        return $memorias;
     }
 
     public static function desmaterializar($maquina, $memoria) {

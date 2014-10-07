@@ -13,16 +13,20 @@ class PlacaVideoIsaai implements ComponenteMaterializable {
         $condicion = $id_maquina->get_condicion_unicidad_sql();
         $consulta = "SELECT pv.nombre, pv.memoria, pv.chipset "
                 . " pv.fecha_cambio FROM placas_video AS pv "
-                . "INNER JOIN maquinas AS maquinas ON "
-                . "pv.id_maquina = maquinas.id AND pv.fecha_cambio = maquinas.fecha_cambio "
+                . "INNER JOIN maquinas AS maquina ON "
+                . "pv.id_maquina = maquina.id AND pv.fecha_cambio = maquina.fecha_cambio "
                 . "WHERE {$condicion}";
-        $resultado = $conexion->consultar_simple($consulta);
-        $placa_video = new PlacaVideo();
-        $placa_video->set_id(null);
-        $placa_video->set_nombre($resultado[0]['nombre']);
-        $placa_video->set_memoria($resultado[0]['memoria']);
-        $placa_video->set_chipset($resultado[0]['chipset']);
-        return $placa_video;
+        $resultados = $conexion->consultar_simple($consulta);
+        $placas_video = array();
+        for ($i = 0; $i < count($resultados); $i++) {
+            $placa_video = new PlacaVideo();
+            $placa_video->set_id(null);
+            $placa_video->set_nombre($resultados[$i]['nombre']);
+            $placa_video->set_memoria($resultados[$i]['memoria']);
+            $placa_video->set_chipset($resultados[$i]['chipset']);
+            $placas_video[] = $placa_video;
+        }
+        return $placas_video;
     }
 
     public static function desmaterializar($maquina, $placa_video) {
