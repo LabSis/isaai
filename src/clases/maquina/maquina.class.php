@@ -259,7 +259,7 @@ class Maquina {
                     break;
                 case("procesador"):
                     $componentes_materializables[$nombre_clase_componente] = ProcesadorIsaai;
-                    $componentes[$nombre_clase_componente] = $this->_procesadores;
+                    $componentes[$nombre_clase_componente] = $componente_cambiado;
                     break;
             }
         }
@@ -292,6 +292,7 @@ class Maquina {
                     $ok &= $componente_materializable::desmaterializar($this, $datos_componente[$i]);
                 }
             } else {
+                Out::println("Quiero desmaterializar: " . get_class($datos_componente));
                 $ok &= $componente_materializable::desmaterializar($this, $datos_componente);
             }
         }

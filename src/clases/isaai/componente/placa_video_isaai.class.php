@@ -11,7 +11,7 @@ class PlacaVideoIsaai implements ComponenteMaterializable {
     public static function materializar($id_maquina) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $condicion = $id_maquina->get_condicion_unicidad_sql();
-        $consulta = "SELECT pv.nombre, pv.memoria, pv.chipset "
+        $consulta = "SELECT pv.nombre, pv.memoria, pv.chipset, "
                 . " pv.fecha_cambio FROM placas_video AS pv "
                 . "INNER JOIN maquinas AS maquina ON "
                 . "pv.id_maquina = maquina.id AND pv.fecha_cambio = maquina.fecha_cambio "

@@ -101,7 +101,7 @@ class Disco extends Componente {
         $igual &= $this->_modelo === $componente->get_modelo();
         $igual &= $this->_nombre === $componente->get_nombre();
         $igual &= $this->_numero_serial === $componente->get_numero_serial();
-        $igual &= $this->_tamanio === $componente->get_tamnio();
+        $igual &= $this->_tamanio === $componente->get_tamanio();
         $igual &= $this->_tipo === $componente->get_tipo();
     }
 

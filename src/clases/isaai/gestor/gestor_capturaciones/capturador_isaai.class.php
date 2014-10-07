@@ -9,7 +9,7 @@ class CapturadorIsaai implements Capturador {
 
     public static function obtener_maquina($id_maquina) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
-        $consulta = "SELECT * FROM maquinas WHERE {$id_maquina->get_condicion_unicidad_sql()}";
+        $consulta = "SELECT * FROM maquinas AS maquina WHERE {$id_maquina->get_condicion_unicidad_sql()}";
         $resultados = $conexion->consultar_simple($consulta);
 
         $maquina = new Maquina();

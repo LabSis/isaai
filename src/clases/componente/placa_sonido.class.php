@@ -37,7 +37,7 @@ class PlacaSonido extends Componente {
         $igual = true;
         $igual &= $this->_fabricante === $componente->get_fabricante();
         $igual &=$this->_nombre === $componente->get_nombre();
-        return igual;
+        return $igual;
     }
 
 }

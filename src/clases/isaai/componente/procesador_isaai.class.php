@@ -37,7 +37,10 @@ class ProcesadorIsaai implements ComponenteMaterializable {
             'velocidad' => $procesador->get_velocidad(),
             'nucleos' => $procesador->get_numero()
         );
-        return $conexion->insertar('procesadores', $datos_insercion);
+        Out::print_array($datos_insercion);
+        if ($conexion->insertar('procesadores', $datos_insercion)){
+            Out::print_array($conexion->get_error());
+        }
     }
 
 }

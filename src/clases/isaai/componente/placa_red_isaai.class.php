@@ -14,7 +14,7 @@ class PlacaRedIsaai implements ComponenteMaterializable {
         $consulta = "SELECT pr.direccion_ip, pr.direccion_mac, pr.direccion_red, pr.direccion_dns, "
                 . "pr.mascara, pr.gateway, pr.descripcion, pr.tipo, pr.velocidad, "
                 . "pr.fecha_cambio FROM placas_red AS pr "
-                . "INNER JOIN maquinas AS maquinas ON "
+                . "INNER JOIN maquinas AS maquina ON "
                 . "pr.id_maquina = maquina.id AND pr.fecha_cambio = maquina.fecha_cambio "
                 . "WHERE {$condicion}";
         $resultados = $conexion->consultar_simple($consulta);
