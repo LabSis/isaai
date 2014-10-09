@@ -228,35 +228,35 @@ class Maquina {
             switch ($nombre_clase_componente) {
                 case("bios"):
                     $componentes_materializables[$nombre_clase_componente] = BiosIsaai;
-                    $componentes[$nombre_clase_componente] = $this->_bios;
+                    $componentes[$nombre_clase_componente] = $componente_cambiado;
                     break;
                 case("disco"):
                     $componentes_materializables[$nombre_clase_componente] = DiscoIsaai;
-                    $componentes[$nombre_clase_componente] = $this->_discos;
+                    $componentes[$nombre_clase_componente] = $componente_cambiado;
                     break;
                 case("memoria"):
                     $componentes_materializables[$nombre_clase_componente] = MemoriaIsaai;
-                    $componentes[$nombre_clase_componente] = $this->_memorias;
+                    $componentes[$nombre_clase_componente] = $componente_cambiado;
                     break;
                 case("monitor"):
                     $componentes_materializables[$nombre_clase_componente] = MonitorIsaai;
-                    $componentes[$nombre_clase_componente] = $this->_monitores;
+                    $componentes[$nombre_clase_componente] = $componente_cambiado;
                     break;
                 case("periferico"):
-                    $componentes_materializables[$nombre_clase_componente] = PerisfericoIsaai;
-                    $componentes[$nombre_clase_componente] = $this->_perifericos;
+                    $componentes_materializables[$nombre_clase_componente] = PerifericoIsaai;
+                    $componentes[$nombre_clase_componente] = $componente_cambiado;
                     break;
                 case("placas_red"):
                     $componentes_materializables[$nombre_clase_componente] = PlacaRedIsaai;
-                    $componentes[$nombre_clase_componente] = $this->_placas_red;
+                    $componentes[$nombre_clase_componente] = $componente_cambiado;
                     break;
                 case("placas_sonido"):
                     $componentes_materializables[$nombre_clase_componente] = PlacaSonidoIsaai;
-                    $componentes[$nombre_clase_componente] = $this->_placas_sonido;
+                    $componentes[$nombre_clase_componente] = $componente_cambiado;
                     break;
                 case("placas_video"):
                     $componentes_materializables[$nombre_clase_componente] = PlacaVideoIsaai;
-                    $componentes[$nombre_clase_componente] = $this->_placas_video;
+                    $componentes[$nombre_clase_componente] = $componente_cambiado;
                     break;
                 case("procesador"):
                     $componentes_materializables[$nombre_clase_componente] = ProcesadorIsaai;
@@ -306,10 +306,11 @@ class Maquina {
 
     public function actualizar_fecha_sincronizacion() {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
-        $datos = array(
-            'fecha_sincronizacion' => $this->_fecha_sincronizacion
-        );
-        return $conexion->actualizar('maquinas', $datos);
+        $consulta = "UPDATE maquinas SET fecha_sincronizacion = '{$this->_fecha_sincronizacion}' "
+        . "WHERE id='{$this->_id}' AND fecha_sincronizacion = "
+        . "(SELECT MAX(fecha_sincronizacion) FROM maquinas WHERE id = '{$this->_id}')";
+        Out::println($consulta);
+        return $conexion->actualizar_simple($consulta);
     }
 
 }

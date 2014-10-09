@@ -10,6 +10,7 @@ class IdMaquinaIsaai extends IdMaquina {
 
     private $_id_maquina;
     private $_fecha_cambio;
+
     /**
      *
      * @var string Condición sql que debe ponerse en una cláusula where para 
@@ -26,8 +27,11 @@ class IdMaquinaIsaai extends IdMaquina {
         $this->_condicion_unicidad = null;
         $this->_id_hash = $id_maquina;
     }
+
     public function get_condicion_unicidad_sql() {
         $this->_condicion_unicidad = " 1=1 AND maquina.id = '{$this->_id_maquina}' AND maquina.fecha_cambio = '{$this->_fecha_cambio}'";
+        //$this->_condicion_unicidad = " 1=1 AND maquina.id = '{$this->_id_maquina}' AND maquina.fecha_cambio = "
+        //        . "(SELECT MAX(fecha_cambio) FROM maquinas WHERE id = '{$this->_id}')";
         return $this->_condicion_unicidad;
     }
 

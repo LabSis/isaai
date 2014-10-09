@@ -18,7 +18,7 @@ header('Cache-Control: post-check=0, pre-check=0', false);
 header('Pragma: no-cache');
 
 //Dependiendo de la configuración establezco si se mostrarán o no los errores.
-$global_modo_desarrollo = true;
+$global_modo_desarrollo = false;
 if ($global_modo_desarrollo) {
     error_reporting(E_ALL | E_STRICT);
 } else {
