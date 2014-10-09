@@ -42,6 +42,18 @@ class Util {
     public static function get_fecha_formato_dd_mm_aaaa($instante) {
         return date('d/m/Y', $instante);
     }
+    
+     public static function get_fecha_y_hora_actual_formato_dd_mm_aaaa() {
+        return self::get_fecha_y_hora_formato_dd_mm_aaaa(time());
+    }
+    
+    public static function get_fecha_y_hora_formato_dd_mm_aaaa($instante) {
+        return date('d/m/Y H:i:s', $instante);
+    }
+    
+    public static function get_fecha_y_hora_actual_mysql() {
+        return date('Y-m-s H:i:s', time());
+    }
 
     public static function convertir_fecha_a_mysql($fecha, $formato = self::FORMATO_FECHA_DD_MM_YYYY) {
         $dia = "00";

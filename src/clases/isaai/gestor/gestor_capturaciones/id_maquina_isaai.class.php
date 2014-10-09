@@ -19,6 +19,7 @@ class IdMaquinaIsaai extends IdMaquina {
     private $_condicion_unicidad;
     private $_id_hash;
 
+    //se espera que venga en formato AAAA_MM_DD
     function __construct($id_maquina, $fecha_cambio) {
         $this->_id_maquina = $id_maquina;
         $this->_fecha_cambio = $fecha_cambio;

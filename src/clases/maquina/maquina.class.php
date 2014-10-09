@@ -17,6 +17,7 @@ class Maquina {
     private $_id;
     private $_nombre;
     private $_sistema_operativo;
+    //Todas las fechas, por simplicidad, se manejan en formato de mysql aaaa-mm-dd hh:mm:ss
     private $_fecha_alta;
     private $_fecha_cambio;
     private $_fecha_sincronizacion;
@@ -190,7 +191,7 @@ class Maquina {
             "discos" => DiscoIsaai,
             "memorias" => MemoriaIsaai,
             "monitores" => MonitorIsaai,
-            "perifericos" => PerisfericoIsaai,
+            "perifericos" => PerifericoIsaai,
             "placas_red" => PlacaRedIsaai,
             "placas_sonido" => PlacaSonidoIsaai,
             "placas_video" => PlacaVideoIsaai,
@@ -212,10 +213,10 @@ class Maquina {
     }
 
     //Al actualizar la maquina que cambio, debo insertar un nuevo registro en la 
-    //base de datos isaai para la tabla maquinas y todas aquellas tabla de los 
+    //base de datos isaai para la tabla maquinas y todas aquellas tablas de los 
     //componentes que hayan cambiado, unicamente de los que cambiaron, asi 
     //garantizo de no almacenar registro redundantes. El inconveniente con esta 
-    //aproximacion seria de que para octener los componentes actuales de una maquina 
+    //aproximacion seria de que para obtener los componentes actuales de una maquina 
     //deberia complicar la consulta sobre las tablas de los componentes, es decir 
     //consultar las tablas de componentes y ordenarlos de manera creciente por 
     //fecha de cambio, para asi obtener los utlimos componentes
@@ -273,10 +274,10 @@ class Maquina {
         $ok = true;
         $datos_insercion = array(
             'id' => $this->_id,
-            'fecha_cambio' => Util::convertir_fecha_a_mysql($this->_fecha_cambio),
+            'fecha_cambio' => $this->_fecha_cambio,
             'id_sistema_operativo' => '1', //Evitar esto!
             'nombre' => $this->_nombre,
-            'fecha_alta' => Util::convertir_fecha_a_mysql($this->_fecha_alta),
+            'fecha_alta' => $this->_fecha_alta,
             'fecha_sincronizacion' => $this->_fecha_sincronizacion
         );
         $ok &= $conexion->insertar('maquinas', $datos_insercion);
@@ -292,7 +293,6 @@ class Maquina {
                     $ok &= $componente_materializable::desmaterializar($this, $datos_componente[$i]);
                 }
             } else {
-                Out::println("Quiero desmaterializar: " . get_class($datos_componente));
                 $ok &= $componente_materializable::desmaterializar($this, $datos_componente);
             }
         }
@@ -302,6 +302,14 @@ class Maquina {
             $conexion->transaccion_revertir();
         }
         return $ok;
+    }
+
+    public function actualizar_fecha_sincronizacion() {
+        $conexion = Conexion::get_instacia(CONEXION_ISAAI);
+        $datos = array(
+            'fecha_sincronizacion' => $this->_fecha_sincronizacion
+        );
+        return $conexion->actualizar('maquinas', $datos);
     }
 
 }

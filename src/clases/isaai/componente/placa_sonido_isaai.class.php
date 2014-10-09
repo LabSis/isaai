@@ -33,7 +33,7 @@ class PlacaSonidoIsaai implements ComponenteMaterializable {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $datos_insercion = array(
             'id_maquina' => $maquina->get_id(),
-            'fecha_cambio' => Util::convertir_fecha_a_mysql($maquina->get_fecha_cambio()),
+            'fecha_cambio' => $maquina->get_fecha_cambio(),
             'nombre' => $placa_sonido->get_nombre(),
             'fabricante' => $placa_sonido->get_fabricante()
         );

@@ -42,12 +42,14 @@ class ComparadorMaquinas {
         return $iguales;
     }
 
-    private function verificar_cambios($maquina1_componentes_tipados, $maquina2_componentes_tipados) {
+    private function verificar_cambios($maquina1_componentes, $maquina2_componentes) {
         $igual = true;
-        for ($i = 0; $i < count($maquina1_componentes_tipados); $i++) {
-            if (isset($maquina1_componentes_tipados[$i]) && isset($maquina2_componentes_tipados[$i])) {
-                if (!$maquina1_componentes_tipados[$i]->equals($maquina2_componentes_tipados[$i])) {
-                    $this->_componentes_cambiados[] = $maquina1_componentes_tipados[$i];
+        for ($i = 0; $i < count($maquina1_componentes); $i++) {
+            //Es necesario agregar también los componentes nuevos!
+            //es decir, el caso en que count($maquina1_componentes) > count($maquina2_componentes)
+            if (isset($maquina1_componentes[$i]) && isset($maquina2_componentes[$i])) {
+                if (!$maquina1_componentes[$i]->equals($maquina2_componentes[$i])) {
+                    $this->_componentes_cambiados[] = $maquina1_componentes[$i];
                     $igual = false;
                 }
             }

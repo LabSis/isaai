@@ -47,11 +47,14 @@ class GestorComparaciones {
                 $cambio->set_maquina_actual($maquina_actual);
                 $cambio->set_componentes_cambiados($comparador->get_componentes_cambiados());
                 $cambios[] = $cambio;
-                //actualizo las maquinas con los componentes actuales en la base de datos isaai
+                //Actualizo las maquinas con los componentes actuales en la base de datos isaai
                 $maquina_actual->set_fecha_cambio($fecha_cambio);
                 $maquina_actual->set_fecha_sincronizacion($fecha_sincronizacion);
                 $maquina_actual->actualizar_cambios_componentes($comparador->get_componentes_cambiados());
             }
+            //Por más de que no haya cambiado la máquina, es necesario actualizar 
+            //la fecha de sincornización de las máquinas en isaai
+            $maquina_actual->actualizar_fecha_sincronizacion();
         }
         return $cambios;
     }

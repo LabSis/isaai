@@ -22,10 +22,12 @@ class CapturadorOcs implements Capturador {
         $devideid = $resultados[0]["DEVICEID"];
         $partes_devide_id = explode("-", $devideid);
         $longitud_partes_devide_id = count($partes_devide_id) - 1;
-        $fecha_alta = $partes_devide_id[$longitud_partes_devide_id - 3] . '/' . $partes_devide_id[$longitud_partes_devide_id - 4] . '/' . $partes_devide_id[$longitud_partes_devide_id - 5];
-        $maquina->set_fecha_alta($fecha_alta);
-        //fecha de cambio es null
-        $maquina->set_fecha_cambio(null);
+        //formato dd/mm/aaaa
+        //$fecha_alta = $partes_devide_id[$longitud_partes_devide_id - 3] . '/' . $partes_devide_id[$longitud_partes_devide_id - 4] . '/' . $partes_devide_id[$longitud_partes_devide_id - 5];
+        $fecha_y_hora_alta = $partes_devide_id[$longitud_partes_devide_id - 5] . '/' . $partes_devide_id[$longitud_partes_devide_id - 4] . '/' . $partes_devide_id[$longitud_partes_devide_id - 3];
+        $fecha_y_hora_alta .= ' ' . $partes_devide_id[$longitud_partes_devide_id - 2] . '-' . $partes_devide_id[$longitud_partes_devide_id - 1] . '-' . $partes_devide_id[$longitud_partes_devide_id - 0];
+        $maquina->set_fecha_alta($fecha_y_hora_alta);
+        $maquina->set_fecha_cambio($resultados[0]["LASTCOME"]); //fecha deberia ser null, porque el insertar deberia tomar la fecha actual
         $maquina->set_fecha_sincronizacion($resultados[0]["LASTCOME"]);
 
         $sistema_operativo = new SistemaOperativo(null, $resultados[0]["OSNAME"], $resultados[0]["OSVERSION"]);
@@ -57,7 +59,6 @@ class CapturadorOcs implements Capturador {
 
         $procesadores = ProcesadorOcs::materializar($id_maquina_ocs);
         $maquina->set_procesadores($procesadores);
-
 
         return $maquina;
     }

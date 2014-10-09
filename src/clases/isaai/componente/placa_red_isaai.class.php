@@ -41,7 +41,7 @@ class PlacaRedIsaai implements ComponenteMaterializable {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $datos_insercion = array(
             'id_maquina' => $maquina->get_id(),
-            'fecha_cambio' => Util::convertir_fecha_a_mysql($maquina->get_fecha_cambio()),
+            'fecha_cambio' => $maquina->get_fecha_cambio(),
             'direccion_mac' => $placa_red->get_direccion_mac(),
             'direccion_ip' => $placa_red->get_direccion_ip(),
             'direccion_dns' => $placa_red->get_direccion_dns(),

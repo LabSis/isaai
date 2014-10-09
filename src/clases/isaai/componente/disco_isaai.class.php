@@ -40,7 +40,7 @@ class DiscoIsaai implements ComponenteMaterializable {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $datos_insercion = array(
             'id_maquina' => $maquina->get_id(),
-            'fecha_cambio' => Util::convertir_fecha_a_mysql($maquina->get_fecha_cambio()),
+            'fecha_cambio' => $maquina->get_fecha_cambio(),
             'nombre' => $disco->get_nombre(),
             'fabricante' => $disco->get_fabricante(),
             'modelo' => $disco->get_modelo(),

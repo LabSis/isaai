@@ -42,19 +42,26 @@ class GestorCapturaciones {
                 $j++;
             }
             if ($j === count($lista_resultados_isaai)) {
-                //if ($cantidad_agregadas < 1) {
+                if ($cantidad_agregadas < 1) {
                     //agregar nueva maquina
                     $id_maquina_ocs = new IdMaquinaOcs($lista_resultados_ocs[$i]['ID']);
                     $maquina_nueva = $capturador_ocs->obtener_maquina($id_maquina_ocs);
-                    $maquina_nueva->set_fecha_cambio(Util::get_fecha_actual_formato_dd_mm_aaaa());
-                    $maquina_nueva->set_fecha_alta(Util::get_fecha_actual_formato_dd_mm_aaaa());
+                    /*
+                      //Es lo correcto que se haga con fecha y hora actual
+                      //pero por ahora para pruebas sin el ocs funcionando, si no consideramos
+                      //estos datos del ocs, siempre va a considerar que la maquina haya cambiado
+                      $fecha_y_hora_actual = Util::get_fecha_y_hora_actual_mysql(); //aaaa-mm-dd hh:mm:ss
+                      $maquina_nueva->set_fecha_alta($fecha_y_hora_actual);
+                      $maquina_nueva->set_fecha_cambio($fecha_y_hora_actual);
+                      $maquina_nueva->set_fecha_sincronizacion($fecha_y_hora_actual);
+                     */
                     if ($maquina_nueva->insertar() == true) {
                         $cantidad_agregadas++;
                         $lista_maquinas_nuevas[] = $maquina_nueva;
                     } else {
                         Out::print_array(Conexion::get_instacia(CONEXION_ISAAI)->get_error());
                     }
-                //}
+                }
             } else {
                 //comparar la fechas
                 $cantidad_comparaciones++;

@@ -15,9 +15,9 @@ class CapturadorIsaai implements Capturador {
         $maquina = new Maquina();
         $maquina->set_id($id_maquina->get_id_hash());
         $maquina->set_nombre($resultados[0]["nombre"]);
-        $maquina->set_fecha_alta($resultados[0]["fecha_alta"]);
-        $maquina->set_fecha_cambio($resultados[0]["fecha_cambio"]);
-        $maquina->set_fecha_sincronizacion($resultados[0]["fecha_sincronizacion"]);
+        $maquina->set_fecha_alta(Util::convertir_fecha_de_mysql($resultados[0]["fecha_alta"]));
+        $maquina->set_fecha_cambio(Util::convertir_fecha_de_mysql($resultados[0]["fecha_cambio"]));
+        $maquina->set_fecha_sincronizacion(Util::convertir_fecha_de_mysql($resultados[0]["fecha_sincronizacion"]));
 
         $sistema_operativo = SistemaOperativo::materializar($id_maquina);
         $maquina->set_sistema_operativo($sistema_operativo);
