@@ -9,5 +9,5 @@ $gestor_comparaciones = new GestorComparaciones();
 $cambios = $gestor_comparaciones->obtener_cambios($maquinas[0], $maquinas[1], $maquinas[2]);
 
 Out::println("Los cambios encontrados son " . count($cambios));
-//Out::print_array($cambios);
+Out::print_array($cambios);
 

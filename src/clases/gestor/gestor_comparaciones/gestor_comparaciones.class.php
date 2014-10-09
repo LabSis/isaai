@@ -22,7 +22,7 @@ class GestorComparaciones {
     public function obtener_cambios($maquinas_actuales, $maquinas_anteriores, $maquinas_nuevas) {
         assert(count($maquinas_actuales) == count($maquinas_anteriores));
 
-        $fecha_actual = Util::get_fecha_actual_formato_dd_mm_aaaa(); //fecha actual
+        $fecha_actual = Util::get_fecha_y_hora_actual_mysql(); //fecha actual
         $fecha_cambio = $fecha_actual;
         $fecha_sincronizacion = $fecha_actual;
 
