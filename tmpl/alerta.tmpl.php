@@ -2,20 +2,27 @@
     <head>
         <title>Alerta</title>
         <script lang="javascript">
+            var websocket;
             function conectar() {
                 var wsUri = "ws://172.16.170.61:9000/isaai/server.php";
                 websocket = new WebSocket(wsUri);
-                
+                console.log("OK");
+
                 websocket.onopen = function(ev) {
-                    document.getElementById("divMensajeConectado").display = yes;
+                    document.getElementById("divMensajeConectado").style.display = "inline";
                     console.log("CONECTADO!");
                     //$('#message_box').append("<div class=\"system_msg\">Connected!</div>");
                 };
                 websocket.onerror = function(ev) {
-                    console.log("ERROR");
+                    console.log("ERROR" + ev);
                 };
                 websocket.onclose = function(ev) {
                     console.log("CERRADO");
+                };
+                websocket.onmessage = function(ev) {
+                    console.log("OK");
+                    var msg = JSON.parse(ev.data);
+                    console.log(msg);
                 };
             }
         </script>
