@@ -55,10 +55,11 @@ class GestorComparaciones {
                 //$maquina_actual->set_fecha_cambio($fecha_cambio);
                 //$maquina_actual->set_fecha_sincronizacion($fecha_sincronizacion);
                 $maquina_actual->actualizar_cambios_componentes($comparador->get_componentes_cambiados());
+            } else {
+                //Por más de que no haya cambiado la máquina, es necesario actualizar 
+                //la fecha de sincornización de las máquinas en isaai
+                $maquina_actual->actualizar_fecha_sincronizacion($maquina_anterior->get_fecha_sincronizacion());
             }
-            //Por más de que no haya cambiado la máquina, es necesario actualizar 
-            //la fecha de sincornización de las máquinas en isaai
-            $maquina_actual->actualizar_fecha_sincronizacion();
         }
         return $cambios;
     }

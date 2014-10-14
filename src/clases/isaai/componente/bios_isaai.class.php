@@ -17,6 +17,7 @@ class BiosIsaai implements ComponenteMaterializable {
                 . "b.id_maquina = maquina.id AND b.fecha_cambio = maquina.fecha_cambio "
                 . "WHERE {$condicion}";
         $resultado = $conexion->consultar_simple($consulta);
+        Out::println($consulta);
         $bios = new Bios();
         $bios->set_id(null);
         $bios->set_nombre($resultado[0]['nombre']);

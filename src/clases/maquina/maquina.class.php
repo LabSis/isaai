@@ -246,15 +246,15 @@ class Maquina {
                     $componentes_materializables[$nombre_clase_componente] = PerifericoIsaai;
                     $componentes[$nombre_clase_componente] = $componente_cambiado;
                     break;
-                case("placas_red"):
+                case("placared"):
                     $componentes_materializables[$nombre_clase_componente] = PlacaRedIsaai;
                     $componentes[$nombre_clase_componente] = $componente_cambiado;
                     break;
-                case("placas_sonido"):
+                case("placasonido"):
                     $componentes_materializables[$nombre_clase_componente] = PlacaSonidoIsaai;
                     $componentes[$nombre_clase_componente] = $componente_cambiado;
                     break;
-                case("placas_video"):
+                case("placavideo"):
                     $componentes_materializables[$nombre_clase_componente] = PlacaVideoIsaai;
                     $componentes[$nombre_clase_componente] = $componente_cambiado;
                     break;
@@ -304,12 +304,11 @@ class Maquina {
         return $ok;
     }
 
-    public function actualizar_fecha_sincronizacion() {
+    public function actualizar_fecha_sincronizacion($ultima_fecha_sincronizacion) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $consulta = "UPDATE maquinas SET fecha_sincronizacion = '{$this->_fecha_sincronizacion}' "
-        . "WHERE id='{$this->_id}' AND fecha_sincronizacion = "
-        . "(SELECT MAX(fecha_sincronizacion) FROM maquinas WHERE id = '{$this->_id}')";
-        Out::println($consulta);
+        . "WHERE id='{$this->_id}' AND fecha_sincronizacion = '{$ultima_fecha_sincronizacion}'";
+        //. "(SELECT MAX(fecha_sincronizacion) FROM maquinas AS WHERE id = '{$this->_id}')";
         return $conexion->actualizar_simple($consulta);
     }
 

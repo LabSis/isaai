@@ -25,7 +25,7 @@ class PlacaRedIsaai implements ComponenteMaterializable {
             $placa_red->set_direccion_ip($resultados[$i]['direccion_ip']);
             $placa_red->set_direccion_mac($resultados[$i]['direccion_mac']);
             $placa_red->set_direccion_red($resultados[$i]['direccion_red']);
-            $placa_red->set_direccion_dns($resultados[$i]['direccion_dns']);
+            $placa_red->set_direccion_dns(null);
             $placa_red->set_mascara($resultados[$i]['mascara']);
             $placa_red->set_gateway($resultados[$i]['gateway']);
             $placa_red->set_descripcion($resultados[$i]['descripcion']);
@@ -46,6 +46,7 @@ class PlacaRedIsaai implements ComponenteMaterializable {
             'direccion_ip' => $placa_red->get_direccion_ip(),
             'direccion_dns' => $placa_red->get_direccion_dns(),
             'direccion_red' => $placa_red->get_direccion_red(),
+            'gateway' => $placa_red->get_gateway(),
             'mascara' => $placa_red->get_mascara(),
             'descripcion' => $placa_red->get_descripcion(),
             'tipo' => $placa_red->get_tipo(),

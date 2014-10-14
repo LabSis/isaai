@@ -105,15 +105,16 @@ class PlacaRed extends Componente {
 
     public function equals($componente) {
         $igual = true;
-        $igual &= $this->_descripcion === $componente->get_descripcion();
-        $igual &= $this->_direccion_dns === $componente->get_direccion_dns();
-        $igual &= $this->_direccion_ip === $componente->get_direccion_ip();
-        $igual &= $this->_direccion_mac === $componente->get_direccion_mac();
-        $igual &= $this->_direccion_red === $componente->get_direccion_red();
-        $igual &= $this->_gateway === $componente->get_gateway();
-        $igual &= $this->_mascara === $componente->get_mascara();
-        $igual &= $this->_tipo === $componente->get_tipo();
-        $igual &= $this->_velocidad === $componente->get_velocidad();
+        $igual &= $this->_descripcion == $componente->get_descripcion();
+        $igual &= $this->_direccion_dns == $componente->get_direccion_dns();
+        $igual &= $this->_direccion_ip == $componente->get_direccion_ip();
+        $igual &= $this->_direccion_mac == $componente->get_direccion_mac();
+        $igual &= $this->_direccion_red == $componente->get_direccion_red();
+        $igual &= $this->_gateway == $componente->get_gateway();
+        $igual &= $this->_mascara == $componente->get_mascara();
+        $igual &= $this->_tipo == $componente->get_tipo();
+        $igual &= $this->_velocidad == $componente->get_velocidad();
+        return $igual;
     }
 
 }

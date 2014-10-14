@@ -75,11 +75,12 @@ class Bios extends Componente {
 
     public function equals($componente) {
         $igual = true;
-        $igual &= $this->_asset_tag === $componente->get_asset_tag();
-        $igual &= $this->_fabricante === $componente->get_fabricante();
-        $igual &= $this->_nombre === $componente->get_nombre();
-        $igual &= $this->_numero_serial === $componente->get_numero_serial();
-        $igual &= $this->_version === $componente->get_version();
+        $igual &= $this->_asset_tag == $componente->get_asset_tag();
+        $igual &= $this->_fabricante == $componente->get_fabricante();
+        $igual &= $this->_nombre == $componente->get_nombre();
+        $igual &= $this->_numero_serial == $componente->get_numero_serial();
+        $igual &= $this->_version == $componente->get_version();
+        return $igual;
     }
 
 }
