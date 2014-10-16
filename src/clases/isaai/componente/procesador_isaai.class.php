@@ -17,6 +17,12 @@ class ProcesadorIsaai implements ComponenteMaterializable {
                 . "WHERE {$condicion}";
         $resultados = $conexion->consultar_simple($consulta);
         $procesadores = array();
+        if (empty($resultados)) {
+            $consulta = "SELECT p.tipo, p.velocidad, p.nucleos FROM procesadores AS p "
+                    . "INNER JOIN maquinas AS maquina ON "
+                    . "p.id_maquina = maquina.id ORDER BY p.fecha_cambio DESC LIMIT 1";
+            $resultados = $conexion->consultar_simple($consulta);
+        }
         for ($i = 0; $i < count($resultados); $i++) {
             $procesador = new Procesador();
             $procesador->set_id(null);

@@ -17,7 +17,14 @@ class BiosIsaai implements ComponenteMaterializable {
                 . "b.id_maquina = maquina.id AND b.fecha_cambio = maquina.fecha_cambio "
                 . "WHERE {$condicion}";
         $resultado = $conexion->consultar_simple($consulta);
-        Out::println($consulta);
+        if (empty($resultado)) {
+            $consulta = "SELECT b.nombre,  b.fabricante, b.modelo, b.asset_tag, "
+                    . "b.version, b.numero_serial, b.fecha_cambio FROM bios AS b "
+                    . "INNER JOIN maquinas AS maquina ON "
+                    . "b.id_maquina = maquina.id ORDER BY b.fecha_cambio DESC LIMIT 1";
+            //obtener la ultima bios, dada la max fecha de cambio
+            $resultado = $conexion->consultar_simple($consulta);
+        }
         $bios = new Bios();
         $bios->set_id(null);
         $bios->set_nombre($resultado[0]['nombre']);
@@ -26,7 +33,6 @@ class BiosIsaai implements ComponenteMaterializable {
         $bios->set_asset_tag($resultado[0]['asset_tag']);
         $bios->set_version($resultado[0]['version']);
         $bios->set_numero_serial($resultado[0]['numero_serial']);
-//        $bios->set_fecha_cambio($resultado[0]['fecha_cambio']);
         return $bios;
     }
 

@@ -28,7 +28,7 @@ class ComparadorMaquinas {
         $iguales = true;
 
         if (!$maquina1->get_bios()->equals($maquina2->get_bios())) {
-            $this->_componentes_cambiados[] = $maquina2->get_bios();
+            $this->_componentes_cambiados[] = $maquina1->get_bios();
             $iguales = false;
         }
         $iguales &= $this->verificar_cambios($maquina1->get_discos(), $maquina2->get_discos());
