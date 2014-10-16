@@ -15,10 +15,9 @@ class Servidor {
 
     private function __construct() {
         $this->_clients = array();
-        $this->_iniciar();
     }
 
-    private function _iniciar() {
+    public function iniciar() {
         $this->_socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
         if ($this->_socket === false) {
             // Manejo los errores...
@@ -46,14 +45,19 @@ class Servidor {
                 $this->_clients[] = $nuevo_socket;
                 $cabecera = socket_read($nuevo_socket, 1024);
                 $this->perform_handshaking($cabecera, $nuevo_socket, $this->_HOST, $this->_PUERTO);
+                echo "OK";
             }
         }
     }
 
-    public function enviar_alertas($alerta) {
+    public function enviar_alerta($alerta) {
+
+        echo "Por enviar: " . $alerta;
         $msg = $this->mask(json_encode(array('msg' => $alerta)));
+        echo count ($this->_clients);
         foreach ($this->_clients as $s) {
             @socket_write($s, $msg, strlen($msg));
+            echo "Envie: " . $msg;
         }
     }
 
@@ -91,4 +95,5 @@ class Servidor {
                 "Sec-WebSocket-Accept:$secAccept\r\n\r\n";
         socket_write($client_conn, $upgrade, strlen($upgrade));
     }
+
 }

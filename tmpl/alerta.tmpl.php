@@ -4,7 +4,7 @@
         <script lang="javascript">
             var websocket;
             function conectar() {
-                var wsUri = "ws://172.16.170.61:9000/isaai/server.php";
+                var wsUri = "ws://172.16.170.38:9000/isaai/server.php";
                 websocket = new WebSocket(wsUri);
                 console.log("OK");
 

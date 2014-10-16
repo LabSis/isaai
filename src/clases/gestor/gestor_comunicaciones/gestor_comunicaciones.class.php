@@ -16,8 +16,8 @@ class GestorComunicaciones {
     public function alertar($lista_cambios, $alertadores) {
         for($i = 0; $i < count($lista_cambios); $i++){
             for($j = 0; $j < count($alertadores); $j++){
-                $tipo_cambio = determinar_tipo_cambio($lista_cambios[$i]);
-                $roles = determinar_roles_a_enviar($tipo_cambio);
+                $tipo_cambio = $this->determinar_tipo_cambio($lista_cambios[$i]);
+                $roles = $this->determinar_roles_a_enviar($tipo_cambio);
                 $alertadores[$j]->alertar($lista_cambios[$i], $roles);
             }
         }
