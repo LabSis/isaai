@@ -182,4 +182,38 @@ CREATE TABLE IF NOT EXISTS perifericos(
 		ON UPDATE RESTRICT
 )ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
+CREATE TABLE IF NOT EXISTS tipos_cambio(
+    id INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT NULL,
+    PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+CREATE TABLE IF NOT EXISTS roles_x_tipo_cambio(
+    id INT NOT NULL AUTO_INCREMENT,
+    id_rol INT NOT NULL,
+    id_tipo_cambio INT NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY (id_rol) REFERENCES roles (id)
+	ON DELETE RESTRICT
+	ON UPDATE RESTRICT,
+    FOREIGN KEY (id_tipo_cambio) REFERENCES tipos_cambio (id)
+	ON DELETE RESTRICT
+	ON UPDATE RESTRICT
+)ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
 INSERT INTO sistemas_operativos VALUES (1,'Windows','1');
+
+INSERT INTO roles (id, nombre, descripcion) VALUES (1, "Administrador", NULL);
+INSERT INTO roles (id, nombre, descripcion) VALUES (2, "Operador", NULL);
+INSERT INTO roles (id, nombre, descripcion) VALUES (3, "Técnico", NULL);
+
+INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("diego","123",1,"Diego","Barrionuevo","santosdiegob@gmail.com","03517323132",NOW());
+INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("german","123",1,"Germán","Parisi","germannparisi@gmail.com","03515192675",NOW());
+INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("milagros","123",1,"Milagros","Zea Cárdenas","milyzc@gmail.com","03512610201",NOW());
+
+INSERT INTO tipos_cambio (id, nombre, descripcion) VALUES (1, "Le interesa todo", NULL);
+
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio) VALUES (1,1);
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio) VALUES (2,1);
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio) VALUES (3,1);

@@ -28,6 +28,9 @@ class GestorComunicaciones {
      * @return \TipoCambio
      */
     public function determinar_tipo_cambio($cambio){
+        //Suponemos que lo que haces es identificar los compoenntes que cambiaron,
+        //en base a eso y a consutlar la tabla tipos_cambios, saber que instancia
+        //de tipo de cambio devolver?
         return new TipoCambio();
     }
 
