@@ -18,6 +18,17 @@ class PlacaSonidoIsaai implements ComponenteMaterializable {
                 . "WHERE {$condicion}";
         $resultados = $conexion->consultar_simple($consulta);
         $placas_sonido = array();
+        if (empty($resultados)) {
+            $consulta = "SELECT ps.nombre, ps.fabricante, "
+                    . "ps.fecha_cambio FROM placas_sonido AS ps "
+                    . "INNER JOIN maquinas AS maquina ON "
+                    . "ps.id_maquina = maquina.id "
+                    . "WHERE ps.fecha_cambio = ("
+                    . " SELECT MAX(ps2.fecha_cambio) FROM placas_sonido AS ps2 "
+                    . " WHERE ps2.id_maquina = maquina.id"
+                    . ")";
+            $resultados = $conexion->consultar_simple($consulta);
+        }
         for ($i = 0; $i < count($resultados); $i++) {
             $placa_sonido = new PlacaSonido();
             $placa_sonido->set_id(null);

@@ -12,4 +12,4 @@ Out::println("Los cambios encontrados son " . count($cambios));
 //Out::print_array($cambios);
 
 $gestor_comunicaciones = new GestorComunicaciones();
-$gestor_comunicaciones->alertar($cambios, array(new AlertadorWeb()));
+//$gestor_comunicaciones->alertar($cambios, array(new AlertadorWeb()));

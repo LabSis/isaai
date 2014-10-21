@@ -20,6 +20,13 @@ class MonitorIsaai implements ComponenteMaterializable {
                 . "WHERE {$condicion}";
         $resultado = $conexion->consultar_simple($consulta);
         $monitor = new Monitor();
+        if (empty($resultado)) {
+            $consulta = "SELECT m.nombre, m.modelo, m.monitor, "
+                    . "m.version, m.fecha_cambio FROM monitores AS m "
+                    . "INNER JOIN maquinas AS maquinas ON "
+                    . "m.id_maquina = maquinas.id ORDER BY m.fecha_cambio DESC LIMIT 1";
+            $resultado = $conexion->consultar_simple($consulta);
+        }
         $monitor->set_id(null);
         $monitor->set_nombre($resultado['nombre']);
         $monitor->set_modelo($resultado['modelo']);

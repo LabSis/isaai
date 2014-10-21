@@ -19,6 +19,17 @@ class PerifericoIsaai implements ComponenteMaterializable {
                 . "WHERE {$condicion}";
         $resultados = $conexion->consultar_simple($consulta);
         $perifericos = array();
+        if (empty($resultados)) {
+            $consulta = "SELECT p.nombre, p.fabricante, p.tipo, "
+                    . "p.descripcion, p.interfaz, p.fecha_cambio FROM perifericos AS p "
+                    . "INNER JOIN maquinas AS maquina ON "
+                    . "p.id_maquina = maquina.id "
+                    . "WHERE p.fecha_cambio = ("
+                    . " SELECT MAX(p2.fecha_cambio) FROM perifericos AS p2 "
+                    . " WHERE p2.id_maquina = maquina.id"
+                    . ")";
+            $resultados = $conexion->consultar_simple($consulta);
+        }
         for ($i = 0; $i < count($resultados); $i++) {
             $periferico = new Periferico();
             $periferico->set_id(null);

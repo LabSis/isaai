@@ -19,6 +19,18 @@ class PlacaRedIsaai implements ComponenteMaterializable {
                 . "WHERE {$condicion}";
         $resultados = $conexion->consultar_simple($consulta);
         $placas_red = array();
+        if (empty($resultados)) {
+            $consulta = "SELECT pr.direccion_ip, pr.direccion_mac, pr.direccion_red, pr.direccion_dns, "
+                    . "pr.mascara, pr.gateway, pr.descripcion, pr.tipo, pr.velocidad, "
+                    . "pr.fecha_cambio FROM placas_red AS pr "
+                    . "INNER JOIN maquinas AS maquina ON "
+                    . "pr.id_maquina = maquina.id "
+                    . "WHERE pr.fecha_cambio = ("
+                    . " SELECT MAX(pr2.fecha_cambio) FROM placas_red AS pr2 "
+                    . " WHERE pr2.id_maquina = maquina.id"
+                    . ")";
+            $resultados = $conexion->consultar_simple($consulta);
+        }
         for ($i = 0; $i < count($resultados); $i++) {
             $placa_red = new PlacaRed();
             $placa_red->set_id(null);

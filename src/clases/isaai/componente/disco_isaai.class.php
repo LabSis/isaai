@@ -19,6 +19,16 @@ class DiscoIsaai implements ComponenteMaterializable {
                 . "WHERE {$condicion}";
         $resultados = $conexion->consultar_simple($consulta);
         $discos = array();
+        if (empty($resultados)) {
+             $consulta = "SELECT d.nombre, d.fabricante, d.modelo, d.descripcion, "
+                . "d.tipo, d.firmware, d.tamanio, d.numero_serial, d.fecha_cambio FROM discos AS d "
+                . "INNER JOIN maquinas AS maquina ON "
+                . "d.id_maquina = maquina.id WHERE d.fecha_cambio = ("
+                     . " SELECT MAX(d2.fecha_cambio) FROM discos AS d2 "
+                     . " WHERE d2.id_maquina = maquina.id"
+                     . ")";
+            $resultados = $conexion->consultar_simple($consulta);
+        }
         for ($i = 0; $i < count($resultados); $i++) {
             $disco = new Disco();
             $disco->set_id(null);

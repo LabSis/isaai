@@ -19,6 +19,17 @@ class MemoriaIsaai implements ComponenteMaterializable {
                 . "WHERE {$condicion}";
         $resultados = $conexion->consultar_simple($consulta);
         $memorias = array();
+        if (empty($resultados)) {
+              $consulta = "SELECT m.capacidad, m.tipo, m.descripcion, m.numero_serial, "
+                . "m.numero_ranura, m.velocidad, m.nombre, m.fecha_cambio FROM memorias AS m "
+                . "INNER JOIN maquinas AS maquina ON "
+                . "m.id_maquina = maquina.id "
+                . "WHERE m.fecha_cambio = ("
+                    . " SELECT MAX(m2.fecha_cambio) FROM memorias AS m2 "
+                    . " WHERE m2.id_maquina = maquina.id"
+                    . ")";
+            $resultados = $conexion->consultar_simple($consulta);
+        }
         for ($i = 0; $i < count($resultados); $i++) {
             $memoria = new Memoria();
             $memoria->set_id(null);

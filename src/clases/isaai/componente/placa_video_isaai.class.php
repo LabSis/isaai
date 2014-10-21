@@ -18,6 +18,17 @@ class PlacaVideoIsaai implements ComponenteMaterializable {
                 . "WHERE {$condicion}";
         $resultados = $conexion->consultar_simple($consulta);
         $placas_video = array();
+        if (empty($resultados)) {
+            $consulta = "SELECT pv.nombre, pv.memoria, pv.chipset, "
+                    . " pv.fecha_cambio FROM placas_video AS pv "
+                    . "INNER JOIN maquinas AS maquina ON "
+                    . "pv.id_maquina = maquina.id "
+                    . " WHERE pv.fecha_cambio = ("
+                    . " SELECT MAX(pv2.fecha_cambio) FROM placas_video AS pv2 "
+                    . " WHERE pv2.id_maquina = maquina.id"
+                    . ")";
+            $resultados = $conexion->consultar_simple($consulta);
+        }
         for ($i = 0; $i < count($resultados); $i++) {
             $placa_video = new PlacaVideo();
             $placa_video->set_id(null);
