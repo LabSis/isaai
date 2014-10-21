@@ -18,16 +18,16 @@ class Usuario {
     private $_direccion;
     private $_fecha_alta;
 
-    function __construct($_nombre_usuario, $_clave_usuario, $_rol, $_nombre, $_apellido, $_email, $_telefono, $_direccion, $_fecha_alta) {
-        $this->_nombre_usuario = $_nombre_usuario;
-        $this->_clave_usuario = $_clave_usuario;
-        $this->_rol = $_rol;
-        $this->_nombre = $_nombre;
-        $this->_apellido = $_apellido;
-        $this->_email = $_email;
-        $this->_telefono = $_telefono;
-        $this->_direccion = $_direccion;
-        $this->_fecha_alta = $_fecha_alta;
+    function __construct() {
+        $this->_nombre_usuario = NULL;
+        $this->_clave_usuario = NULL;
+        $this->_rol = NULL;
+        $this->_nombre = NULL;
+        $this->_apellido = NULL;
+        $this->_email = NULL;
+        $this->_telefono = NULL;
+        $this->_direccion = NULL;
+        $this->_fecha_alta = NULL;
     }
 
     public function get_nombre_usuario() {
