@@ -31,7 +31,7 @@ class GestorComunicaciones {
         //Suponemos que lo que haces es identificar los compoenntes que cambiaron,
         //en base a eso y a consutlar la tabla tipos_cambios, saber que instancia
         //de tipo de cambio devolver?
-        return new TipoCambio();
+        return TipoCambio::determinar_tipo_cambio($cambio);
     }
 
     /**
@@ -40,8 +40,6 @@ class GestorComunicaciones {
      * @return Array de \Rol
      */
     public function determinar_roles_a_enviar($tipo_cambio){
-        $roles = array();
-        $roles[] = new Rol("admin", "Alguna descripcion");
-        return $roles;
+        return Rol::determinar_roles_a_enviar($tipo_cambio);
     }
 }
