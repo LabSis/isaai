@@ -36,7 +36,9 @@ date_default_timezone_set('America/Argentina/Catamarca');
 $global_paquetes = array('', 'util', 'componente', 'maquina', 'usuario',
     'gestor', 'gestor/gestor_capturaciones', 'gestor/gestor_comparaciones',
     'isaai', 'isaai/componente', 'isaai/gestor', 'isaai/gestor/gestor_capturaciones',
-    'ocs', 'ocs/componente', 'ocs/gestor', 'ocs/gestor/gestor_capturaciones', 'socket', 'gestor/gestor_comunicaciones','gestor/gestor_comunicaciones/alertadores');
+    'ocs', 'ocs/componente', 'ocs/gestor', 'ocs/gestor/gestor_capturaciones', 'socket', 
+    'gestor/gestor_comunicaciones','gestor/gestor_comunicaciones/alertadores',
+    'sesion');
 
 function __autoload($nombre_clase) {
     global $global_paquetes;

@@ -17,6 +17,7 @@ class Usuario {
     private $_telefono;
     private $_direccion;
     private $_fecha_alta;
+    private $_fecha_baja;
 
     function __construct() {
         $this->_nombre_usuario = NULL;
@@ -28,6 +29,7 @@ class Usuario {
         $this->_telefono = NULL;
         $this->_direccion = NULL;
         $this->_fecha_alta = NULL;
+        $this->_fecha_baja = NULL;
     }
 
     public function get_nombre_usuario() {
@@ -66,6 +68,14 @@ class Usuario {
         return $this->_fecha_alta;
     }
 
+    public function get_fecha_baja() {
+        return $this->_fecha_baja;
+    }
+
+    public function set_fecha_baja($_fecha_baja) {
+        $this->_fecha_baja = $_fecha_baja;
+    }
+
     public function set_nombre_usuario($_nombre_usuario) {
         $this->_nombre_usuario = $_nombre_usuario;
     }
@@ -100,6 +110,32 @@ class Usuario {
 
     public function set_fecha_alta($_fecha_alta) {
         $this->_fecha_alta = $_fecha_alta;
+    }
+
+    /**
+     * Este método recibira un nuevo usuario como parametro y lo grabara en la 
+     * base de datos retornado true o 1. Si ocurre algún error devolverá false o 0
+     * @param type $nuevo_usuario, tipo Usuario
+     */
+    public static function insertar($nuevo_usuario) {
+        $conexion = Conexion::get_instacia(CONEXION_ISAAI);
+        //puedo generar la fecha de alta aca????
+        $nombre_usuario = $nuevo_usuario->get_nombre_usuario();
+        $clave_usuario = $nuevo_usuario->get_clave_usuario();
+        $id_rol = $nuevo_usuario->get_rol();
+        $nombre = $nuevo_usuario->get_nombre();
+        $apellido = $nuevo_usuario->get_apellido();
+        $email = is_null($nuevo_usuario->get_email()) ? null : $nuevo_usuario->get_email();
+        $telefono = is_null($nuevo_usuario->get_telefono()) ? null : $nuevo_usuario->get_telefono();
+        $direccion = is_null($nuevo_usuario->get_direccion()) ? null : $nuevo_usuario->get_direccion();
+        $fecha_alta = $nuevo_usuario->get_fecha_alta();
+
+        $sql = "INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, "
+                . "apellido, email, telefono, direccion, fecha_alta, fecha_baja) "
+                . "VALUES ('" . $nombre_usuario . "', '" . $clave_usuario . "', " . $id_rol . ", " . $nombre . ", "
+                . $apellido . ", " . $email . ", " . $telefono . ", " . $direccion . ", " . $fecha_alta . ", NULL)";
+
+        return $conexion->insertar_simple($sql);
     }
 
 }
