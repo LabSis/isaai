@@ -272,10 +272,12 @@ class Maquina {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $conexion->transaccion_comenzar();
         $ok = true;
+        $ok &= $this->_sistema_operativo->insertar();
+        $id_sistema_operativo = $conexion->get_id_insercion();
         $datos_insercion = array(
             'id' => $this->_id,
             'fecha_cambio' => $this->_fecha_cambio,
-            'id_sistema_operativo' => '1', //Evitar esto!
+            'id_sistema_operativo' => $id_sistema_operativo,
             'nombre' => $this->_nombre,
             'fecha_alta' => $this->_fecha_alta,
             'fecha_sincronizacion' => $this->_fecha_sincronizacion

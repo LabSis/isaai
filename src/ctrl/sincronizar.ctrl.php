@@ -14,4 +14,4 @@ $cambios = $gestor_comparaciones->obtener_cambios($maquinas[0], $maquinas[1], $m
 Out::println("Los cambios encontrados son " . count($cambios));
 //Out::print_array($cambios);
 
-$gestor_comunicaciones = new GestorComunicaciones();
+//$gestor_comunicaciones = new GestorComunicaciones();
