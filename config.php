@@ -42,6 +42,7 @@ $global_paquetes = array('', 'util', 'componente', 'maquina', 'usuario',
 
 function __autoload($nombre_clase) {
     global $global_paquetes;
+    global $global_ruta_servidor; //<-- Para poder encontrar los paquetes desde cualquier sitio!
     $clase = '';
     $caracteres = str_split($nombre_clase);
     for ($i = 0; $i < count($caracteres); $i++) {
@@ -51,7 +52,7 @@ function __autoload($nombre_clase) {
         $clase .= strtolower($caracteres[$i]);
     }
     for ($i = 0; $i < count($global_paquetes); $i++) {
-        $posible_archivo = 'src/clases/' . $global_paquetes[$i] . '/' . $clase . '.class.php';
+        $posible_archivo = $global_ruta_servidor. '/' . 'src/clases/' . $global_paquetes[$i] . '/' . $clase . '.class.php';
         if (file_exists($posible_archivo)) {
             require_once $posible_archivo;
             break;

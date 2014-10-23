@@ -1,7 +1,32 @@
-<?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="es-AR">
+    <head>
+         <?php require_once $global_ruta_servidor . '/tmpl/marco/head.tmpl.php' ?>
+    </head>
+    <body>
+        <?php require_once $global_ruta_servidor . '/tmpl/marco/cabecera.tmpl.php' ?>
+        <main>
+            <aside id="menuPrincipal">
+                <ul>
+                    <li>
+                        Máquinas
+                    </li>
+                    <li>
+                        Componentes
+                    </li>
+                    <li>
+                        Sincronizar
+                    </li>
+                    <li>
+                        Configurar
+                    </li>
+                </ul>
+            </aside>
+            <div id="contenido">
+                
+            </div>
+            <div class="clearer"></div>
+        </main>
+        <?php require_once $global_ruta_servidor . '/tmpl/marco/pie_pagina.tmpl.php' ?>
+    </body>
+</html>

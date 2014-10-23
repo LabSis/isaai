@@ -1,53 +1,45 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="es-AR">
     <head>
-        <title>ISAAI</title>
-        <!-- Google fonts -->
-        <link href='http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Serif' rel='stylesheet' type='text/css'>
+        <?php require_once $global_ruta_servidor . '/tmpl/marco/head.tmpl.php' ?>
         <!-- CSS -->
-        <link href="../css/general.css" type="text/css" rel="stylesheet"/>
-        <link href="../css/maquetado.css" type="text/css" rel="stylesheet"/>
-        <link href="../css/index.css" type="text/css" rel="stylesheet"/>
+        <link href="<?php echo $global_ruta_web; ?>/css/index.css" type="text/css" rel="stylesheet"/>
         <!-- JavaScript -->
     </head>
     <body>
-        <header>
-            <h1 id="tituloPrincipal">ISAAI</h1>
-        </header>
-    <main>
-        <aside id="menuPrincipal">
-
-        </aside>
-        <div id="contenido">
-            <form action="index.php" id="frmIngreso" method="post">
-                <table>
-                    <tr>
-                        <td >
-                            Nombre de usuario:
-                        </td>
-                        <td>
-                            <input type="text" name="txtNombre"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td >
-                            Clave:
-                        </td>
-                        <td>
-                            <input type="password" name="txtClave"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <input type="submit" value="Ingresar" name="btnIngresar"/>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </div>
-    </main>
-    <footer>
-        <h4>LabSis 2014</h4>
-    </footer>
-</body>
+        <?php require_once $global_ruta_servidor . '/tmpl/marco/cabecera.tmpl.php' ?>
+        <main>
+            <div id="contenido">
+                <form action="<?php echo $global_ruta_web; ?>/index.php" id="frmIngreso" method="post">
+                    <table>
+                        <tr>
+                            <td >
+                                Nombre de usuario:
+                            </td>
+                            <td>
+                                <input type="text" name="txtNombre" class="general"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >
+                                Clave:
+                            </td>
+                            <td>
+                                <input type="password" name="txtClave" class="general"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="submit" value="Ingresar" name="btnIngresar" class="boton"/>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <?php require_once $global_ruta_servidor . '/tmpl/general/mensajes.tmpl.php' ?>
+            </div>
+            <div class="clearer"></div>
+        </main>
+        <?php require_once $global_ruta_servidor . '/tmpl/marco/pie_pagina.tmpl.php' ?>
+    </body>
 </html>

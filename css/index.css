@@ -3,7 +3,10 @@
     Author     : Diego
 */
 #frmIngreso{
-    padding: 10px;
+    padding-top: 20px;
     width: 400px;
     margin: 0px auto;
+}
+#frmIngreso table td{
+    padding:2px;
 }
