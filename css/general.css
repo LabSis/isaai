@@ -2,11 +2,15 @@
     Created on : 23/10/2014, 14:20:21
     Author     : Diego
 */
+a{
+    text-decoration: none;
+    color:#000;
+}
 .textoInformal{
-    font-family: "Droid Sans", "Sans";
+    font-family: sans-serif;
 }
 .textoFormal{
-    font-family: "Droid Serif", "Sans-serif"
+    font-family: serif;
 }
 .clearer{
    clear: both;
