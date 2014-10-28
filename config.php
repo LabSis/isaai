@@ -27,17 +27,17 @@ if ($global_modo_desarrollo) {
 
 //Rutas usadas
 $global_ruta_servidor = dirname(__FILE__);
-$global_ruta_web = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $global_nombre_sitio;
+$global_ruta_web = 'http://' . $_SERVER['HTTP_HOST'] . substr(dirname(__FILE__), strpos(dirname(__FILE__), "htdocs") + strlen("htdocs"));
 
 //Configura la zona horaria
-date_default_timezone_set('America/Argentina/Catamarca');
+date_default_timezone_set('America/Argentina/Cordoba');
 
 //funcion para encontrar las clases
 $global_paquetes = array('', 'util', 'componente', 'maquina', 'usuario',
     'gestor', 'gestor/gestor_capturaciones', 'gestor/gestor_comparaciones',
     'isaai', 'isaai/componente', 'isaai/gestor', 'isaai/gestor/gestor_capturaciones',
-    'ocs', 'ocs/componente', 'ocs/gestor', 'ocs/gestor/gestor_capturaciones', 'socket', 
-    'gestor/gestor_comunicaciones','gestor/gestor_comunicaciones/alertadores',
+    'ocs', 'ocs/componente', 'ocs/gestor', 'ocs/gestor/gestor_capturaciones', 'socket',
+    'gestor/gestor_comunicaciones', 'gestor/gestor_comunicaciones/alertadores',
     'sesion');
 
 function __autoload($nombre_clase) {
@@ -52,7 +52,7 @@ function __autoload($nombre_clase) {
         $clase .= strtolower($caracteres[$i]);
     }
     for ($i = 0; $i < count($global_paquetes); $i++) {
-        $posible_archivo = $global_ruta_servidor. '/' . 'src/clases/' . $global_paquetes[$i] . '/' . $clase . '.class.php';
+        $posible_archivo = $global_ruta_servidor . '/' . 'src/clases/' . $global_paquetes[$i] . '/' . $clase . '.class.php';
         if (file_exists($posible_archivo)) {
             require_once $posible_archivo;
             break;

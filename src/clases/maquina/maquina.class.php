@@ -274,6 +274,7 @@ class Maquina {
         $ok = true;
         $ok &= $this->_sistema_operativo->insertar();
         $id_sistema_operativo = $conexion->get_id_insercion();
+        //Es necesario corroboar la existencia de un sistema operativo asi uso el fk en vez de insertar uno nuevo
         $datos_insercion = array(
             'id' => $this->_id,
             'fecha_cambio' => $this->_fecha_cambio,

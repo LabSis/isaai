@@ -59,5 +59,12 @@ class SistemaOperativo {
         );
         return $conexion->insertar("sistemas_operativos", $datos);
     }
+    
+    public function equals($sistema_operativo) {
+        $igual = true;
+        $igual &= $this->_nombre == $sistema_operativo->get_nombre();
+        $igual &= $this->_version == $sistema_operativo->get_version();
+        return $igual;
+    }
 
 }
