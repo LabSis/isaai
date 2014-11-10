@@ -104,7 +104,7 @@ class Sesion {
 
     /**
      * Verifica que el usuario en la sesión actual de verdad exista, es decir 
-     * verifica si hay un usuario ingresadi o si caducó la sesión. Setea como 
+     * verifica si hay un usuario ingresado o si caducó la sesión. Setea como 
      * parte de sus atributos el usuario actual (algo similar a lo que sucede 
      * al iniciar la sesión del usuario). Es muy útil para verificar en cada 
      * página si es usuario ha ingresado como tal o no.

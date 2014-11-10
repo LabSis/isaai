@@ -60,6 +60,9 @@ function __autoload($nombre_clase) {
     }
 }
 
+//session_set_cookie_params(3600, $global_ruta_servidor . '/sesiones');
+session_start();
+
 define('CONEXION_ISAAI', 'isaai');
 define('CONEXION_OCS', 'ocs');
 Conexion::agregar_instancia(CONEXION_ISAAI, Conexion::init('localhost', 'root', '', 'isaai', true));
