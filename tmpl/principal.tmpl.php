@@ -5,26 +5,13 @@
         <!-- CSS -->
         <link href="<?php echo $global_ruta_web; ?>/css/lib/font-awesome-4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
         <!-- JavaScript -->
+        <script src="<?php echo $global_ruta_web; ?>/js/sincronizar.js" type="text/javascript"></script>
     </head>
     <body>
+        <div class="data" id="dataRutaWeb"><?php echo $global_ruta_web; ?></div>
         <?php require_once dirname(__FILE__) . '/marco/cabecera.tmpl.php' ?>
         <main>
-            <aside id="menuPrincipal">
-                <ul>
-                    <li>
-                        <a href="#"><i class="fa fa-desktop fa-fw icono"></i>Máquinas</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-cog fa-fw icono"></i>Configurar</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-refresh fa-fw icono"></i>Sincronizar</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-cube fa-fw icono"></i>Componentes</a>
-                    </li>
-                </ul>
-            </aside>
+            <?php require_once dirname(__FILE__) . '/marco/menu_principal.tmpl.php' ?>
             <div id="contenido">
 
             </div>

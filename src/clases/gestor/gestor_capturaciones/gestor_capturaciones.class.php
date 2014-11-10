@@ -42,7 +42,7 @@ class GestorCapturaciones {
                 $j++;
             }
             if ($j === count($lista_resultados_isaai)) {
-                //if ($cantidad_agregadas < 1) {
+                if ($cantidad_agregadas < 10) {
                     //agregar nueva maquina
                     $id_maquina_ocs = new IdMaquinaOcs($lista_resultados_ocs[$i]['ID']);
                     $maquina_nueva = $capturador_ocs->obtener_maquina($id_maquina_ocs);
@@ -61,7 +61,7 @@ class GestorCapturaciones {
                     } else {
                         Out::print_array(Conexion::get_instacia(CONEXION_ISAAI)->get_error());
                     }
-                //}
+                }
             } else {
                 //comparar la fechas
                 $cantidad_comparaciones++;
@@ -73,8 +73,8 @@ class GestorCapturaciones {
                 }
             }
         }
-        echo "Agregue: $cantidad_agregadas<br/>";
-        echo "Compare: $cantidad_comparaciones de las cuales " . count($lista_maquinas_isaai) . " podrían haber cambiado.</br>";
+        //echo "Agregue: $cantidad_agregadas<br/>";
+        //echo "Compare: $cantidad_comparaciones de las cuales " . count($lista_maquinas_isaai) . " podrían haber cambiado.</br>";
         $lista_maquinas[] = $lista_maquinas_ocs;
         $lista_maquinas[] = $lista_maquinas_isaai;
         $lista_maquinas[] = $lista_maquinas_nuevas;

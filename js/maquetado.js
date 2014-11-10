@@ -21,4 +21,13 @@ $(document).ready(function() {
         }
         */
     });
+    //recalculo las dimensiones del maquetado
+    resize();
 });
+$(window).resize(function(){
+    resize();
+});
+function resize(){
+    $("#contenido").css("height", $(window).height() - (parseInt($("header").css("height")) + parseInt($("footer").css("height"))));
+    $("#menuPrincipal").css("height", $(window).height() - (parseInt($("header").css("height")) + parseInt($("footer").css("height"))));
+}

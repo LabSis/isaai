@@ -16,8 +16,6 @@ class BiosOcs implements ComponenteMaterializable {
                 . " bversion, ssn FROM bios AS b INNER JOIN hardware AS hardware ON "
                 . " b.hardware_id = hardware.id WHERE {$condicion}";
         $resultado = $conexion->consultar_simple($consulta);
-        Out::println("Consyutla de materialziar OCS bios: ".$consulta);
-        //cargo el objeto bios...
         $bios = new Bios();
         $bios->set_id(null);
         $bios->set_nombre($resultado[0]['smanufacturer']);
