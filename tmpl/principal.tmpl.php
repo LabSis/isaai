@@ -13,7 +13,44 @@
         <main>
             <?php require_once dirname(__FILE__) . '/marco/menu_principal.tmpl.php' ?>
             <div id="contenido">
-
+                <table class="general">
+                    <thead>
+                        <tr>
+                            <td>
+                                Titulo
+                            </td>
+                            <td>
+                                Titulo
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Cuerpo
+                            </td>
+                            <td>
+                                Cuerpo
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Cuerpo
+                            </td>
+                            <td>
+                                Cuerpo
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Cuerpo
+                            </td>
+                            <td>
+                                Cuerpo
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="clearer"></div>
         </main>
