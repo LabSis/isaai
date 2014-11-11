@@ -163,6 +163,7 @@ table.general tbody td{
     background-color: #E8E8E8;
     box-shadow: inset 0px 1px 0px rgba(0,0,0,0.1), inset 0px -1px 0px rgba(255,255,255,0.4),
         inset 1px 0px 0px rgba(0,0,0,0.1), inset -1px 0px 0px rgba(255,255,255,0.4);
+    transition: background 0.2s;
 }
 table.general tbody tr:nth-child(2n) td{
     background-color: #E3E3E3;

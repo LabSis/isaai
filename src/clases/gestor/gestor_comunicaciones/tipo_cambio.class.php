@@ -45,9 +45,10 @@ class TipoCambio {
     public static function determinar_tipo_cambio($cambio) {
         $tipo_cambio = new TipoCambio();
         $tipos_cambio = array();
-        $tipo_cambio->set_id(1); //TODO por defecto
+        //$tipo_cambio->set_id(1); //TODO por defecto
         if ($cambio->is_maquina_nueva() == true) {
             $tipo_cambio->set_id(2);
+            $tipos_cambio[] = $tipo_cambio;
         }
         $componentes_cambiados = $cambio->get_componentes_cambiados();
         foreach ($componentes_cambiados as $componente_cambiado) {
@@ -58,8 +59,7 @@ class TipoCambio {
             }
             switch ($nombre_clase_componente) {
                 case("procesador"):
-                    $tipos_cambio[] = (new TipoCambio())->set_id(3);
-                    //$tipo_cambio->set_id(3);
+                    $tipo_cambio->set_id(3);
                     break;
                 case("bios"):
                     $tipo_cambio->set_id(4);
@@ -86,20 +86,28 @@ class TipoCambio {
                     $tipo_cambio->set_id(11);
                     break;
             }
-            //falta comprobar que cambie tanto el procesador y la memoria pro ejemplo
+            $tipos_cambio[] = $tipo_cambio;
+            //$tipos_cambio[] = (new TipoCambio())->set_id($tipo_cambio->get_id());
         }
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
+        $tipos_cambio_final  =array();
         if (!empty($tipos_cambio)) {
-            
-        } else {
-            $consulta = "SELECT * FROM tipos_cambio WHERE id = {$tipo_cambio->_id}";
-            $resultados = $conexion->consultar_simple($consulta);
+            $cantidad_cambios = 0;
+            foreach ($tipos_cambio as $tipo_cambio_actual) {
+                $consulta = "SELECT * FROM tipos_cambio WHERE id = {$tipo_cambio_actual->_id}";
+                $resultados = $conexion->consultar_simple($consulta);
+                if (!empty($resultados)) {
+                    $tipo_cambio_actual->set_nombre($resultados[0]['nombre']);
+                    $tipo_cambio_actual->set_descripcion($resultados[0]['descripcion']);
+                    $tipos_cambio_final[] = $tipo_cambio_actual;
+                    $cantidad_cambios++;
+                }
+            }
+            if($cantidad_cambios >= 9 ){
+                $tipos_cambio_final[] = (new TipoCambio())->set_id(1);
+            }
         }
-        if (!empty($resultados)) {
-            $tipo_cambio->set_nombre($resultados[0]['nombre']);
-            $tipo_cambio->set_descripcion($resultados[0]['descripcion']);
-        }
-        return $tipo_cambio;
+        return $tipos_cambio_final;
     }
 
 }
