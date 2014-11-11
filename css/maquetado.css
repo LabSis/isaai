@@ -45,6 +45,12 @@ header #fondoCabecera #seccionUsuario{
     border-radius: 5px;
     border:1px solid rgba(0,0,0,0.0);
     transition: all 0.2s;
+    color:#fff;
+    text-shadow: 0px 1px 0px #000;
+}
+#botonUsuario a{
+    color:#fff;
+    text-shadow: 0px 1px 0px #000;
 }
 #botonUsuario:hover{
     cursor:pointer;
@@ -148,6 +154,35 @@ main{
     overflow-y: scroll;
     padding: 10px;
     box-sizing: border-box;
+}
+.seccion{
+    width: 100%;
+    border-radius:5px;
+    background-color: #fff;
+    box-sizing: border-box;
+    border:1px solid rgba(0,0,0,0.2);
+}
+.seccion:not(:last-child){
+    margin-bottom: 10px;
+}
+.contenidoSeccion{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.tituloSeccion{
+    color:#fff;
+    background-color: #9FD3E3;
+    box-sizing: border-box;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    padding: 10px;
+    text-align: center;
+    text-shadow: 0px 2px 0px rgba(0,0,0,0.6), 0px 0px 1px rgba(0,0,0,1);
+    background-image: linear-gradient(to top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.0) 100%),
+        linear-gradient(to right,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.0) 20%, rgba(0,0,0,0.0) 80%,rgba(0,0,0,0.1) 100%);
+    border:1px solid rgba(0,0,0,0.4);
+    box-shadow: inset 0px 1px 1px rgba(255,255,255,0.8), inset 0px -1px 0px rgba(255,255,255,0.6);
 }
 #noticia{
     background-color: #fff;

@@ -14,42 +14,49 @@
         <main>
             <?php require_once dirname(__FILE__) . '/marco/menu_principal.tmpl.php' ?>
             <div id="contenido">
-                <table class="general" id='tablaMaquinas'>
-                    <thead>
-                        <tr>
-                            <td>
-                                Id máquina
-                            </td>
-                            <td>
-                                Nombre
-                            </td>
-                            <td>
-                                Fecha alta
-                            </td>
-                            <td>
-                                Fecha última sincronización
-                            </td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach($template_maquinas as $maquina):?>
-                        <tr>
-                            <td>
-                                <?php echo $maquina['id'];?>
-                            </td>
-                            <td>
-                                <?php echo $maquina['nombre'];?>
-                            </td>
-                            <td>
-                                <?php echo $maquina['fecha_alta'];?>
-                            </td>
-                            <td>
-                                <?php echo $maquina['fecha_sincronizacion'];?>
-                            </td>
-                        </tr>
-                        <?php endforeach;?>
-                    </tbody>
-                </table>
+                <div class='seccion'>
+                    <h2 class='titulo tituloSeccion'>
+                        Todas las máquinas
+                    </h2>
+                    <div class='contenidoSeccion'>
+                        <table class="general" id='tablaMaquinas'>
+                            <thead>
+                                <tr>
+                                    <td>
+                                        Id máquina
+                                    </td>
+                                    <td>
+                                        Nombre
+                                    </td>
+                                    <td>
+                                        Fecha alta
+                                    </td>
+                                    <td>
+                                        Fecha última sincronización
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($template_maquinas as $maquina): ?>
+                                    <tr>
+                                        <td>
+                                            <?php echo $maquina['id']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $maquina['nombre']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $maquina['fecha_alta']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $maquina['fecha_sincronizacion']; ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="clearer"></div>
         </main>
