@@ -23,7 +23,11 @@ $(document).ready(function() {
                 if (cantMaquinasCambiadas === 0) {
                     msj = "Ninguna máquina ha cambiado";
                 } else {
-                    msj = "Muchas máquinas han cambiado";
+                    if (isNaN(cantMaquinasCambiadas)) {
+                        msj = "Muchas máquinas han cambiado";
+                    } else {
+                        msj = cantMaquinasCambiadas + " máquinas han cambiado";
+                    }
                 }
                 $("#mensajesAlerta").html(msj);
                 setTimeout(function() {

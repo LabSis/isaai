@@ -134,8 +134,11 @@ input[type=text].general, textarea.general, input[type=radio].general, input[typ
 .data{
     display:none;
 }
+/* Tablas */
 table.general{
     border-collapse: collapse;
+    border-radius: 4px;
+    box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.6), 0px 2px 4px rgba(0,0,0,0.2);
 }
 table.general td{
     padding:2px 4px;
@@ -158,9 +161,22 @@ table.general thead tr:last-child td{
 }
 table.general tbody td{
     background-color: #E8E8E8;
+    box-shadow: inset 0px 1px 0px rgba(0,0,0,0.1), inset 0px -1px 0px rgba(255,255,255,0.4),
+        inset 1px 0px 0px rgba(0,0,0,0.1), inset -1px 0px 0px rgba(255,255,255,0.4);
+}
+table.general tbody tr:nth-child(2n) td{
+    background-color: #E3E3E3;
+}
+table.general tbody tr:hover td{
+    background-color: #D0E5F5;
+}
+table.general tbody tr td.seleccionado{
+    background-color: #D0E5F5;
 }
 table.general tbody tr:first-child td{
-    box-shadow: inset 0px 1px rgba(0,0,0,0.4);
+    box-shadow: inset 0px 1px 0px rgba(0,0,0,0.1), inset 0px -1px 0px rgba(255,255,255,0.4),
+        inset 1px 0px 0px rgba(0,0,0,0.1), inset -1px 0px 0px rgba(255,255,255,0.4),
+        inset 0px 1px rgba(0,0,0,0.4);
 }
 table.general tbody tr:last-child td:first-child{
     border-bottom-left-radius: 4px;

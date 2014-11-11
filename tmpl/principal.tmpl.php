@@ -4,6 +4,7 @@
         <?php require_once dirname(__FILE__) . '/marco/head.tmpl.php' ?>
         <!-- CSS -->
         <link href="<?php echo $global_ruta_web; ?>/css/lib/font-awesome-4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+        <link href="<?php echo $global_ruta_web; ?>/css/principal.css" type="text/css" rel="stylesheet"/>
         <!-- JavaScript -->
         <script src="<?php echo $global_ruta_web; ?>/js/sincronizar.js" type="text/javascript"></script>
     </head>
@@ -13,42 +14,40 @@
         <main>
             <?php require_once dirname(__FILE__) . '/marco/menu_principal.tmpl.php' ?>
             <div id="contenido">
-                <table class="general">
+                <table class="general" id='tablaMaquinas'>
                     <thead>
                         <tr>
                             <td>
-                                Titulo
+                                Id máquina
                             </td>
                             <td>
-                                Titulo
+                                Nombre
+                            </td>
+                            <td>
+                                Fecha alta
+                            </td>
+                            <td>
+                                Fecha última sincronización
                             </td>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach($template_maquinas as $maquina):?>
                         <tr>
                             <td>
-                                Cuerpo
+                                <?php echo $maquina['id'];?>
                             </td>
                             <td>
-                                Cuerpo
+                                <?php echo $maquina['nombre'];?>
+                            </td>
+                            <td>
+                                <?php echo $maquina['fecha_alta'];?>
+                            </td>
+                            <td>
+                                <?php echo $maquina['fecha_sincronizacion'];?>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                Cuerpo
-                            </td>
-                            <td>
-                                Cuerpo
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Cuerpo
-                            </td>
-                            <td>
-                                Cuerpo
-                            </td>
-                        </tr>
+                        <?php endforeach;?>
                     </tbody>
                 </table>
             </div>
