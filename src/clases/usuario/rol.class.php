@@ -47,7 +47,7 @@ class Rol {
         $roles = array();
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $consulta = "SELECT r.id, r.nombre, r.descripcion "
-                . "FROM roles AS r INNER JOIN roles_x_tipo_cambio AS rtc"
+                . "FROM roles AS r INNER JOIN roles_x_tipo_cambio AS rtc "
                 . "ON r.id = rtc.id_rol "
                 . "WHERE rtc.id_tipo_cambio = {$tipo_cambio->get_id()}";
         $resultados = $conexion->consultar_simple($consulta);

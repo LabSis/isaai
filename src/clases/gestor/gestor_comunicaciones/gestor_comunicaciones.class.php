@@ -27,9 +27,8 @@ class GestorComunicaciones {
                             $roles_comunicar[] = $rol_actual;
                         }
                     }
-                    $alertadores[$j]->alertar($lista_cambios[$i], $roles);
+                    $alertadores[$j]->alertar($lista_cambios[$i], $roles_comunicar);
                 }
-                
             }
         }
     }

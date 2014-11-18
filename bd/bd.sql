@@ -212,12 +212,18 @@ INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, e
 INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("german","123",1,"Germán","Parisi","germannparisi@gmail.com","03515192675",NOW());
 INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("milagros","123",1,"Milagros","Zea Cárdenas","milyzc@gmail.com","03512610201",NOW());
 
-INSERT INTO tipos_cambio (id, nombre, descripcion) VALUES (1, "Todo", "Todos los cambios, sean máquinas nuevas o modificaciones en las máquinas actuales");
-INSERT INTO tipos_cambio (id, nombre, descripcion) VALUES (2, "Nuevas", "Sólo máquinas agregadas al sistema ISAAI");
-INSERT INTO tipos_cambio (id, nombre, descripcion) VALUES (3, "Procesadores", "Cambios de procesadores");
-INSERT INTO tipos_cambio (id, nombre, descripcion) VALUES (4, "Bios", "Cambios de bios");
-INSERT INTO tipos_cambio (id, nombre, descripcion) VALUES (5, "Memorias y procesadores", "Cambios de memorias y procesadores");
-
+INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Cualquier cambio", "Todos los cambios, sean máquinas nuevas o modificaciones en las máquinas actuales");
+INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Nuevas", "Sólo máquinas agregadas al sistema ISAAI");
+INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Procesadores", "Cambios de procesadores");
+INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Bios", "Cambios de bios");
+INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Discos", "Cambios de discos");
+INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Memorias", "Cambios de memorias");
+INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Monitores", "Cambios de monitores");
+INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Perifericos", "Cambios de perifericos");
+INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Placas de red", "Cambios de palcas de red");
+INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Placas de sonido", "Cambios de palcas de sonido");
+INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Placas de video", "Cambios de palcas video");
+   
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio) VALUES (1,1);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio) VALUES (2,1);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio) VALUES (3,1);

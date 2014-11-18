@@ -42,7 +42,7 @@ class GestorCapturaciones {
                 $j++;
             }
             if ($j === count($lista_resultados_isaai)) {
-                if ($cantidad_agregadas < 10) {
+                if ($cantidad_agregadas < 1) {
                     //agregar nueva maquina
                     $id_maquina_ocs = new IdMaquinaOcs($lista_resultados_ocs[$i]['ID']);
                     $maquina_nueva = $capturador_ocs->obtener_maquina($id_maquina_ocs);

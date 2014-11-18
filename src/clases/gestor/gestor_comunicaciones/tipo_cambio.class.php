@@ -87,10 +87,9 @@ class TipoCambio {
                     break;
             }
             $tipos_cambio[] = $tipo_cambio;
-            //$tipos_cambio[] = (new TipoCambio())->set_id($tipo_cambio->get_id());
         }
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
-        $tipos_cambio_final  =array();
+        $tipos_cambio_final = array();
         if (!empty($tipos_cambio)) {
             $cantidad_cambios = 0;
             foreach ($tipos_cambio as $tipo_cambio_actual) {
@@ -103,8 +102,15 @@ class TipoCambio {
                     $cantidad_cambios++;
                 }
             }
-            if($cantidad_cambios >= 9 ){
-                $tipos_cambio_final[] = (new TipoCambio())->set_id(1);
+            /*
+              //Todos los tipos d cambio esta implicito para cada rol
+              if($cantidad_cambios >= 9 ){
+              $tipos_cambio_final[] = (new TipoCambio())->set_id(1);
+              }
+             */
+            if ($cantidad_cambios >= 1) {
+                $tipo_cambio->set_id(1);
+                $tipos_cambio_final[] = $tipo_cambio;
             }
         }
         return $tipos_cambio_final;

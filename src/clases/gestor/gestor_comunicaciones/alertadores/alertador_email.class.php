@@ -14,10 +14,13 @@ class AlertadorEmail implements Alertador {
                 . "ON u.id_rol = r.id";
         $resultados = $conexion->consultar_simple($consulta);
         $lista_emails = array();
+        Out::print_array($roles);
         for ($i = 0; $i < count($resultados); $i++) {
             for ($j = 0; $j < count($roles); $j++) {
                 if ($resultados[$i]['id_rol'] == $roles[$j]->get_id()) {
                     $lista_emails[] = $resultados[$i]['email'];
+                    //Out::print_array($cambio->get_maquina_actual());
+                    Out::println("Envio email de cambio a emial: ".$resultados[$i]['email']);
                 }
             }
         }
