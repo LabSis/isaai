@@ -7,6 +7,7 @@
         <link href="<?php echo $global_ruta_web; ?>/css/config/config_roles_x_tipo_cambio.css" type="text/css" rel="stylesheet"/>
         <!-- JavaScript -->
         <script src="<?php echo $global_ruta_web; ?>/js/sincronizar.js" type="text/javascript"></script>
+        <script src="<?php echo $global_ruta_web; ?>/js/config/config_roles_x_tipo_cambio.js" type="text/javascript"></script>
     </head>
     <body>
         <div class="data" id="dataRutaWeb"><?php echo $global_ruta_web; ?></div>
@@ -31,7 +32,8 @@
                                 </tr>
                                 <tr>
                                     <?php foreach ($roles as $rol): ?>
-                                        <td>
+                                        <td class="columnaRol">
+                                            <i class="fa fa-caret-square-o-down icono iconoBoton"></i>
                                             <?php echo Util::capitalizar_texto($rol->get_nombre()); ?>
                                         </td>
                                     <?php endforeach; ?>
@@ -39,9 +41,10 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($tipos_cambio as $tipo_cambio): ?>
-                                    <tr>
+                                    <tr class="filaTipoCambio">
                                         <td>
                                             <?php echo Util::capitalizar_texto($tipo_cambio->get_nombre()); ?>
+                                            <i class="fa fa-caret-square-o-right icono iconoBoton"></i>
                                         </td>
                                         <?php foreach ($roles as $rol): ?>
                                             <td class="celdaCheckbox">
