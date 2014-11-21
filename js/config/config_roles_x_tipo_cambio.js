@@ -1,20 +1,47 @@
 $(document).ready(function() {
     //seleccionar todos los tipos de cambio para un rol
-    $(".columnaRol .iconoBoton").click(function() {
+    $(".columnaRol .checkbox").click(function() {
+        var estadoCheckbox;
+        if (typeof $(this).attr("checked") !== typeof undefined && $(this).attr("checked") !== false) {
+            estadoCheckbox = false;
+            $(this).removeAttr("checked");
+        } else {
+            //es igual a undefined
+            estadoCheckbox = true;
+            $(this).attr("checked", "true");
+        }
+        console.log($(this).attr("checked"), estadoCheckbox);
         var indiceColumna = $(this).parent().index();
         $(".filaTipoCambio").each(function() {
             $(this).find(".celdaCheckbox").each(function() {
                 if (($(this).index() - 1) === indiceColumna) {
-                    $(this).find("input[type='checkbox']").attr("checked", "true");
+                    if (estadoCheckbox === true) {
+                        console.log("estadoCheckbox es true");
+                        $(this).find("input[type='checkbox']").attr("checked", "checked");
+                    } else {
+                        $(this).find("input[type='checkbox']").removeAttr("checked");
+                    }
                 }
             });
         });
     });
     //seleccionar todos los roles para un tipo de cambio
-    $(".filaTipoCambio .iconoBoton").click(function() {
-        var indiceFila = $(this).parents("tr").index();
+    $(".filaTipoCambio .checkbox").click(function() {
+        var estadoCheckbox;
+        if (typeof $(this).attr("checked") !== typeof undefined && $(this).attr("checked") !== false) {
+            estadoCheckbox = false;
+            $(this).removeAttr("checked");
+        } else {
+            estadoCheckbox = true;
+            $(this).attr("checked", "true");
+        }
+        //var indiceFila = $(this).parents("tr").index();
         $(this).parent().nextAll().each(function() {
-            $(this).find("input[type='checkbox']").attr("checked", "true");
+            if (estadoCheckbox === true) {
+                $(this).find("input[type='checkbox']").attr("checked", "checked");
+            } else {
+                $(this).find("input[type='checkbox']").removeAttr("checked");
+            }
         });
     });
 });

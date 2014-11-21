@@ -33,7 +33,7 @@
                                 <tr>
                                     <?php foreach ($roles as $rol): ?>
                                         <td class="columnaRol">
-                                            <i class="fa fa-caret-square-o-down icono iconoBoton"></i>
+                                            <input type="checkbox" name="chkTipoCambio" class="checkbox"/>
                                             <?php echo Util::capitalizar_texto($rol->get_nombre()); ?>
                                         </td>
                                     <?php endforeach; ?>
@@ -44,7 +44,7 @@
                                     <tr class="filaTipoCambio">
                                         <td>
                                             <?php echo Util::capitalizar_texto($tipo_cambio->get_nombre()); ?>
-                                            <i class="fa fa-caret-square-o-right icono iconoBoton"></i>
+                                            <input type="checkbox" name="chkTipoCambio" class="checkbox"/>
                                         </td>
                                         <?php foreach ($roles as $rol): ?>
                                             <td class="celdaCheckbox">

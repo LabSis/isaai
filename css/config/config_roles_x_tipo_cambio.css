@@ -3,26 +3,20 @@
     Author     : Diego
 */
 #tablaConfig{
-
     width: 60%;
     margin:10px auto;
-
 }
 #tablaConfig tbody tr td.celdaCheckbox{
     text-align: center;
 }
-
-#tablaConfig tr td .icono{
-    color: rgba(0,0,0,0.4);
-}
-#tablaConfig thead tr td .icono{
+#tablaConfig thead tr td .checkbox{
     float:left;
-    padding-left: 2px;
-    padding-right: 8px;
-    padding-top:2px;
+    margin-left: 2px;
+    margin-right: 8px;
+    margin-top:4px;
 }
-#tablaConfig tbody tr td .icono{
+#tablaConfig tbody tr td .checkbox{
     float:right;
-    padding-right: 2px;
-    padding-top:2px;
+    margin-right: 2px;
+    margin-top: 4px;
 }
