@@ -226,4 +226,12 @@ INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Placas de video", "Cambi
    
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio) VALUES (1,1);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio) VALUES (2,1);
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio) VALUES (2,3);
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio) VALUES (2,4);
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio) VALUES (2,8);
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio) VALUES (2,5);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio) VALUES (3,1);
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio) VALUES (3,10);
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio) VALUES (3,6);
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio) VALUES (3,7);
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio) VALUES (3,3);

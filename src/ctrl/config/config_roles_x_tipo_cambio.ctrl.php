@@ -11,7 +11,7 @@ if (!empty($resultados)) {
     }
 }
 
-$resultados = $conexion->consultar_simple("SELECT id, nombre, descripcion FROM tipos_cambio;");
+$resultados = $conexion->consultar_simple("SELECT id, nombre, descripcion FROM tipos_cambio");
 $tipos_cambio = array();
 if (!empty($resultados)) {
     foreach ($resultados as $fila_resultado) {
@@ -22,5 +22,17 @@ if (!empty($resultados)) {
         $tipos_cambio[] = $tipo_cambio;
     }
 }
-//Out::print_array($roles);
+
+$resultados = $conexion->consultar_simple("SELECT id_rol, id_tipo_cambio FROM roles_x_tipo_cambio");
+$matriz = array();
+
+if (!empty($resultados)) {
+    foreach ($resultados as $fila_resultado) {
+        if (!isset($matriz[$fila_resultado['id_rol']])) {
+            $matriz[$fila_resultado['id_rol']] = array();
+        }
+        $matriz[$fila_resultado['id_rol']][] = $fila_resultado['id_tipo_cambio'];
+    }
+}
+
 require_once $global_ruta_servidor . '/tmpl/config/config_roles_x_tipo_cambio.tmpl.php';

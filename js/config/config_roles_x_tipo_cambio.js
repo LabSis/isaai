@@ -10,13 +10,11 @@ $(document).ready(function() {
             estadoCheckbox = true;
             $(this).attr("checked", "true");
         }
-        console.log($(this).attr("checked"), estadoCheckbox);
         var indiceColumna = $(this).parent().index();
         $(".filaTipoCambio").each(function() {
             $(this).find(".celdaCheckbox").each(function() {
                 if (($(this).index() - 1) === indiceColumna) {
                     if (estadoCheckbox === true) {
-                        console.log("estadoCheckbox es true");
                         $(this).find("input[type='checkbox']").attr("checked", "checked");
                     } else {
                         $(this).find("input[type='checkbox']").removeAttr("checked");

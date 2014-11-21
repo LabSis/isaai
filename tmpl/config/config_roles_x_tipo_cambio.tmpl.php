@@ -20,41 +20,49 @@
                         Configurar roles por tipo de cambio
                     </h2>
                     <div class='contenidoSeccion'>
-                        <table class="general" id='tablaConfig'>
-                            <thead>
-                                <tr>
-                                    <td rowspan="2">
-                                        Tipo de cambio
-                                    </td>
-                                    <td colspan="<?php echo count($roles); ?>">
-                                        Roles de usuario
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <?php foreach ($roles as $rol): ?>
-                                        <td class="columnaRol">
-                                            <input type="checkbox" name="chkTipoCambio" class="checkbox"/>
-                                            <?php echo Util::capitalizar_texto($rol->get_nombre()); ?>
-                                        </td>
-                                    <?php endforeach; ?>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($tipos_cambio as $tipo_cambio): ?>
-                                    <tr class="filaTipoCambio">
-                                        <td>
-                                            <?php echo Util::capitalizar_texto($tipo_cambio->get_nombre()); ?>
-                                            <input type="checkbox" name="chkTipoCambio" class="checkbox"/>
-                                        </td>
-                                        <?php foreach ($roles as $rol): ?>
-                                            <td class="celdaCheckbox">
-                                                <input type="checkbox" name="chkTipoCambio"/>
+                        <div class="contenedor">
+                            <form action="" method="post">
+                                <table class="general" id='tablaConfig'>
+                                    <thead>
+                                        <tr>
+                                            <td rowspan="2">
+                                                Tipo de cambio
                                             </td>
+                                            <td colspan="<?php echo count($roles); ?>">
+                                                Roles de usuario
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <?php foreach ($roles as $rol): ?>
+                                                <td class="columnaRol">
+                                                    <input type="checkbox" name="chkTipoCambio" class="checkbox"/>
+                                                    <?php echo Util::capitalizar_texto($rol->get_nombre()); ?>
+                                                </td>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($tipos_cambio as $tipo_cambio): ?>
+                                            <tr class="filaTipoCambio">
+                                                <td>
+                                                    <?php echo Util::capitalizar_texto($tipo_cambio->get_nombre()); ?>
+                                                    <input type="checkbox" name="chkTipoCambio" class="checkbox"/>
+                                                </td>
+                                                <?php foreach ($roles as $rol): ?>
+                                                    <td class="celdaCheckbox">
+                                                        <?php $checked = ''; ?>
+                                                        <?php if (in_array($tipo_cambio->get_id(), $matriz[$rol->get_id()])) $checked = "checked='checked'"; ?>
+                                                        <input type="checkbox" name="chkTipoCambio_<?php echo $rol->get_id() . "_" . $tipo_cambio->get_id(); ?>" <?php echo $checked; ?>/>
+                                                    </td>
+                                                <?php endforeach; ?>
+                                            </tr>
                                         <?php endforeach; ?>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                                    </tbody>
+                                </table>
+                                <input type="submit" value="Actualizar" name="btnActualizar" class="boton" id="btnActualizar"/>
+                                <div class="clearer"></div>
+                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
