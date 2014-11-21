@@ -1,0 +1,13 @@
+/* 
+    Created on : 21/11/2014, 14:07:46
+    Author     : Diego
+*/
+#tablaConfig{
+    
+    width: 60%;
+    margin:10px auto;
+    
+}
+#tablaConfig tbody tr td.celdaCheckbox{
+    text-align: center;
+}
