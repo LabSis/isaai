@@ -21,7 +21,8 @@
                     </h2>
                     <div class='contenidoSeccion'>
                         <div class="contenedor">
-                            <form action="" method="post">
+                            <form action="<?php echo $global_ruta_web; ?>/src/ctrl/config/config_roles_x_tipo_cambio.ctrl.php" method="post" id="frmActualizar">
+                                <input type="hidden" class="data" name="dataRolesXTipoCambio" id="dataRolesXTipoCambio" />
                                 <table class="general" id='tablaConfig'>
                                     <thead>
                                         <tr>
@@ -51,7 +52,7 @@
                                                 <?php foreach ($roles as $rol): ?>
                                                     <td class="celdaCheckbox">
                                                         <?php $checked = ''; ?>
-                                                        <?php if (in_array($tipo_cambio->get_id(), $matriz[$rol->get_id()])) $checked = "checked='checked'"; ?>
+                                                        <?php if ($matriz[$rol->get_id()][$tipo_cambio->get_id()]) $checked = "checked='checked'"; ?>
                                                         <input type="checkbox" name="chkTipoCambio_<?php echo $rol->get_id() . "_" . $tipo_cambio->get_id(); ?>" <?php echo $checked; ?>/>
                                                     </td>
                                                 <?php endforeach; ?>
@@ -61,8 +62,8 @@
                                 </table>
                                 <input type="submit" value="Actualizar" name="btnActualizar" class="boton" id="btnActualizar"/>
                                 <div class="clearer"></div>
+                            </form>
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>

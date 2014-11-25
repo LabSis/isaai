@@ -23,7 +23,7 @@ if (!empty($resultados)) {
     }
 }
 
-$resultados = $conexion->consultar_simple("SELECT id_rol, id_tipo_cambio FROM roles_x_tipo_cambio");
+$resultados = $conexion->consultar_simple("SELECT id_rol, id_tipo_cambio, permiso FROM roles_x_tipo_cambio");
 $matriz = array();
 
 if (!empty($resultados)) {
@@ -31,7 +31,7 @@ if (!empty($resultados)) {
         if (!isset($matriz[$fila_resultado['id_rol']])) {
             $matriz[$fila_resultado['id_rol']] = array();
         }
-        $matriz[$fila_resultado['id_rol']][] = $fila_resultado['id_tipo_cambio'];
+        $matriz[$fila_resultado['id_rol']][$fila_resultado['id_tipo_cambio']] = $fila_resultado['permiso'];
     }
 }
 

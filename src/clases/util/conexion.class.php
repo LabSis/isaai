@@ -414,7 +414,7 @@ class Conexion {
     public function actualizar_simple($actualizacion) {
         $this->autoconectar();
         if (!$this->_conexion->query($actualizacion)) {
-            $this->_error("Error al ejecutar actualización");
+            $this->error("Error al ejecutar actualización");
             return false;
         }
         $this->_cantidad_filas_afectadas = $this->_conexion->affected_rows;
@@ -462,7 +462,7 @@ class Conexion {
      * contrario.
      */
     public function transaccion_terminar($transaccion_exitosa) {
-        if ($transaccion_exitosa === true) {
+        if ($transaccion_exitosa == true) {
             //commit
             return $this->transaccion_confirmar();
         } else {
