@@ -13,7 +13,17 @@ a{
     font-family: serif;
 }
 .clearer{
-   clear: both;
+    clear: both;
+}
+#fondoNegro{
+    background-color: rgba(0,0,0,0.4);
+    z-index: 100;
+    position: absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    box-shadow: inset 0px 0px 60px 10px rgba(0,0,0,0.4);
+    display:none;
 }
 /* Mensajes */
 div.mensaje{
@@ -49,6 +59,13 @@ div.mensajeAlerta{
 }
 div.mensajeError{
     background-color: #F04A4A;
+}
+.mensajeFlotante{
+    position: absolute;
+    z-index: 101;
+    width: auto!important;
+    top: 10%;
+    left:25%;
 }
 /* Campo de texto */
 input[type=text].general, input[type=password].general{
@@ -107,7 +124,7 @@ input[type=checkbox].general{
 }
 /* Todos los generales */
 input[type=text].general, textarea.general, input[type=radio].general, input[type=checkbox].general, select.general{
-    
+
 }
 .boton{
     color:#000;
@@ -129,7 +146,7 @@ input[type=text].general, textarea.general, input[type=radio].general, input[typ
     background-image: linear-gradient(to top, rgba(0,0,0,0.0) 0%,rgba(0,0,0,0.0) 49%,rgba(255,255,255,0.5) 50%,rgba(255,255,255,0.0) 100%);
     box-shadow: inset 0px 0px 4px rgba(0,0,0,0.6);
     text-shadow: 0px -1px 0px rgba(255,255,255,0.6);
-    
+
 }
 .data{
     display:none;

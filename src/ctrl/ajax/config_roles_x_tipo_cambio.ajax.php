@@ -61,7 +61,6 @@ if (isset($_POST['accion'])) {
             $datos = $_POST['datos'];
             
             $json = json_decode($datos, true);
-            echo Out::print_array($json);
 
             $conexion = Conexion::get_instacia(CONEXION_ISAAI);
             $conexion->transaccion_comenzar();
@@ -74,7 +73,6 @@ if (isset($_POST['accion'])) {
                     $actualizacion = "UPDATE roles_x_tipo_cambio "
                             . "SET permiso = '" . $tipo_cambio['permiso'] . "' "
                             . "WHERE id_rol = {$id_rol} AND id_tipo_cambio = {$tipo_cambio['id']};";
-                            echo Out::println($actualizacion);
                     $ok &= $conexion->actualizar_simple($actualizacion);
                 }
             }

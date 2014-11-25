@@ -61,8 +61,15 @@ $(document).ready(function() {
                 datos: JSON.stringify(roles)
             }
         }).done(function(respuesta) {
-            console.log(respuesta);
+            if (respuesta == 1) {
+                //style='position:absolute;top:10px;left:10px'
+                var mensaje = "<div class='mensaje mensajeInfo mensajeFlotante'>Cambios realizados con éxito, no haga tantas actualizaciones</br>Nose</br></br>Nose</br>asd</div>";
+                
+                $("body").prepend(mensaje);
+                $("#fondoNegro").css("display","block");
+                mensajeFlotante();
+            }
         });
-        //evt.preventDefault();
+        evt.preventDefault();
     });
 });

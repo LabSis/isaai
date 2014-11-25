@@ -21,7 +21,7 @@
                     </h2>
                     <div class='contenidoSeccion'>
                         <div class="contenedor">
-                            <form action="<?php echo $global_ruta_web; ?>/src/ctrl/config/config_roles_x_tipo_cambio.ctrl.php" method="post" id="frmActualizar">
+                            <form action="" method="post" id="frmActualizar">
                                 <input type="hidden" class="data" name="dataRolesXTipoCambio" id="dataRolesXTipoCambio" />
                                 <table class="general" id='tablaConfig'>
                                     <thead>

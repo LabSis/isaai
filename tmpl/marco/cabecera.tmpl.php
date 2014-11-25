@@ -1,3 +1,4 @@
+<div id="fondoNegro"></div>
 <header>
     <div id="fondoCabecera">
         <h1 id="tituloPrincipal">Sistema de Alertas Automáticas</h1><!-- Inventario Seguro de Alertas Automatias en Ambientes Informativos de activos TI -->
