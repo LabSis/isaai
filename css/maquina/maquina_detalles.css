@@ -1,0 +1,42 @@
+/* 
+    Created on : 27/11/2014, 16:40:25
+    Author     : Diego
+*/
+#tablaDatosMaquina {
+    width:auto;
+}
+#tablaDatosMaquina td{
+    padding:4px 6px;
+}
+#tablaDatosMaquina tr td:first-child{
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    background-color: #D3E9F0;
+}
+#tablaDatosMaquina tr td:not(:first-child){
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    background-color: #F2F2F2;
+}
+.subtituloSeccion{
+    color:#fff;
+    text-shadow: 0px 0px 2px rgba(0,0,0,1.0), 0px 2px 0px rgba(0,0,0,1.0);
+}
+#tablaContenedorComponentes tr td{
+    vertical-align: top;
+}
+#tablaContenedorComponentes{
+    margin-top: 10px;
+    width: 100%;
+}
+.tituloComponente{
+    font-weight: normal;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    background-color: #D3E9F0;
+    padding: 6px;
+}
+.tableDatoComponente td{
+    padding:2px 4px;
+}
+.tableDatoComponente tr td:first-child{
+    text-decoration: underline;
+    text-align: right;
+}

@@ -310,9 +310,35 @@ class Maquina {
     public function actualizar_fecha_sincronizacion($ultima_fecha_sincronizacion) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $consulta = "UPDATE maquinas SET fecha_sincronizacion = '{$this->_fecha_sincronizacion}' "
-        . "WHERE id='{$this->_id}' AND fecha_sincronizacion = '{$ultima_fecha_sincronizacion}'";
+                . "WHERE id='{$this->_id}' AND fecha_sincronizacion = '{$ultima_fecha_sincronizacion}'";
         //. "(SELECT MAX(fecha_sincronizacion) FROM maquinas AS WHERE id = '{$this->_id}')";
         return $conexion->actualizar_simple($consulta);
+    }
+
+    public static function materializar($id_maquina) {
+        $conexion = Conexion::get_instacia(CONEXION_ISAAI);
+        $consulta = "SELECT id, id_sistema_operativo, nombre, fecha_alta, fecha_sincronizacion, fecha_cambio "
+                . "FROM maquinas m "
+                . "WHERE id = '{$id_maquina}'";
+        $resultado = $conexion->consultar_simple($consulta);
+        if (!empty($resultado)) {
+            $maquina = new Maquina();
+            $maquina->set_id($id_maquina);
+            $maquina->set_nombre($resultado[0]['nombre']);
+            $maquina->set_fecha_alta($resultado[0]['fecha_alta']);
+            $maquina->set_fecha_sincronizacion($resultado[0]['fecha_sincronizacion']);
+            $maquina->set_fecha_cambio($resultado[0]['fecha_cambio']);
+            $consulta = "SELECT id, nombre, version "
+                    . "FROM sistemas_operativos "
+                    . "WHERE id = {$resultado[0]['id_sistema_operativo']}";
+            $resultado = $conexion->consultar_simple($consulta);
+            if (!empty($resultado)) {
+                $sistema_operativo = new SistemaOperativo($resultado[0]['id'], $resultado[0]['nombre'], $resultado[0]['version']);
+                $maquina->set_sistema_operativo($sistema_operativo);
+            }
+            return $maquina;
+        }
+        return null;
     }
 
 }
