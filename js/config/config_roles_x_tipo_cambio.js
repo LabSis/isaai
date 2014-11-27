@@ -1,6 +1,7 @@
 var roles;
 $(document).ready(function() {
     //Cargo el array de roles
+    var mensajeGuardarCambios = new MensajeFlotante("");
     $.ajax({
         url: $("#dataRutaWeb").html() + "/src/ctrl/ajax/config_roles_x_tipo_cambio.ajax.php",
         type: "POST",
@@ -62,13 +63,13 @@ $(document).ready(function() {
             }
         }).done(function(respuesta) {
             if (respuesta == 1) {
-                //style='position:absolute;top:10px;left:10px'
-                var mensaje = "<div class='mensaje mensajeInfo mensajeFlotante'>Cambios realizados con éxito, no haga tantas actualizaciones</br>Nose</br></br>Nose</br>asd</div>";
-                
-                $("body").prepend(mensaje);
-                $("#fondoNegro").css("display","block");
-                mensajeFlotante();
+                mensajeGuardarCambios.setContenido("Éxito al guardar los cambios");
+                mensajeGuardarCambios.setTipo(TipoMensaje.prototype.exito);
+            } else {
+                mensajeGuardarCambios.setContenido("Problemas al intentar guardar los cambios");
+                mensajeGuardarCambios.setTipo(TipoMensaje.prototype.error);
             }
+            mensajeGuardarCambios.mostrar();
         });
         evt.preventDefault();
     });
