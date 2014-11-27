@@ -53,6 +53,7 @@ class Rol {
         $resultados = $conexion->consultar_simple($consulta);
         for ($i = 0; $i < count($resultados); $i++) {
             $rol = new Rol($resultados[$i]['id'], $resultados[$i]['nombre'], $resultados[$i]['descripcion']);
+            $rol ->set_descripcion("Responde al tipo de cambio ".$tipo_cambio->get_nombre());
             $roles[] = $rol;
         }
         return $roles;

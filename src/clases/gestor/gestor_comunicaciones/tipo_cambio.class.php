@@ -43,10 +43,10 @@ class TipoCambio {
     }
 
     public static function determinar_tipo_cambio($cambio) {
-        $tipo_cambio = new TipoCambio();
         $tipos_cambio = array();
         //$tipo_cambio->set_id(1); //TODO por defecto
         if ($cambio->is_maquina_nueva() == true) {
+            $tipo_cambio = new TipoCambio();
             $tipo_cambio->set_id(2);
             $tipos_cambio[] = $tipo_cambio;
         }
@@ -57,36 +57,47 @@ class TipoCambio {
             } else {
                 $nombre_clase_componente = strtolower(get_class($componente_cambiado));
             }
+            $id_tipo_cambio;
             switch ($nombre_clase_componente) {
                 case("procesador"):
-                    $tipo_cambio->set_id(3);
+                    $id_tipo_cambio = 3;
                     break;
                 case("bios"):
-                    $tipo_cambio->set_id(4);
+                    $id_tipo_cambio = 4;
                     break;
                 case("disco"):
-                    $tipo_cambio->set_id(5);
+                    $id_tipo_cambio = 5;
                     break;
                 case("memoria"):
-                    $tipo_cambio->set_id(6);
+                    $id_tipo_cambio = 6;
                     break;
                 case("monitor"):
-                    $tipo_cambio->set_id(7);
+                    $id_tipo_cambio = 7;
                     break;
                 case("periferico"):
-                    $tipo_cambio->set_id(8);
+                    $id_tipo_cambio = 8;
                     break;
-                case("placa_red"):
-                    $tipo_cambio->set_id(9);
+                case("placared"):
+                    $id_tipo_cambio = 9;
                     break;
-                case("placa_sonido"):
-                    $tipo_cambio->set_id(10);
+                case("placasonido"):
+                    $id_tipo_cambio = 10;
                     break;
-                case("placa_video"):
-                    $tipo_cambio->set_id(11);
+                case("placavideo"):
+                    $id_tipo_cambio = 11;
                     break;
             }
-            $tipos_cambio[] = $tipo_cambio;
+            $esta = false;
+            foreach ($tipos_cambio as $tipo) {
+                if ($tipo->get_id() == $id_tipo_cambio) {
+                    $esta = true;
+                }
+            }
+            if (!$esta) {
+                $tipo_cambio = new TipoCambio();
+                $tipo_cambio->set_id($id_tipo_cambio);
+                $tipos_cambio[] = $tipo_cambio;
+            }
         }
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $tipos_cambio_final = array();
@@ -109,11 +120,19 @@ class TipoCambio {
               }
              */
             if ($cantidad_cambios >= 1) {
+                $tipo_cambio = new TipoCambio();
                 $tipo_cambio->set_id(1);
-                $tipos_cambio_final[] = $tipo_cambio;
+                $consulta = "SELECT * FROM tipos_cambio WHERE id = 1";
+                $resultados = $conexion->consultar_simple($consulta);
+                if (!empty($resultados)) {
+                    $tipo_cambio->set_nombre($resultados[0]['nombre']);
+                    $tipo_cambio->set_descripcion($resultados[0]['descripcion']);
+
+                    $tipos_cambio_final[] = $tipo_cambio;
+                }
             }
+            return $tipos_cambio_final;
         }
-        return $tipos_cambio_final;
     }
 
 }

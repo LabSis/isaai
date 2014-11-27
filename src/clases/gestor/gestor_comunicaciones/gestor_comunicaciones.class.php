@@ -25,11 +25,18 @@ class GestorComunicaciones {
                     foreach ($roles_actuales as $rol_actual) {
                         if (!in_array($rol_actual, $roles_comunicar, true)) {
                             $roles_comunicar[] = $rol_actual;
+                            //Out::println($tipo_cambio->get_nombre()." -> ".$rol_actual->get_nombre());
                         }
                     }
+
                     $alertadores[$j]->alertar($lista_cambios[$i], $roles_comunicar);
                 }
-            }
+                Out::println("Cambio nro: " . $i . "" . " Tipo de cambio: " . $tipo_cambio->get_nombre());
+                Out::println("CAMBIO: ");
+                Out::print_array($lista_cambios[$i]->get_maquina_actual()->get_id());
+                Out::println("->> SUS ROLES ");
+                Out::print_array($roles_comunicar);
+            }           
         }
     }
 
