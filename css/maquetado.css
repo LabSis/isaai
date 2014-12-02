@@ -118,11 +118,13 @@ main{
     width: 100%;
 }
 #menuPrincipal{
+    overflow: hidden;
     width: 15%;
     height: 600px;
     float:left;
     background-color: #BFBFBF;
     box-shadow: inset 0px 0px 8px 1px rgba(0,0,0,0.4);
+    transition: width 0.2s;
 }
 #menuPrincipal ul{
     list-style-type: none;
@@ -148,7 +150,14 @@ main{
     font-weight: bold;
     cursor:pointer;
 }
+#menuPrincipal #seccionOcultarMostrarMenu{
+    position: absolute;
+    left:10px;
+    bottom:50px;
+    color:#444;
+}
 #contenido{
+    transition: width 0.2s;
     float:left;
     width: 85%;
     overflow-y: scroll;
