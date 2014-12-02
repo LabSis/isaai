@@ -13,4 +13,7 @@
             <a href="#"><i class="fa fa-cog fa-fw icono"></i>Configurar</a>
         </li>
     </ul>
+    <div id="btnOcultarMostrarMenu">
+        <i class="fa fa-arrow-right icono iconoBoton"></i>
+    </div>
 </aside>

@@ -66,32 +66,34 @@
                         <?php if (isset($template_componentes) && !empty($template_componentes)): ?>
                             <h3 class="titulo subtituloSeccion">Componentes</h3>
                             <table id="tablaContenedorComponentes">
-                                <?php $contador = 0; ?>
+                                <?php $contador = 0; $cantidad_celdas_x_fila = 4; ?>
                                 <?php foreach ($template_componentes as $nombre_tempate_componente => $template_componente): ?>
-                                    <?php if (($contador % 4) == 0): ?>
-                                        <tr>
-                                        <?php endif; ?>
-                                        <td>
-                                            <div class="componente">
-                                                <h4 class="tituloComponente"><?php echo $nombre_tempate_componente; ?></h4>
-                                                <table class="tableDatoComponente">
-                                                    <?php foreach ($template_componente as $nombre_propiedad => $propiedad): ?>
-                                                        <tr>
-                                                            <td>
-                                                                <?php echo $nombre_propiedad; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php echo $propiedad; ?>
-                                                            </td>
-                                                        </tr>
-                                                    <?php endforeach; ?>
-                                                </table>
-                                            </div>
-                                        </td>
-                                        <?php if (($contador % 4) == 0): ?>
-                                        </tr>
-                                    <?php endif; ?>
-                                    <?php $contador++; ?>
+                                        <?php foreach ($template_componente as $objecto): ?>
+                                            <?php if (($contador % $cantidad_celdas_x_fila) === 0): ?>
+                                            <tr>
+                                            <?php endif; ?>
+                                                <td style="width:<?php echo (int)(100/$cantidad_celdas_x_fila); ?>%;">
+                                                    <div class="componente">
+                                                        <h4 class="tituloComponente"><?php echo $nombre_tempate_componente; ?></h4>
+                                                        <table class="tableDatoComponente">
+                                                            <?php foreach ($objecto as $nombre_propiedad => $valor_propiedad): ?>
+                                                                <tr>
+                                                                    <td>
+                                                                        <?php echo $nombre_propiedad; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $valor_propiedad; ?>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            <?php $contador++; ?>
+                                            <?php if (($contador % $cantidad_celdas_x_fila) === 0): ?>
+                                            </tr>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
                                 <?php endforeach; ?>
                             </table>
                         <?php endif; ?>
