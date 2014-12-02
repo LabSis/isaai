@@ -23,20 +23,28 @@ class GestorComunicaciones {
                 foreach ($tipos_cambios as $tipo_cambio) {
                     $roles_actuales = $this->determinar_roles_a_enviar($tipo_cambio);
                     foreach ($roles_actuales as $rol_actual) {
-                        if (!in_array($rol_actual, $roles_comunicar, true)) {
+                        //if (!in_array($rol_actual, $roles_comunicar, true)) {
+                        //    $roles_comunicar[] = $rol_actual;
+                        //}
+                        if (count($roles_comunicar) == 0) {
                             $roles_comunicar[] = $rol_actual;
-                            //Out::println($tipo_cambio->get_nombre()." -> ".$rol_actual->get_nombre());
+                        } else {
+                            $existe = false;
+                            foreach ($roles_comunicar as $rol_comunicar) {
+                                if ($rol_comunicar->get_id() == $rol_actual->get_id()) {
+                                    $mensaje_actual_rol = $rol_comunicar->get_descripcion() . "<br/>" . $rol_actual->get_descripcion();
+                                    $rol_comunicar->set_descripcion($mensaje_actual_rol);
+                                    $existe = true;
+                                }
+                            }
+                            if (!$existe) {
+                                $roles_comunicar[] = $rol_actual;
+                            }
                         }
                     }
-
-                    $alertadores[$j]->alertar($lista_cambios[$i], $roles_comunicar);
                 }
-                Out::println("Cambio nro: " . $i . "" . " Tipo de cambio: " . $tipo_cambio->get_nombre());
-                Out::println("CAMBIO: ");
-                Out::print_array($lista_cambios[$i]->get_maquina_actual()->get_id());
-                Out::println("->> SUS ROLES ");
-                Out::print_array($roles_comunicar);
-            }           
+                $alertadores[$j]->alertar($lista_cambios[$i], $roles_comunicar);
+            }
         }
     }
 
