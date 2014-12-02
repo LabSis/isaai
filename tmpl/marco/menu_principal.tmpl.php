@@ -7,7 +7,7 @@
             <a href="<?php echo $global_ruta_web; ?>/src/ctrl/maquina/maquinas.ctrl.php"><i class="fa fa-desktop fa-fw icono"></i><span class="spnTextMenu">Máquinas</span></a>
         </li>
         <li>
-            <a href="#"><i class="fa fa-cube fa-fw icono"></i><span class="spnTextMenu">Componentes</span></a>
+            <a href="<?php echo $global_ruta_web; ?>/src/ctrl/componente/componentes.ctrl.php"><i class="fa fa-cube fa-fw icono"></i><span class="spnTextMenu">Componentes</span></a>
         </li>
         <li>
             <a href="#"><i class="fa fa-cog fa-fw icono"></i><span class="spnTextMenu">Configurar</span></a>

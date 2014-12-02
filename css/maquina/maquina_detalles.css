@@ -33,10 +33,17 @@
     background-color: #D3E9F0;
     padding: 6px;
 }
+.componente{
+    padding: 1px;
+}
+.tableDatoComponente{
+    border-collapse: collapse;
+}
 .tableDatoComponente td{
-    padding:2px 4px;
+    padding:4px 4px;
 }
 .tableDatoComponente tr td:first-child{
-    text-decoration: underline;
+    background-color: #F5F5F5;
+    border-right:1px solid rgba(0,0,0,0.2);
     text-align: right;
 }

@@ -1,0 +1,11 @@
+/* 
+    Created on : 02/12/2014, 17:36:51
+    Author     : Diego
+*/
+#tablaComponentes{
+    width:95%;
+    margin:10px auto;
+}
+#tablaComponentes tbody td{
+    padding:2px 4px;
+}

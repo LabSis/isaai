@@ -19,6 +19,23 @@
                         Todas las máquinas
                     </h2>
                     <div class='contenidoSeccion'>
+                        <form action="<?php echo $global_ruta_web; ?>/src/ctrl/maquina/maquinas.ctrl.php" method="post">
+                            <table>
+                                <tr>
+                                    <td>
+                                        Cantidad de máquinas por página:
+                                        <select name="slcCantidadMaquinasPorPAgina">
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="50">50</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="submit" value="Paginar"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
                         <table class="general" id='tablaMaquinas'>
                             <thead>
                                 <tr>
