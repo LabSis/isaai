@@ -3,10 +3,8 @@
     <head>
         <?php require_once dirname(__FILE__) . '/../marco/head.tmpl.php' ?>
         <!-- CSS -->
-        <link href="<?php echo $global_ruta_web; ?>/css/lib/font-awesome-4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
         <link href="<?php echo $global_ruta_web; ?>/css/componente/componentes.css" type="text/css" rel="stylesheet"/>
         <!-- JavaScript -->
-        <script src="<?php echo $global_ruta_web; ?>/js/sincronizar.js" type="text/javascript"></script>
     </head>
     <body>
         <div class="data" id="dataRutaWeb"><?php echo $global_ruta_web; ?></div>

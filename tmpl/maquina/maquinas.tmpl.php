@@ -3,10 +3,8 @@
     <head>
         <?php require_once dirname(__FILE__) . '/../marco/head.tmpl.php' ?>
         <!-- CSS -->
-        <link href="<?php echo $global_ruta_web; ?>/css/lib/font-awesome-4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
         <link href="<?php echo $global_ruta_web; ?>/css/maquina/maquinas.css" type="text/css" rel="stylesheet"/>
         <!-- JavaScript -->
-        <script src="<?php echo $global_ruta_web; ?>/js/sincronizar.js" type="text/javascript"></script>
     </head>
     <body>
         <div class="data" id="dataRutaWeb"><?php echo $global_ruta_web; ?></div>
@@ -36,6 +34,7 @@
                                 </tr>
                             </table>
                         </form>
+                        <?php if(isset($template_maquinas) && !empty($template_maquinas)): ?>
                         <table class="general" id='tablaMaquinas'>
                             <thead>
                                 <tr>
@@ -61,31 +60,36 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($template_maquinas as $maquina): ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $maquina['id']; ?>
-                                        </td>
-                                        <td>
-                                            <a href="<?php echo $global_ruta_web; ?>/src/ctrl/maquina/maquina_detalles.ctrl.php?id=<?php echo $maquina['id']; ?>&fecha_cambio=<?php echo $maquina['fecha_cambio']; ?>">
-                                                <?php echo $maquina['nombre']; ?>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <?php echo $maquina['nombre_sistema_operativo']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $maquina['fecha_alta']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $maquina['fecha_sincronizacion']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $maquina['fecha_cambio']; ?>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        <?php echo $maquina['id']; ?>
+                                    </td>
+                                    <td>
+                                        <a href="<?php echo $global_ruta_web; ?>/src/ctrl/maquina/maquina_detalles.ctrl.php?id=<?php echo $maquina['id']; ?>&fecha_cambio=<?php echo $maquina['fecha_cambio']; ?>">
+                                            <?php echo $maquina['nombre']; ?>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <?php echo $maquina['nombre_sistema_operativo']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $maquina['fecha_alta']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $maquina['fecha_sincronizacion']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $maquina['fecha_cambio']; ?>
+                                    </td>
+                                </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
+                        <?php else: ?>
+                        <div class="mensaje mensajeAlerta">
+                            No existen máquinas en el sistema, sincronize para actualziar el listado
+                        </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

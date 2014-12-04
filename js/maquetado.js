@@ -10,20 +10,16 @@ $(document).ready(function() {
     });
     //btn ocultar mostrar menu
     $("#seccionOcultarMostrarMenu").click(function() {
-        if ($("#menuPrincipal").hasClass("menuOculto")) {
+        if ($("#menuPrincipal").hasClass("oculto")) {
             //mostrar
-            $("#contenido").css("width", "85%");
-            $("#menuPrincipal").css("width", "15%");
-            $("#menuPrincipal .spnTextMenu").show();
-            $("#menuPrincipal").removeClass("menuOculto");
+            $("#menuPrincipal").removeClass("oculto");
+            $("#contenido").removeClass("expandido");
             $(this).children(".icono").removeClass("fa-arrow-right");
             $(this).children(".icono").addClass("fa-arrow-left");
         } else {
             //ocultar
-            $("#contenido").css("width", "97%");
-            $("#menuPrincipal").css("width", "3%");
-            $("#menuPrincipal .spnTextMenu").hide();
-            $("#menuPrincipal").addClass("menuOculto");
+            $("#menuPrincipal").addClass("oculto");
+            $("#contenido").addClass("expandido");
             $(this).children(".icono").removeClass("fa-arrow-left");
             $(this).children(".icono").addClass("fa-arrow-right");
         }

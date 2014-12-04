@@ -126,12 +126,24 @@ main{
     box-shadow: inset 0px 0px 8px 1px rgba(0,0,0,0.4);
     transition: width 0.2s;
 }
+#menuPrincipal.oculto{
+    width:3%;
+}
+#menuPrincipal .spnTextMenu{
+    display:inline;
+}
+#menuPrincipal.oculto .spnTextMenu{
+    display:none;
+}
 #menuPrincipal ul{
     list-style-type: none;
 }
 #menuPrincipal ul li .icono{
     /*float:right;*/
     padding-right:10px;
+}
+#menuPrincipal ul li{
+    overflow-x: hidden;
 }
 #menuPrincipal ul li:not(:first-child){
     border-top: 1px solid rgba(255,255,255,0.2)
@@ -163,6 +175,9 @@ main{
     overflow-y: scroll;
     padding: 10px;
     box-sizing: border-box;
+}
+#contenido.expandido{
+    width:97%;
 }
 .seccion{
     width: 100%;
