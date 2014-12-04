@@ -1,4 +1,4 @@
-<aside id="menuPrincipal">
+<aside id="menuPrincipal" <?php if (Sesion::get_instancia()->get_dato("ocultar_menu") == "ocultar") echo "class='oculto'"; ?>>
     <ul>
         <li>
             <a href="#" id="btnSincronizar"><i class="fa fa-refresh fa-fw icono"></i><span class="spnTextMenu">Sincronizar</span></a>

@@ -233,4 +233,15 @@ class Sesion {
         return $this->_ultima_web;
     }
 
+    public function set_dato($clave, $valor) {
+        $_SESSION[$clave] = $valor;
+    }
+
+    public function get_dato($clave) {
+        if (isset($_SESSION[$clave])) {
+            return $_SESSION[$clave];
+        }
+        return null;
+    }
+
 }
