@@ -36,28 +36,30 @@
                                 </tr>
                             </table>
                         </form>
-                        <table class="general" id="tablaComponentes">
-                            <thead>
-                                <tr>
-                                    <?php foreach ($tamplate_nombres_columnas as $nombre_columna) : ?>
-                                        <td>
-                                            <?php echo $nombre_columna; ?>
-                                        </td>
-                                    <?php endforeach; ?>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($template_componentes as $datos_componente) : ?>
+                        <?php if (isset($template_componentes) && !empty($template_componentes)): ?>
+                            <table class="general" id="tablaComponentes">
+                                <thead>
                                     <tr>
-                                        <?php foreach ($datos_componente as $dato_componente) : ?>
+                                        <?php foreach ($tamplate_nombres_columnas as $nombre_columna) : ?>
                                             <td>
-                                                <?php echo $dato_componente; ?>
+                                                <?php echo $nombre_columna; ?>
                                             </td>
                                         <?php endforeach; ?>
                                     </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($template_componentes as $datos_componente) : ?>
+                                        <tr>
+                                            <?php foreach ($datos_componente as $dato_componente) : ?>
+                                                <td>
+                                                    <?php echo $dato_componente; ?>
+                                                </td>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
