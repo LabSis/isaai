@@ -215,3 +215,8 @@ table.general tbody tr:last-child td:last-child{
 .iconoBoton:hover{
     cursor:pointer;
 }
+/* Paginaion */
+div.pagina{
+    display:inline;
+    margin:2px;
+}

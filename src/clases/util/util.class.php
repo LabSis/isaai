@@ -88,5 +88,24 @@ class Util {
         }
         return "{$dia}/{$mes}/{$anio}";
     }
+    
+    /**
+     * Crea un conjunto paginado de elementos, dado el mismo conjunto completo 
+     * como parámetro
+     * @param array $conjunto Conjunto de elementos a paginar
+     * @param int $pagina_actual Página actual
+     * @param int $tamanio_pagina Cantidad de elementos a mostrar por página
+     * @return array Conjunto de elementos paginado, si no ha es posbile 
+     * realizar la paginación, devuelve un conjunto vacío
+     */
+    public static function paginar($conjunto, $pagina_actual, $tamanio_pagina) {
+        $resultado = array();
+        for ($i = 0; $i < count($conjunto); $i++) {
+            if ($i >= (($pagina_actual - 1) * $tamanio_pagina) && $i < ((($pagina_actual - 1) * $tamanio_pagina) + $tamanio_pagina)) {
+                $resultado[] = $conjunto[$i];
+            }
+        }
+        return $resultado;
+    }
 
 }
