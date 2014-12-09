@@ -5,6 +5,8 @@
         <!-- CSS -->
         <link href="<?php echo $global_ruta_web; ?>/css/maquina/maquinas.css" type="text/css" rel="stylesheet"/>
         <!-- JavaScript -->
+        <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+        <script src="<?php echo $global_ruta_web; ?>/js/maquina/maquinas.js" type="text/javascript"></script>
     </head>
     <body>
         <div class="data" id="dataRutaWeb"><?php echo $global_ruta_web; ?></div>
@@ -35,6 +37,59 @@
                                 </tr>
                             </table>
                         </form>
+                        <!-- Con Angular -->
+                        <div ng-app="" ng-controller="Maquina">
+                            <table class="general" id='tablaMaquinas'>
+                                <thead>
+                                    <tr>
+                                        <td>
+                                            Id máquina
+                                        </td>
+                                        <td>
+                                            Nombre
+                                        </td>
+                                        <td>
+                                            Sistema Operativo
+                                        </td>
+                                        <td>
+                                            Fecha alta
+                                        </td>
+                                        <td>
+                                            Fecha última sincronización
+                                        </td>
+                                        <td>
+                                            Fecha cambio
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="maquina in maquinas">
+                                        <td>
+                                            {{ maquina.id }}
+                                        </td>
+                                        <td>
+                                            <a href="<?php echo $global_ruta_web; ?>/src/ctrl/maquina/maquina_detalles.ctrl.php?id={{ maquina.id }}&fecha_cambio={{ maquina.fechaCambio }}">
+                                                {{ maquina.nombre }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {{ maquina.nombreSistemaOperativo }}
+                                        </td>
+                                        <td>
+                                            {{ maquina.fechaAlta }}
+                                        </td>
+                                        <td>
+                                            {{ maquina.fechaSincronizacion }}
+                                        </td>
+                                        <td>
+                                            {{ maquina.fechaCambio }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Fin con angular -->
+                        <!--
                         <?php if (isset($template_maquinas) && !empty($template_maquinas)): ?>
                             <table class="general" id='tablaMaquinas'>
                                 <thead>
@@ -91,6 +146,7 @@
                                 No existen máquinas en el sistema, sincronize para actualziar el listado
                             </div>
                         <?php endif; ?>
+                        -->
                     </div>
                 </div>
             </div>

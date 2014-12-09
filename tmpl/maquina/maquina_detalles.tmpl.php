@@ -102,6 +102,26 @@
                                     <?php endforeach; ?>
                                 </table>
                             <?php endforeach; ?>
+                            <h3 class="titulo subtituloSeccion">Sincronizaciones</h3>
+                            <table class='general'>
+                                <thead>
+                                    <tr>
+                                        <td>
+                                            Fecha sincronización
+                                        </td>
+                                        <td>
+                                            Cambios
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         <?php endif; ?>
                     </div>
                 </div>
