@@ -10,6 +10,11 @@ $consulta = "SELECT m.id, so.nombre as nombre_sistema_operativo, m.nombre, m.fec
         . "FROM maquinas m "
         . "INNER JOIN sistemas_operativos so "
         . "ON m.id_sistema_operativo = so.id "
+        . "WHERE m.fecha_sincronizacion = ("
+        . "     SELECT MAX(m2.fecha_sincronizacion) "
+        . "     FROM maquinas m2 "
+        . "     WHERE m2.id = m.id "
+        . ")"
         . "ORDER BY m.nombre ASC";
 $resultados = $conexion->consultar_simple($consulta);
 $tamanio_pagina = (int) (isset($_GET['tamanio_pagina']) ? $_GET['tamanio_pagina'] : 5);
@@ -17,7 +22,5 @@ $cantidad_resultados = count($resultados);
 $cantidad_paginas = (int) ceil($cantidad_resultados / $tamanio_pagina);
 $pagina_actual = (int) (isset($_GET['pagina']) ? $_GET['pagina'] : 1);
 $template_maquinas = Util::paginar($resultados, $pagina_actual, $tamanio_pagina);
-
-//Out::print_array($template_maquinas);
 
 require_once $global_ruta_servidor . '/tmpl/maquina/maquinas.tmpl.php';

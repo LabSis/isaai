@@ -24,7 +24,7 @@ class PlacaRedIsaai implements ComponenteMaterializable {
                     . "pr.mascara, pr.gateway, pr.descripcion, pr.tipo, pr.velocidad, "
                     . "pr.fecha_cambio FROM placas_red AS pr "
                     . "INNER JOIN maquinas AS maquina ON "
-                    . "pr.id_maquina = maquina.id "
+                    . "pr.id_maquina = maquina.id AND pr.fecha_cambio = maquina.fecha_cambio "
                     . "WHERE pr.fecha_cambio = ("
                     . " SELECT MAX(pr2.fecha_cambio) FROM placas_red AS pr2 "
                     . " WHERE pr2.id_maquina = maquina.id"

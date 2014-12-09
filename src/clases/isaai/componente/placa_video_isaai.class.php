@@ -22,7 +22,7 @@ class PlacaVideoIsaai implements ComponenteMaterializable {
             $consulta = "SELECT pv.nombre, pv.memoria, pv.chipset, "
                     . " pv.fecha_cambio FROM placas_video AS pv "
                     . "INNER JOIN maquinas AS maquina ON "
-                    . "pv.id_maquina = maquina.id "
+                    . "pv.id_maquina = maquina.id AND pv.fecha_cambio = maquina.fecha_cambio "
                     . " WHERE pv.fecha_cambio = ("
                     . " SELECT MAX(pv2.fecha_cambio) FROM placas_video AS pv2 "
                     . " WHERE pv2.id_maquina = maquina.id"

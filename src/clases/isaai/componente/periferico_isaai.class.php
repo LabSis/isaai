@@ -23,7 +23,7 @@ class PerifericoIsaai implements ComponenteMaterializable {
             $consulta = "SELECT p.nombre, p.fabricante, p.tipo, "
                     . "p.descripcion, p.interfaz, p.fecha_cambio FROM perifericos AS p "
                     . "INNER JOIN maquinas AS maquina ON "
-                    . "p.id_maquina = maquina.id "
+                    . "p.id_maquina = maquina.id AND p.fecha_cambio = maquina.fecha_cambio "
                     . "WHERE p.fecha_cambio = ("
                     . " SELECT MAX(p2.fecha_cambio) FROM perifericos AS p2 "
                     . " WHERE p2.id_maquina = maquina.id"

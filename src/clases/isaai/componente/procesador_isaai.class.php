@@ -19,8 +19,9 @@ class ProcesadorIsaai implements ComponenteMaterializable {
         $procesadores = array();
         if (empty($resultados)) {
             $consulta = "SELECT p.tipo, p.velocidad, p.nucleos FROM procesadores AS p "
-                    . "INNER JOIN maquinas AS maquina ON "
-                    . "p.id_maquina = maquina.id WHERE p.fecha_cambio = ( "
+                    . "INNER JOIN maquinas AS maquina "
+                    . "ON p.id_maquina = maquina.id AND p.fecha_cambio = maquina.fecha_cambio "
+                    . "WHERE p.fecha_cambio = ( "
                     . "SELECT MAX(p2.fecha_cambio) FROM procesadores AS p2 "
                     . "WHERE p2.id_maquina = maquina.id )";
             $resultados = $conexion->consultar_simple($consulta);

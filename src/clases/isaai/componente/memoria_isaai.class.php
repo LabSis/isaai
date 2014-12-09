@@ -23,7 +23,7 @@ class MemoriaIsaai implements ComponenteMaterializable {
               $consulta = "SELECT m.capacidad, m.tipo, m.descripcion, m.numero_serial, "
                 . "m.numero_ranura, m.velocidad, m.nombre, m.fecha_cambio FROM memorias AS m "
                 . "INNER JOIN maquinas AS maquina ON "
-                . "m.id_maquina = maquina.id "
+                . "m.id_maquina = maquina.id AND m.fecha_cambio = maquina.fecha_cambio "
                 . "WHERE m.fecha_cambio = ("
                     . " SELECT MAX(m2.fecha_cambio) FROM memorias AS m2 "
                     . " WHERE m2.id_maquina = maquina.id"

@@ -21,14 +21,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        Cantidad de máquinas por página:
-                                        <select name="tamanio_pagina">
-                                            <option value="10">10</option>
-                                            <option value="20">20</option>
-                                            <option value="50">50</option>
-                                        </select>
-                                    </td>
-                                    <td>
+                                        Páginas:
                                         <?php if (!empty($template_maquinas) && $cantidad_paginas > 1): ?>
                                             <?php for ($p = 1; $p <= $cantidad_paginas; $p++): ?>
                                                 <div class="pagina">
@@ -38,9 +31,6 @@
                                                 </div>
                                             <?php endfor; ?>
                                         <?php endif; ?>
-                                    </td>
-                                    <td>
-                                        <input type="submit" value="Paginar"/>
                                     </td>
                                 </tr>
                             </table>

@@ -22,7 +22,7 @@ class PlacaSonidoIsaai implements ComponenteMaterializable {
             $consulta = "SELECT ps.nombre, ps.fabricante, "
                     . "ps.fecha_cambio FROM placas_sonido AS ps "
                     . "INNER JOIN maquinas AS maquina ON "
-                    . "ps.id_maquina = maquina.id "
+                    . "ps.id_maquina = maquina.id AND ps.fecha_cambio = maquina.fecha_cambio "
                     . "WHERE ps.fecha_cambio = ("
                     . " SELECT MAX(ps2.fecha_cambio) FROM placas_sonido AS ps2 "
                     . " WHERE ps2.id_maquina = maquina.id"
