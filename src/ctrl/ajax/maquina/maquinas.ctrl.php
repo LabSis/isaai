@@ -20,7 +20,7 @@ $consulta = "SELECT m.id, so.nombre as nombre_sistema_operativo, m.nombre, m.fec
 $resultados = $conexion->consultar_simple($consulta);
 
 //parametros paginacion
-$tamanio_pagina = (int) (isset($_REQUEST['tamanio_pagina']) ? $_REQUEST['tamanio_pagina'] : 5);
+$tamanio_pagina = (int) (isset($_REQUEST['tamanio_pagina']) ? $_REQUEST['tamanio_pagina'] : 10);
 $cantidad_resultados = count($resultados);
 $cantidad_paginas = (int) ceil($cantidad_resultados / $tamanio_pagina);
 $pagina_actual = (int) (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);

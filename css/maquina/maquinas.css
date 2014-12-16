@@ -6,6 +6,9 @@
     width:95%;
     margin:10px auto;
 }
+#tablaMaquinas thead td:hover{
+    cursor:pointer;
+}
 .pagina:hover{
     cursor:pointer;
 }

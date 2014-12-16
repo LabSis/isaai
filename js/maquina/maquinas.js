@@ -2,7 +2,9 @@ $(document).ready(function() {
 
 
 });
-function Maquina($scope, $http) {
+function ControladorMaquinas($scope, $http) {
+    $scope.ordenTabla = "id";
+    $scope.ordenInvertido = false;
     $scope.maquinas = [];
     $scope.criteriosOrdenacion = [
         {clave: "id", valor: "ID"},
@@ -26,4 +28,8 @@ function Maquina($scope, $http) {
         $scope.actualizar({criterio_ordenacion: $scope.criterioOrdenacionSeleccionado.clave});
     };
     $scope.actualizar({});
+    $scope.ordenarCabecera = function(orden) {
+        $scope.ordenTabla = orden;
+        $scope.ordenInvertido = !$scope.ordenInvertido;
+    };
 }
