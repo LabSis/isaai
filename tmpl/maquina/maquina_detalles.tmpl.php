@@ -102,6 +102,8 @@
                                     <?php endforeach; ?>
                                 </table>
                             <?php endforeach; ?>
+                            <!-- Sincronizaciones -->
+                            <!--
                             <h3 class="titulo subtituloSeccion">Sincronizaciones</h3>
                             <table class='general'>
                                 <thead>
@@ -122,6 +124,7 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            -->
                         <?php endif; ?>
                     </div>
                 </div>

@@ -19,6 +19,8 @@
                         Todas las máquinas
                     </h2>
                     <div class='contenidoSeccion'>
+                        <!--
+                        Paginacion
                         <form action="<?php echo $global_ruta_web; ?>/src/ctrl/maquina/maquinas.ctrl.php" method="get">
                             <table>
                                 <tr>
@@ -37,8 +39,30 @@
                                 </tr>
                             </table>
                         </form>
+                        -->
                         <!-- Con Angular -->
                         <div ng-app="" ng-controller="Maquina">
+                            <table>
+                                <tr>
+                                    <td>
+                                        Páginas:
+                                        <div class="pagina" ng-repeat="p in [1,2,3,4,5]">
+                                            <a ng-click="paginar(p)">
+                                                {{ p }}
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Orden:
+                                        <select ng-model="criterioOrdenacionSeleccionado" 
+                                                ng-options="criterioOrdenacion as criterioOrdenacion.valor for criterioOrdenacion in criteriosOrdenacion"
+                                                ng-change="ordenar()">
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
                             <table class="general" id='tablaMaquinas'>
                                 <thead>
                                     <tr>
