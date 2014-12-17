@@ -43,17 +43,16 @@ class Rol {
         $this->_descripcion = $_descripcion;
     }
 
-    public static function determinar_roles_a_enviar($tipo_cambio) {
+    public static function determinar_roles_mensaje($tipo_cambio) {
         $roles = array();
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $consulta = "SELECT r.id, r.nombre, r.descripcion "
                 . "FROM roles AS r INNER JOIN roles_x_tipo_cambio AS rtc "
                 . "ON r.id = rtc.id_rol "
-                . "WHERE rtc.id_tipo_cambio = {$tipo_cambio->get_id()}";
+                . "WHERE rtc.id_tipo_cambio = {$tipo_cambio->get_id()} and rtc.permiso = true";
         $resultados = $conexion->consultar_simple($consulta);
         for ($i = 0; $i < count($resultados); $i++) {
             $rol = new Rol($resultados[$i]['id'], $resultados[$i]['nombre'], $resultados[$i]['descripcion']);
-            $rol ->set_descripcion($tipo_cambio->get_nombre());
             $roles[] = $rol;
         }
         return $roles;

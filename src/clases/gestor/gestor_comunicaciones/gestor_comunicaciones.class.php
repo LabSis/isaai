@@ -14,37 +14,35 @@ class GestorComunicaciones {
      * @param array de \Alertador Es un alertador.
      */
     public function alertar($lista_cambios, $alertadores) {
+        $mensajes_x_cambio = array();
         for ($i = 0; $i < count($lista_cambios); $i++) {
-            for ($j = 0; $j < count($alertadores); $j++) {
-                //array tipo de cambios
-                $tipos_cambios = $this->determinar_tipo_cambio($lista_cambios[$i]);
-                //deberia agregar por cada tipo de cambio mas de un rol
-                $roles_comunicar = array();
-                foreach ($tipos_cambios as $tipo_cambio) {
-                    $roles_actuales = $this->determinar_roles_a_enviar($tipo_cambio);
-                    foreach ($roles_actuales as $rol_actual) {
-                        //if (!in_array($rol_actual, $roles_comunicar, true)) {
-                        //    $roles_comunicar[] = $rol_actual;
-                        //}
-                        if (count($roles_comunicar) == 0) {
-                            $roles_comunicar[] = $rol_actual;
-                        } else {
-                            $existe = false;
-                            foreach ($roles_comunicar as $rol_comunicar) {
-                                if ($rol_comunicar->get_id() == $rol_actual->get_id()) {
-                                    $mensaje_actual_rol = $rol_comunicar->get_descripcion() . "<br/>" . $rol_actual->get_descripcion();
-                                    $rol_comunicar->set_descripcion($mensaje_actual_rol);
-                                    $existe = true;
-                                }
-                            }
-                            if (!$existe) {
-                                $roles_comunicar[] = $rol_actual;
-                            }
-                        }
-                    }
+            //array tipo de cambios
+            $mensaje = new MensajeCambio();
+            $tipos_cambios = $this->determinar_tipo_cambio($lista_cambios[$i]);
+            //deberia agregar por cada tipo de cambio mas de un rol
+            $tipos_cambio_x_rol = array();
+            foreach ($tipos_cambios as $tipo_cambio) {
+                $roles_x_tipo_cambio = $this->determinar_roles_mensaje($tipo_cambio);
+                foreach ($roles_x_tipo_cambio as $rol_actual) {
+                    //indice del array por nombre de rol, seria mejor por ID de rol.
+                    $tipos_cambio_x_rol[$rol_actual->get_id()][] = $tipo_cambio;
                 }
-                $alertadores[$j]->alertar($lista_cambios[$i], $roles_comunicar);
             }
+            $mensaje->set_cambio($lista_cambios[$i]);
+            $mensaje->set_rol_x_tipos_cambio($tipos_cambio_x_rol);
+            $mensajes_x_cambio[] = $mensaje;
+        }
+        //Out::print_array($mensajes);
+        $mensajes_x_usuarios = array();
+        foreach ($mensajes_x_cambio as $mensaje) {
+            $tipos_cambio_x_roles = $mensaje->get_rol_x_tipos_cambio();            
+            foreach ($tipos_cambio_x_roles as $tipos_cambio_x_rol) {
+                $usuarios_notificar = $this->determinar_usuarios_a_enviar(key($tipos_cambio_x_roles));  
+                //falta recorrer mensajes_x_cambios y armar el array que contendra a los objetos mensaje_usuario
+            }          
+        }
+        foreach ($alertadores as $alertador) {
+            $alertador->alertar($mensajes_x_usuarios);
         }
     }
 
@@ -65,8 +63,12 @@ class GestorComunicaciones {
      * @param \TipoCambio $tipo_cambio
      * @return Array de \Rol
      */
-    public function determinar_roles_a_enviar($tipo_cambio) {
-        return Rol::determinar_roles_a_enviar($tipo_cambio);
+    public function determinar_roles_mensaje($tipo_cambio) {
+        return Rol::determinar_roles_mensaje($tipo_cambio);
+    }
+
+    public function determinar_usuarios_a_enviar($rol) {
+        return Usuario::determinar_usuarios_a_enviar($rol);
     }
 
 }

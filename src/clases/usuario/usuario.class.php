@@ -119,7 +119,7 @@ class Usuario {
      */
     public static function insertar($nuevo_usuario) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
-        //puedo generar la fecha de alta aca????
+//puedo generar la fecha de alta aca????
         $nombre_usuario = $nuevo_usuario->get_nombre_usuario();
         $clave_usuario = $nuevo_usuario->get_clave_usuario();
         $id_rol = $nuevo_usuario->get_rol();
@@ -136,6 +136,32 @@ class Usuario {
                 . $apellido . ", " . $email . ", " . $telefono . ", " . $direccion . ", " . $fecha_alta . ", NULL)";
 
         return $conexion->insertar_simple($sql);
+    }
+
+    /**
+     * Este método recibirá un objeto rol, y devolverá un array de usuarios que 
+     * esten registrados en la base de datos y que pertenezcan a ese rol.Cada 
+     * usuario tendrá cargado solo nombre_usuario, nombre, apellido, email y 
+     * telefono, que son los atributos mínimos necesarios para enviarles notificaciones.
+     * @param type $rol
+     */
+    public static function determinar_usuarios_a_enviar($id_rol) {
+        $usuarios = array();
+        $conexion = Conexion::get_instacia(CONEXION_ISAAI);
+        $consulta = "SELECT u.nombre_usuario, u.nombre, u.apellido, u.email, u.telefono "
+                . "FROM usuarios AS u INNER JOIN roles AS r "
+                . "ON u.id_rol ={$id_rol}";
+        $resultado = $conexion->consultar_simple($consulta);
+        for ($i = 0; $i < count($resultado); $i++) {
+            $usuario = new Usuario();
+            $usuario->set_nombre_usuario($resultado[$i]['nombre_usuario']);
+            $usuario->set_nombre($resultado[$i]['nombre']);
+            $usuario->set_apellido($resultado[$i]['apellido']);
+            $usuario->set_email($resultado[$i]['email']);
+            $usuario->set_telefono($resultado[$i]['telefono']);
+            $usuarios[] = $usuario;
+        }
+        return $usuarios;
     }
 
 }

@@ -226,10 +226,10 @@ INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Placas de sonido", "Camb
 INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Placas de video", "Cambios de palcas video");
    
 /* Permisos del Administrador*/
-INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,1,true);
-INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,2,true);
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,1,false);
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,2,false);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,3,true);
-INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,4,true);
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,4,false);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,5,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,6,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,7,true);

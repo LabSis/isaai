@@ -9,8 +9,8 @@
 interface Alertador {
     /**
      * Este método debe generar la alerta por el medio correspondiente.
-     * @param \Cambio $cambio Es el cambio que debe alertar.
-     * @param \Rol Son los roles a los cuales se va a alertar.
+     * @param \Mensaje $mensajes Es un colección de mensajes, cada uno contiene 
+     * el cambio, los roles a los cuales se debe alertar y con sus tipos de cambio.
      */
-    public function alertar($cambio, $roles);
+    public function alertar($mensajes_usuarios);
 }
