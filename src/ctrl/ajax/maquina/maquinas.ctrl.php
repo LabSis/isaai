@@ -25,12 +25,26 @@ $cantidad_resultados = count($resultados);
 $cantidad_paginas = (int) ceil($cantidad_resultados / $tamanio_pagina);
 $pagina_actual = (int) (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
 
+//la salida originalmente era una array de maquinas cuyo length es igual al tamanio_pagina
+//por lo que era capturado desde el js de angular de forma directa para setear el array de maquinas
+//sin embargo, lo que necesito para paginar es la cantidad total de resultados.
+//Esto se puede solucionar recibiendo todas (TODAS) los resultados de la base de datos
+//y paginar todo desde el propio js, esto cargaria mucho la memoria del navegador
+//por eso se decidio hacer que la salida devuelva tambien datos de configuracion del angular
+//como ser la cantidad de resultados.
 $salida = '';
 if (!empty($resultados)) {
     //paginacion
     $resultados = Util::paginar($resultados, $pagina_actual, $tamanio_pagina);
     //armo la salida de objetos json
-    $salida = "[";
+    //datos de configuration
+    $salida = '{"config":{'.PHP_EOL;
+    $salida .= '"cantidadResultados": "'.$cantidad_resultados.'",' . PHP_EOL;
+    $salida .= '"cantidadPaginas": "'.$cantidad_paginas.'"' . PHP_EOL;
+    $salida .= '},' . PHP_EOL;
+    $salida .= '"datos":' . PHP_EOL;
+    //datos de maquinas
+    $salida .= "[";
     foreach ($resultados as $resultado) {
         $salida .= '{' . PHP_EOL;
         $salida .= '"id" : "' . $resultado['id'] . '",' . PHP_EOL;
@@ -43,6 +57,7 @@ if (!empty($resultados)) {
         $salida .= ',';
     }
     $salida = rtrim($salida, ',');
-    $salida .= ']';
+    $salida .= ']' .PHP_EOL;
+    $salida .= '}';
 }
 echo $salida;

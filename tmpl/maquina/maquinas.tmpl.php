@@ -46,7 +46,7 @@
                                 <tr>
                                     <td>
                                         Páginas:
-                                        <div class="pagina" ng-repeat="p in [1, 2, 3, 4, 5]">
+                                        <div class="pagina" ng-repeat="p in paginado">
                                             <a ng-click="paginar(p)">
                                                 {{ p }}
                                             </a>
