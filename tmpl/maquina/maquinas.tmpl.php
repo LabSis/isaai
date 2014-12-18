@@ -48,7 +48,12 @@
                                         Páginas:
                                         <div class="pagina" ng-repeat="p in paginado">
                                             <a ng-click="paginar(p)">
-                                                {{ p }}
+                                                <span style="font-weight: bold" ng-if="p == params.paginaActual">
+                                                    {{ p }}
+                                                </span>
+                                                <span ng-if="p != params.paginaActual">
+                                                    {{ p }}
+                                                </span>
                                             </a>
                                         </div>
                                     </td>

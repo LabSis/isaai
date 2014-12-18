@@ -3,7 +3,7 @@
 require_once '../../../../config.php';
 
 //parametros orden
-$criterio_ordenacion = isset($_REQUEST['criterio_ordenacion']) ? $_REQUEST['criterio_ordenacion'] : 'nombre';
+$criterio_ordenacion = isset($_REQUEST['criterioOrdenacion']) ? $_REQUEST['criterioOrdenacion'] : 'nombre';
 $orden = isset($_REQUEST['orden']) ? $_REQUEST['orden'] : 'ASC';
 
 $conexion = Conexion::get_instacia(CONEXION_ISAAI);
@@ -17,13 +17,14 @@ $consulta = "SELECT m.id, so.nombre as nombre_sistema_operativo, m.nombre, m.fec
         . "     WHERE m2.id = m.id "
         . ")"
         . "ORDER BY {$criterio_ordenacion} {$orden}";
+        //echo $consulta;
 $resultados = $conexion->consultar_simple($consulta);
 
 //parametros paginacion
-$tamanio_pagina = (int) (isset($_REQUEST['tamanio_pagina']) ? $_REQUEST['tamanio_pagina'] : 10);
+$tamanio_pagina = (int) (isset($_REQUEST['tamanioPagina']) ? $_REQUEST['tamanioPagina'] : 10);
 $cantidad_resultados = count($resultados);
 $cantidad_paginas = (int) ceil($cantidad_resultados / $tamanio_pagina);
-$pagina_actual = (int) (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
+$pagina_actual = (int) (isset($_REQUEST['paginaActual']) ? $_REQUEST['paginaActual'] : 1);
 
 //la salida originalmente era una array de maquinas cuyo length es igual al tamanio_pagina
 //por lo que era capturado desde el js de angular de forma directa para setear el array de maquinas
@@ -40,7 +41,8 @@ if (!empty($resultados)) {
     //datos de configuration
     $salida = '{"config":{'.PHP_EOL;
     $salida .= '"cantidadResultados": "'.$cantidad_resultados.'",' . PHP_EOL;
-    $salida .= '"cantidadPaginas": "'.$cantidad_paginas.'"' . PHP_EOL;
+    $salida .= '"cantidadPaginas": "'.$cantidad_paginas.'",' . PHP_EOL;
+    $salida .= '"consulta": "'.$consulta.'"';
     $salida .= '},' . PHP_EOL;
     $salida .= '"datos":' . PHP_EOL;
     //datos de maquinas
