@@ -28,6 +28,9 @@ class GestorComunicaciones {
                     $tipos_cambio_x_rol[$rol_actual->get_id()][] = $tipo_cambio;
                 }
             }
+            //$tipos_cambio_x_rol es un array cuyos indices son los id de roles
+            //y cuyo valor para cada indice rol e sun array de tipos de cambio 
+            //que sucedieron que registro el cambio actual
             $mensaje->set_cambio($lista_cambios[$i]);
             $mensaje->set_rol_x_tipos_cambio($tipos_cambio_x_rol);
             $mensajes_x_cambio[] = $mensaje;
@@ -67,8 +70,8 @@ class GestorComunicaciones {
         return Rol::determinar_roles_mensaje($tipo_cambio);
     }
 
-    public function determinar_usuarios_a_enviar($rol) {
-        return Usuario::determinar_usuarios_a_enviar($rol);
+    public function determinar_usuarios_a_enviar($id_rol) {
+        return Usuario::determinar_usuarios_a_enviar($id_rol);
     }
 
 }

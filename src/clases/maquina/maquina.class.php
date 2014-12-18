@@ -312,6 +312,7 @@ class Maquina {
         $consulta = "UPDATE maquinas SET fecha_sincronizacion = '{$this->_fecha_sincronizacion}' "
                 . "WHERE id='{$this->_id}' AND fecha_sincronizacion = '{$ultima_fecha_sincronizacion}'";
         //. "(SELECT MAX(fecha_sincronizacion) FROM maquinas AS WHERE id = '{$this->_id}')";
+                Out::println($consulta);
         return $conexion->actualizar_simple($consulta);
     }
 

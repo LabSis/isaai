@@ -121,7 +121,7 @@ class TipoCambio {
              */
             if ($cantidad_cambios >= 1) {
                 $tipo_cambio = new TipoCambio();
-                $tipo_cambio->set_id(1);
+                $tipo_cambio->set_id(1);//cualquier cambio
                 $consulta = "SELECT * FROM tipos_cambio WHERE id = 1";
                 $resultados = $conexion->consultar_simple($consulta);
                 if (!empty($resultados)) {

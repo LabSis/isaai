@@ -17,7 +17,7 @@ function ControladorMaquinas($scope, $http) {
     $scope.cantidadTotalMaquinas;
     //parametros de la consulta al ajax
     $scope.params = {
-        pagina: 1,
+        paginaActual: 1,
         tamanioPagina: 8,
         criterioOrdenacion: $scope.criteriosOrdenacion[0].clave //id
     };

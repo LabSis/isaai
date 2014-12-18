@@ -14,6 +14,7 @@
             <?php require_once dirname(__FILE__) . '/../marco/menu_principal.tmpl.php' ?>
             <div id="contenido">
                 <div class='seccion'>
+                    <?php if(isset($maquina)):?>
                     <h2 class='titulo tituloSeccion'>
                         Máquina: <?php echo $maquina->get_nombre(); ?>
                     </h2>
@@ -117,16 +118,35 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php foreach($template_sincronzaciones as $sincronizacion):?>
                                     <tr>
                                         <td>
-                                            
+                                            <?php echo $sincronizacion; ?>
+                                        </td>
+                                        <td>
+                                            ...
                                         </td>
                                     </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                             -->
                         <?php endif; ?>
                     </div>
+                    <?php else:?>
+                    <h2 class='titulo tituloSeccion'>
+                        Máquina Inexistente
+                    </h2>
+                    <div class='contenidoSeccion'>
+                        <div class="mensaje mensajeAlerta">
+                            <?php if(isset($_GET['id'])):?>
+                                No existe la máquina con id '<?php echo $_GET['id'];?>
+                            <?php else:?>
+                                No existe tal máquina
+                            <?php endif;?>
+                        </div>
+                    </div>
+                    <?php endif;?>
                 </div>
             </div>
             <div class="clearer"></div>

@@ -23,6 +23,7 @@ $(document).ready(function() {
                     msj = "Ninguna máquina ha cambiado";
                 } else {
                     if (isNaN(cantMaquinasCambiadas)) {
+                        //console.log(respuesta);
                         msj = "Muchas máquinas han cambiado";
                     } else {
                         msj = cantMaquinasCambiadas + " máquinas han cambiado";

@@ -19,163 +19,87 @@
                         Todas las máquinas
                     </h2>
                     <div class='contenidoSeccion'>
-                        <!--
-                        Paginacion
-                        <form action="<?php echo $global_ruta_web; ?>/src/ctrl/maquina/maquinas.ctrl.php" method="get">
-                            <table>
-                                <tr>
-                                    <td>
-                                        Páginas:
-                        <?php if (!empty($template_maquinas) && $cantidad_paginas > 1): ?>
-                            <?php for ($p = 1; $p <= $cantidad_paginas; $p++): ?>
-                                                        <div class="pagina">
-                                                            <a href="<?php echo $global_ruta_web; ?>/src/ctrl/maquina/maquinas.ctrl.php?pagina=<?php echo $p; ?>">
-                                <?php echo $p; ?>
-                                                            </a>
-                                                        </div>
-                            <?php endfor; ?>
-                        <?php endif; ?>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                        -->
-                        <!-- Con Angular -->
                         <div ng-app="" ng-controller="ControladorMaquinas">
-                            <table>
-                                <tr>
-                                    <td>
-                                        Páginas:
-                                        <div class="pagina" ng-repeat="p in paginado">
-                                            <a ng-click="paginar(p)">
-                                                <span style="font-weight: bold" ng-if="p == params.paginaActual">
-                                                    {{ p }}
-                                                </span>
-                                                <span ng-if="p != params.paginaActual">
-                                                    {{ p }}
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Orden:
-                                        <select ng-model="criterioOrdenacionSeleccionado" 
-                                                ng-options="criterioOrdenacion as criterioOrdenacion.valor for criterioOrdenacion in criteriosOrdenacion"
-                                                ng-change="ordenar()">
-                                        </select>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table class="general" id='tablaMaquinas'>
-                                <thead>
+                            <div ng-show='maquinas.length > 0'>
+                                <table>
                                     <tr>
-                                        <td ng-click="ordenarCabecera('id')">
-                                            Id máquina
-                                        </td>
-                                        <td ng-click="ordenarCabecera('nombre')">
-                                            Nombre
-                                        </td>
-                                        <td ng-click="ordenarCabecera('nombreSistemaOperativo')">
-                                            Sistema Operativo
-                                        </td>
-                                        <td ng-click="ordenarCabecera('fechaAlta')">
-                                            Fecha alta
-                                        </td>
-                                        <td ng-click="ordenarCabecera('fechaSincronizacion')">
-                                            Fecha última sincronización
-                                        </td>
-                                        <td ng-click="ordenarCabecera('fechaCambio')">
-                                            Fecha cambio
+                                        <td>
+                                            Páginas:
+                                            <div class="pagina" ng-repeat="p in paginado">
+                                                <a ng-click="paginar(p)">
+                                                    <span style="font-weight: bold" ng-if="p == params.paginaActual">
+                                                        {{ p}}
+                                                    </span>
+                                                    <span ng-if="p != params.paginaActual">
+                                                        {{ p}}
+                                                    </span>
+                                                </a>
+                                            </div>
                                         </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="maquina in maquinas| orderBy : ordenTabla : ordenInvertido">
+                                    <tr>
                                         <td>
-                                            {{ maquina.id}}
-                                        </td>
-                                        <td>
-                                            <a href="<?php echo $global_ruta_web; ?>/src/ctrl/maquina/maquina_detalles.ctrl.php?id={{ maquina.id}}&fecha_cambio={{ maquina.fechaCambio}}">
-                                                {{ maquina.nombre}}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            {{ maquina.nombreSistemaOperativo}}
-                                        </td>
-                                        <td>
-                                            {{ maquina.fechaAlta}}
-                                        </td>
-                                        <td>
-                                            {{ maquina.fechaSincronizacion}}
-                                        </td>
-                                        <td>
-                                            {{ maquina.fechaCambio}}
+                                            Orden:
+                                            <select ng-model="criterioOrdenacionSeleccionado" 
+                                                    ng-options="criterioOrdenacion as criterioOrdenacion.valor for criterioOrdenacion in criteriosOrdenacion"
+                                                    ng-change="ordenar()">
+                                            </select>
                                         </td>
                                     </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- Fin con angular -->
-                        <!--
-                        <?php if (isset($template_maquinas) && !empty($template_maquinas)): ?>
-                                <table class="general" id='tablaMaquinas'>
+                                </table>
+                                <table class="general" id='tablaMaquinas' >
                                     <thead>
                                         <tr>
-                                            <td>
+                                            <td ng-click="ordenarCabecera('id')">
                                                 Id máquina
                                             </td>
-                                            <td>
+                                            <td ng-click="ordenarCabecera('nombre')">
                                                 Nombre
                                             </td>
-                                            <td>
+                                            <td ng-click="ordenarCabecera('nombreSistemaOperativo')">
                                                 Sistema Operativo
                                             </td>
-                                            <td>
+                                            <td ng-click="ordenarCabecera('fechaAlta')">
                                                 Fecha alta
                                             </td>
-                                            <td>
+                                            <td ng-click="ordenarCabecera('fechaSincronizacion')">
                                                 Fecha última sincronización
                                             </td>
-                                            <td>
+                                            <td ng-click="ordenarCabecera('fechaCambio')">
                                                 Fecha cambio
                                             </td>
                                         </tr>
                                     </thead>
                                     <tbody>
-                            <?php foreach ($template_maquinas as $maquina): ?>
-                                                <tr>
-                                                    <td>
-                                <?php echo $maquina['id']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <a href="<?php echo $global_ruta_web; ?>/src/ctrl/maquina/maquina_detalles.ctrl.php?id=<?php echo $maquina['id']; ?>&fecha_cambio=<?php echo $maquina['fecha_cambio']; ?>">
-                                <?php echo $maquina['nombre']; ?>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                <?php echo $maquina['nombre_sistema_operativo']; ?>
-                                                    </td>
-                                                    <td>
-                                <?php echo $maquina['fecha_alta']; ?>
-                                                    </td>
-                                                    <td>
-                                <?php echo $maquina['fecha_sincronizacion']; ?>
-                                                    </td>
-                                                    <td>
-                                <?php echo $maquina['fecha_cambio']; ?>
-                                                    </td>
-                                                </tr>
-                            <?php endforeach; ?>
+                                        <tr ng-repeat="maquina in maquinas| orderBy : ordenTabla : ordenInvertido">
+                                            <td>
+                                                {{ maquina.id}}
+                                            </td>
+                                            <td>
+                                                <a href="<?php echo $global_ruta_web; ?>/src/ctrl/maquina/maquina_detalles.ctrl.php?id={{ maquina.id}}&fecha_cambio={{ maquina.fechaCambio}}">
+                                                    {{ maquina.nombre}}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                {{ maquina.nombreSistemaOperativo}}
+                                            </td>
+                                            <td>
+                                                {{ maquina.fechaAlta}}
+                                            </td>
+                                            <td>
+                                                {{ maquina.fechaSincronizacion}}
+                                            </td>
+                                            <td>
+                                                {{ maquina.fechaCambio}}
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
-                        <?php else: ?>
-                                <div class="mensaje mensajeAlerta">
-                                    No existen máquinas en el sistema, sincronize para actualziar el listado
-                                </div>
-                        <?php endif; ?>
-                        -->
+                            </div>
+                            <div class='mensaje mensajeAlerta' ng-hide='maquinas.length > 0'>
+                                No exiten máquinas, sincronize manualmente para agregar las máquinas al sistema
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
