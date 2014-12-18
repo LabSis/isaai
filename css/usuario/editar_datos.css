@@ -1,0 +1,16 @@
+/* 
+    Created on : 18/12/2014, 15:32:49
+    Author     : Diego
+*/
+#tablaEditarDatos{
+    margin:10px auto;
+}
+.formulario tr td:nth-child(2n) input{
+    width: 260px;
+}
+.formulario select{
+    width: 100%;
+}
+#btnAceptar{
+    width: 100%;
+}

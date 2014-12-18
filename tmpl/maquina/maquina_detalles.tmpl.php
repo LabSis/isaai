@@ -57,6 +57,7 @@
                                     Fecha sincornización:
                                 </td>
                                 <td>
+                                    <!-- Habria que setear la ultima fecha de sincronizacion -->
                                     <?php echo $maquina->get_fecha_sincronizacion(); ?>
                                 </td>
                             </tr>

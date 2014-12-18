@@ -220,3 +220,11 @@ div.pagina{
     display:inline;
     margin:2px;
 }
+/* Formulario */
+/* .formulario se espera que sea una tabla de dos columnas y muchas filas */
+.formulario{
+    border-collapse: collapse;    
+}
+.formulario td{
+    padding: 4px;
+}

@@ -9,7 +9,9 @@
                 </p>
                 <ul id="menuSeccionUsuario">
                     <li>
-                        Editar datos
+                        <a href="<?php echo $global_ruta_web . "/src/ctrl/usuario/editar_datos.ctrl.php"; ?>">
+                            Editar datos
+                        </a>
                     </li>
                     <li>
                         Administrar cuentas
