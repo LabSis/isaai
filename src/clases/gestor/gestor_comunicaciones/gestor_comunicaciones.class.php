@@ -14,7 +14,7 @@ class GestorComunicaciones {
      * @param array de \Alertador Es un alertador.
      */
     public function alertar($lista_cambios, $alertadores) {
-        $mensajes_x_cambio = array();
+        $mensajes_x_cambios = array();
         for ($i = 0; $i < count($lista_cambios); $i++) {
             //array tipo de cambios
             $mensaje = new MensajeCambio();
@@ -33,17 +33,32 @@ class GestorComunicaciones {
             //que sucedieron que registro el cambio actual
             $mensaje->set_cambio($lista_cambios[$i]);
             $mensaje->set_rol_x_tipos_cambio($tipos_cambio_x_rol);
-            $mensajes_x_cambio[] = $mensaje;
+            $mensajes_x_cambios[] = $mensaje;
         }
-        //Out::print_array($mensajes);
+
         $mensajes_x_usuarios = array();
-        foreach ($mensajes_x_cambio as $mensaje) {
-            $tipos_cambio_x_roles = $mensaje->get_rol_x_tipos_cambio();            
+        foreach ($mensajes_x_cambios as $mensajes_x_cambio_actual) {
+            $tipos_cambio_x_roles = $mensajes_x_cambio_actual->get_rol_x_tipos_cambio();
             foreach ($tipos_cambio_x_roles as $tipos_cambio_x_rol) {
-                $usuarios_notificar = $this->determinar_usuarios_a_enviar(key($tipos_cambio_x_roles));  
-                //falta recorrer mensajes_x_cambios y armar el array que contendra a los objetos mensaje_usuario
-            }          
+                $id_rol_actual = array_search($tipos_cambio_x_rol, $tipos_cambio_x_roles);
+                $usuarios_notificar = $this->determinar_usuarios_a_enviar($id_rol_actual);
+                //recorre mensajes_x_cambios y armar el array que contendra a los objetos mensaje_usuario
+                foreach ($usuarios_notificar as $usuario_actual) {
+                    if (!array_key_exists($usuario_actual->get_nombre_usuario(), $mensajes_x_usuarios)) {
+                        $mensajes_x_usuario = new MensajeUsuario();
+                        $mensajes_x_usuario->set_usuario($usuario_actual);
+                        $mensajes_x_usuario->add_tipos_cambio_x_cambio($tipos_cambio_x_rol, $mensajes_x_cambio_actual->get_cambio());
+                        $mensajes_x_usuarios[$usuario_actual->get_nombre_usuario()] = $mensajes_x_usuario;
+                    } else {
+                        $mensajes_x_usuario = $mensajes_x_usuarios[$usuario_actual->get_nombre_usuario()];
+                        $mensajes_x_usuario->add_tipos_cambio_x_cambio($tipos_cambio_x_rol, $mensajes_x_cambio_actual->get_cambio());
+                        $mensajes_x_usuarios[$usuario_actual->get_nombre_usuario()] = $mensajes_x_usuario;
+                    }
+                }
+            }            
         }
+        echo 'Mensajes por usuario';
+        Out::print_array($mensajes_x_usuarios);
         foreach ($alertadores as $alertador) {
             $alertador->alertar($mensajes_x_usuarios);
         }

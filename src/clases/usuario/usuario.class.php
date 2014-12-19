@@ -149,8 +149,7 @@ class Usuario {
         $usuarios = array();
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $consulta = "SELECT u.nombre_usuario, u.nombre, u.apellido, u.email, u.telefono "
-                . "FROM usuarios AS u INNER JOIN roles AS r "
-                . "ON u.id_rol ={$id_rol}";
+                . "FROM usuarios AS u WHERE u.id_rol ={$id_rol}";
         $resultado = $conexion->consultar_simple($consulta);
         for ($i = 0; $i < count($resultado); $i++) {
             $usuario = new Usuario();
@@ -159,6 +158,7 @@ class Usuario {
             $usuario->set_apellido($resultado[$i]['apellido']);
             $usuario->set_email($resultado[$i]['email']);
             $usuario->set_telefono($resultado[$i]['telefono']);
+            $usuario->set_rol(new Rol($id_rol, null, null));
             $usuarios[] = $usuario;
         }
         return $usuarios;

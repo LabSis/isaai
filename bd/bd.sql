@@ -212,6 +212,8 @@ INSERT INTO roles (id, nombre, descripcion) VALUES (3, "Técnico", NULL);
 INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("diego","123",1,"Diego","Barrionuevo","santosdiegob@gmail.com","03517323132",NOW());
 INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("german","123",1,"Germán","Parisi","germannparisi@gmail.com","03515192675",NOW());
 INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("milagros","123",1,"Milagros","Zea Cárdenas","milyzc@gmail.com","03512610201",NOW());
+INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("josefina","123",2,"Josefina","Apaza","milyzc@gmail.com","03512610201",NOW());
+INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("Juan","123",3,"Juan","Paris","germannparisi@gmail.com","03515192675",NOW());
 
 INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Cualquier cambio", "Todos los cambios, sean máquinas nuevas o modificaciones en las máquinas actuales");
 INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Nuevas", "Sólo máquinas agregadas al sistema ISAAI");
@@ -251,7 +253,7 @@ INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (2,10,f
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (2,11,true);
 /* Permisos del Técnico */
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,1,false);
-INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,2,false);
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,2,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,3,false);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,4,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,5,false);
