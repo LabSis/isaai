@@ -95,7 +95,7 @@ class Sesion {
      */
     public function actualizar() {
         if ($this->activo()) {
-            $usuario_actualizado = Usuario::init($this->_usuario->get_id_usuario());
+            $usuario_actualizado = Usuario::materializar($this->_usuario->get_id());
             if (!is_null($usuario_actualizado)) {
                 $this->set_usuario($usuario_actualizado);
                 return true;

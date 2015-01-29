@@ -34,10 +34,10 @@ class Usuario {
         $this->_fecha_baja = NULL;
     }
 
-    public function get_id(){
+    public function get_id() {
         return $this->_id;
     }
-    
+
     public function get_nombre_usuario() {
         return $this->_nombre_usuario;
     }
@@ -77,8 +77,8 @@ class Usuario {
     public function get_fecha_baja() {
         return $this->_fecha_baja;
     }
-    
-    public function set_id($_id){
+
+    public function set_id($_id) {
         $this->_id = $_id;
     }
 
@@ -147,8 +147,8 @@ class Usuario {
 
         return $conexion->insertar_simple($sql);
     }
-    
-    public static function modificar($usuario){
+
+    public static function modificar($usuario) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $actualizacion = "UPDATE usuarios SET "
                 . "nombre_usuario = '{$usuario->get_nombre_usuario()}', "
@@ -189,6 +189,30 @@ class Usuario {
             $usuarios[] = $usuario;
         }
         return $usuarios;
+    }
+
+    public static function materializar($id) {
+        $conexion = Conexion::get_instacia(CONEXION_ISAAI);
+        $consulta = "SELECT id, nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, direccion, fecha_alta, fecha_baja "
+                . "FROM usuarios "
+                . "WHERE id = {$id} ";
+        $resultado = $conexion->consultar_simple($consulta);
+        if (!empty($resultado)) {
+            $usuario = new Usuario();
+            $usuario->set_id($resultado[0]['id']);
+            $usuario->set_nombre_usuario($resultado[0]['nombre_usuario']);
+            $usuario->set_clave_usuario($resultado[0]['clave_usuario']);
+            $usuario->set_rol(Rol::materializar($resultado[0]['id_rol']));
+            $usuario->set_nombre($resultado[0]['nombre']);
+            $usuario->set_apellido($resultado[0]['apellido']);
+            $usuario->set_email($resultado[0]['email']);
+            $usuario->set_telefono($resultado[0]['telefono']);
+            $usuario->set_direccion($resultado[0]['direccion']);
+            $usuario->set_fecha_alta($resultado[0]['fecha_alta']);
+            $usuario->set_fecha_baja($resultado[0]['fecha_baja']);
+            return $usuario;
+        }
+        return null;
     }
 
 }
