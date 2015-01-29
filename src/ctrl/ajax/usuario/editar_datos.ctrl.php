@@ -4,60 +4,78 @@ require_once '../../../../config.php';
 
 $salida = '';
 $salida .= '{' . PHP_EOL;
-$salida .= '"config":{},' . PHP_EOL;
-$salida .= '"datos":{' . PHP_EOL;
 $sesion = Sesion::get_instancia();
-if($sesion->activo()){
-    $usuario = $sesion->get_usuario();
-    $accion = isset($_REQUEST['accion']) ? $_REQUEST['accion'] : 'consultar';
-    if($accion == 'consultar'){
-        $salida .= '"id":'.$usuario->get_id() .',' . PHP_EOL;
-        $salida .= '"nombreUsuario": "'.$usuario->get_nombre_usuario() .'",' . PHP_EOL;
-        //$salida = '"clave_usuario": "'.$usuario->get_clave_usuario() .'",' . PHP_EOL;
-        $salida .= '"id_rol": '.$usuario->get_rol()->get_id() .',' . PHP_EOL;
-        $salida .= '"nombre": "'.$usuario->get_nombre() .'",' . PHP_EOL;
-        $salida .= '"apellido": "'.$usuario->get_apellido() .'",' . PHP_EOL;
-        $salida .= '"email": "'.$usuario->get_email() .'",' . PHP_EOL;
-        $salida .= '"telefono": "'.$usuario->get_telefono() .'",' . PHP_EOL;
-        $salida .= '"direccion": "'.$usuario->get_direccion() .'",' . PHP_EOL;
-        $salida .= '"fechaAlta": "'.$usuario->get_fecha_alta() .'",' . PHP_EOL;
-        $salida .= '"fechaBaja": "'.$usuario->get_fecha_baja() .'"' . PHP_EOL;
-    }else if($accion == 'modificar'){
-        Usuario::modificar();
+if ($sesion->activo()) {
+    $accion =  $_REQUEST['accion'];
+    $datos = $_REQUEST['datos'];
+    if ($accion === 'consultar') {
+        $usuario = $sesion->get_usuario();
+        $salida .= '"config":{"accion": "'.$accion.'"},' . PHP_EOL;
+        $salida .= '"datos":' . to_json($usuario);
+    } else {
+        $salida .= '"config":{"accion": "'.$accion.'", ' . PHP_EOL;
+        
+        $json_usuario = json_decode($datos, true);
+        $usuario_editado = new Usuario();
+        echo ($datos);
+        $usuario_editado->set_id($json_usuario['id']);
+        $usuario_editado->set_nombre_usuario($json_usuario['nombreUsuario']);
+        //$usuario_editado->set_clave_usuario($json_usuario['clave_usuario']);
+        //$usuario_editado->set_rol($json_usuario['id']);
+        $usuario_editado->set_nombre($json_usuario['nombre']);
+        $usuario_editado->set_apellido($json_usuario['apellido']);
+        $usuario_editado->set_email($json_usuario['email']);
+        $usuario_editado->set_telefono($json_usuario['telefono']);
+        $usuario_editado->set_direccion($json_usuario['direccion']);
+        $usuario_editado->set_fecha_alta($json_usuario['fechaAlta']);
+        $usuario_editado->set_fecha_baja($json_usuario['fechaBaja']);
+        
+        $salida .= '"resultado" : "' . Usuario::modificar($usuario_editado) . '"}, ' . PHP_EOL;
+        $salida .= '"datos":' . to_json($usuario_editado);
+        /*
+        $salida .= '"config":{"accion": "'.$accion.'", ' . PHP_EOL;
+        $json_usuario = json_decode($datos, true);
+        //echo $json_usuario['nombre'];
+        $usuario_editado = new Usuario();
+        $usuario_editado->set_id($json_usuario['id']);
+        $usuario_editado->set_nombre_usuario($json_usuario['nombre_usuario']);
+        //$usuario_editado->set_clave_usuario($json_usuario['clave_usuario']);
+        //$usuario_editado->set_rol($json_usuario['id']);
+        $usuario_editado->set_nombre($json_usuario['nombre']);
+        $usuario_editado->set_apellido($json_usuario['apellido']);
+        $usuario_editado->set_email($json_usuario['email']);
+        $usuario_editado->set_telefono($json_usuario['telefono']);
+        $usuario_editado->set_direccion($json_usuario['direccion']);
+        $usuario_editado->set_fecha_alta($json_usuario['fecha_alta']);
+        $usuario_editado->set_fecha_baja($json_usuario['fecha_baja']);
+        $salida .= '"resultado" : "' . Usuario::modificar($usuario) . '"}, ' . PHP_EOL;
+        $salida .= '"datos":' . to_json($usuario_editado);
+         * */
+         
     }
 }
 $salida .= '}' . PHP_EOL;
-$salida .= '}' . PHP_EOL;
+
+$file = fopen("../../../../log.txt", "w");
+fwrite($file,  $salida);
+fclose($file);
+
 echo $salida;
-/*
-$salida = '';
-if (!empty($resultados)) {
-    //paginacion
-    $resultados = Util::paginar($resultados, $pagina_actual, $tamanio_pagina);
-    //armo la salida de objetos json
-    //datos de configuration
-    $salida = '{"config":{'.PHP_EOL;
-    $salida .= '"cantidadResultados": "'.$cantidad_resultados.'",' . PHP_EOL;
-    $salida .= '"cantidadPaginas": "'.$cantidad_paginas.'",' . PHP_EOL;
-    $salida .= '"consulta": "'.$consulta.'"';
-    $salida .= '},' . PHP_EOL;
-    $salida .= '"datos":' . PHP_EOL;
-    //datos de maquinas
-    $salida .= "[";
-    foreach ($resultados as $resultado) {
-        $salida .= '{' . PHP_EOL;
-        $salida .= '"id" : "' . $resultado['id'] . '",' . PHP_EOL;
-        $salida .= '"nombre" : "' . $resultado['nombre'] . '",' . PHP_EOL;
-        $salida .= '"nombreSistemaOperativo" : "' . $resultado['nombre_sistema_operativo'] . '",' . PHP_EOL;
-        $salida .= '"fechaAlta" : "' . $resultado['fecha_alta'] . '",' . PHP_EOL;
-        $salida .= '"fechaSincronizacion" : "' . $resultado['fecha_sincronizacion'] . '",' . PHP_EOL;
-        $salida .= '"fechaCambio" : "' . $resultado['fecha_cambio'] . '"' . PHP_EOL;
-        $salida .= '}' . PHP_EOL;
-        $salida .= ',';
-    }
-    $salida = rtrim($salida, ',');
-    $salida .= ']' .PHP_EOL;
-    $salida .= '}';
+
+function to_json($usuario) {
+    $usuario_json = "";
+    $usuario_json .= "{" . PHP_EOL;
+    $usuario_json .= '"id":' . $usuario->get_id() . ',' . PHP_EOL;
+    $usuario_json .= '"nombreUsuario": "' . $usuario->get_nombre_usuario() . '",' . PHP_EOL;
+    //$salida = '"clave_usuario": "'.$usuario->get_clave_usuario() .'",' . PHP_EOL;
+    $usuario_json .= '"id_rol": ' . $usuario->get_rol()->get_id() . ',' . PHP_EOL;
+    $usuario_json .= '"nombre": "' . $usuario->get_nombre() . '",' . PHP_EOL;
+    $usuario_json .= '"apellido": "' . $usuario->get_apellido() . '",' . PHP_EOL;
+    $usuario_json .= '"email": "' . $usuario->get_email() . '",' . PHP_EOL;
+    $usuario_json .= '"telefono": "' . $usuario->get_telefono() . '",' . PHP_EOL;
+    $usuario_json .= '"direccion": "' . $usuario->get_direccion() . '",' . PHP_EOL;
+    $usuario_json .= '"fechaAlta": "' . $usuario->get_fecha_alta() . '",' . PHP_EOL;
+    $usuario_json .= '"fechaBaja": "' . $usuario->get_fecha_baja() . '"' . PHP_EOL;
+    $usuario_json .= "}" . PHP_EOL;
+    return $usuario_json;
 }
-echo $salida;
-*/

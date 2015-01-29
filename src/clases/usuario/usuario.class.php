@@ -147,6 +147,23 @@ class Usuario {
 
         return $conexion->insertar_simple($sql);
     }
+    
+    public static function modificar($usuario){
+        $conexion = Conexion::get_instacia(CONEXION_ISAAI);
+        $actualizacion = "UPDATE usuarios SET "
+                . "nombre_usuario = '{$usuario->get_nombre_usuario()}', "
+                . "clave_usuario = '{$usuario->get_clave_usuario()}', "
+                //. "id_rol = {$usuario->get_rol()->get_id()}, "
+                . "nombre = '{$usuario->get_nombre()}', "
+                . "apellido = '{$usuario->get_apellido()}', "
+                . "email = '{$usuario->get_email()}', "
+                . "telefono = '{$usuario->get_telefono()}', "
+                . "direccion = '{$usuario->get_direccion()}', "
+                . "fecha_alta = '{$usuario->get_fecha_alta()}', "
+                . "fecha_baja = '{$usuario->get_fecha_baja()}' "
+                . "WHERE id = {$usuario->get_id()}";
+        return $conexion->actualizar_simple($actualizacion);
+    }
 
     /**
      * Este método recibirá un objeto rol, y devolverá un array de usuarios que 
