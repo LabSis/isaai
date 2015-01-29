@@ -8,6 +8,7 @@
  */
 class Usuario {
 
+    private $_id;
     private $_nombre_usuario;
     private $_clave_usuario;
     private $_rol;
@@ -20,6 +21,7 @@ class Usuario {
     private $_fecha_baja;
 
     function __construct() {
+        $this->_id = NULL;
         $this->_nombre_usuario = NULL;
         $this->_clave_usuario = NULL;
         $this->_rol = NULL;
@@ -32,6 +34,10 @@ class Usuario {
         $this->_fecha_baja = NULL;
     }
 
+    public function get_id(){
+        return $this->_id;
+    }
+    
     public function get_nombre_usuario() {
         return $this->_nombre_usuario;
     }
@@ -70,6 +76,10 @@ class Usuario {
 
     public function get_fecha_baja() {
         return $this->_fecha_baja;
+    }
+    
+    public function set_id($_id){
+        $this->_id = $_id;
     }
 
     public function set_fecha_baja($_fecha_baja) {

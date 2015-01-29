@@ -68,8 +68,10 @@ class Sesion {
         $resultado = $conexion->consultar_simple($consulta);
         if (!empty($resultado)) {
             $usuario = new Usuario();
+            $usuario->set_id($resultado[0]['id']);
             $usuario->set_nombre_usuario($resultado[0]['nombre_usuario']);
             $usuario->set_clave_usuario($resultado[0]['clave_usuario']);
+            $usuario->set_rol(Rol::materializar($resultado[0]['id_rol']));
             $usuario->set_nombre($resultado[0]['nombre']);
             $usuario->set_apellido($resultado[0]['apellido']);
             $usuario->set_email($resultado[0]['email']);

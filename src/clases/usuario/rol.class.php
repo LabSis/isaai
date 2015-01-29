@@ -43,6 +43,19 @@ class Rol {
         $this->_descripcion = $_descripcion;
     }
 
+    public static function materializar($_id) {
+        $conexion = Conexion::get_instacia(CONEXION_ISAAI);
+        $consulta = "SELECT r.id, r.nombre, r.descripcion "
+                . "FROM roles AS r "
+                . "WHERE r.id = {$_id}";
+        $resultados = $conexion->consultar_simple($consulta);
+        if (!empty($resultados)){
+            $rol = new Rol($resultados[0]['id'],$resultados[0]['nombre'],$resultados[0]['descripcion']);
+            return $rol;
+        }
+        return null;
+    }
+
     public static function determinar_roles_mensaje($tipo_cambio) {
         $roles = array();
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);

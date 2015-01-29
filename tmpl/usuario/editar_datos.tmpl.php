@@ -5,9 +5,11 @@
         <!-- CSS -->
         <link href="<?php echo $global_ruta_web; ?>/css/usuario/editar_datos.css" type="text/css" rel="stylesheet"/>
         <!-- JavaScript -->
-        <script src="<?php echo $global_ruta_web; ?>/js/usuario/editar_datos.css" type="text/javascript"></script>
+        <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+        <script src="<?php echo $global_ruta_web; ?>/js/usuario/editar_datos.js" type="text/javascript"></script>
     </head>
     <body>
+        <div class="data" id="dataRutaWeb"><?php echo $global_ruta_web; ?></div>
         <?php require_once dirname(__FILE__) . '/../marco/cabecera.tmpl.php' ?>
         <main>
             <?php require_once dirname(__FILE__) . '/../marco/menu_principal.tmpl.php' ?>
@@ -16,85 +18,87 @@
                     <h2 class='titulo tituloSeccion'>
                         Editar datos
                     </h2>
-                    <div class='contenidoSeccion'>
-                        <form action="<?php echo $global_ruta_web ?>/src/ctrl/usuario/editar_datos.ctrl.php" id="frmEditarDatos" method="post">
-                            <table id='tablaEditarDatos' class='formulario'>
-                                <tr>
-                                    <td >
-                                        Nombre de usuario:
-                                    </td>
-                                    <td>
-                                        <input type="text" name="txtNombreUsuario" value="<?php echo $usuario->get_nombre_usuario();?>" class="general" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td >
-                                        Clave:
-                                    </td>
-                                    <td>
-                                        <input type="password" name="txtClave" value="" class="general"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Nombre:
-                                    </td>
-                                    <td>
-                                        <input type="text" name="txtNombre" value="<?php echo $usuario->get_nombre();?>" class="general"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Apellido:
-                                    </td>
-                                    <td>
-                                        <input type="text" name="txtApellido" value="<?php echo $usuario->get_apellido();?>" class="general"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Rol:
-                                    </td>
-                                    <td>
-                                        <select class='general'>
-                                            <option>Administrador</option>
-                                            <option>Operador</option>
-                                            <option>Técnico</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Email:
-                                    </td>
-                                    <td>
-                                        <input type="text" name="txtEmail" value="<?php echo $usuario->get_email();?>" class="general"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Teléfono:
-                                    </td>
-                                    <td>
-                                        <input type="text" name="txtTelefono" value="<?php echo $usuario->get_telefono();?>" class="general"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Dirección:
-                                    </td>
-                                    <td>
-                                        <input type="text" name="txtDireccion" value="<?php echo $usuario->get_direccion();?>"  class="general"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <input type="submit" value="Aceptar" name="btnAceptar" id='btnAceptar' class="boton"/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
+                    <div class='contenidoSeccion' >
+                        <div ng-app="" ng-controller="ControladorEditarDatos">
+                            <form action="<?php echo $global_ruta_web ?>/src/ctrl/usuario/editar_datos.ctrl.php" id="frmEditarDatos" method="post">
+                                <table id='tablaEditarDatos' class='formulario'>
+                                    <tr>
+                                        <td >
+                                            Nombre de usuario:
+                                        </td>
+                                        <td>
+                                            <input type="text" name="txtNombreUsuario" ng-model="usuario.nombreUsuario" class="general" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td >
+                                            Clave:
+                                        </td>
+                                        <td>
+                                            <input type="password" name="txtClave" value="" class="general"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Nombre:
+                                        </td>
+                                        <td>
+                                            <input type="text" name="txtNombre" ng-model="usuario.nombre" class="general"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Apellido:
+                                        </td>
+                                        <td>
+                                            <input type="text" name="txtApellido" ng-model="usuario.apellido" class="general"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Rol:
+                                        </td>
+                                        <td>
+                                            <select class='general'>
+                                                <option>Administrador</option>
+                                                <option>Operador</option>
+                                                <option>Técnico</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Email:
+                                        </td>
+                                        <td>
+                                            <input type="text" name="txtEmail" ng-model="usuario.email" class="general"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Teléfono:
+                                        </td>
+                                        <td>
+                                            <input type="text" name="txtTelefono" ng-model="usuario.telefono" class="general"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Dirección:
+                                        </td>
+                                        <td>
+                                            <input type="text" name="txtDireccion" ng-model="usuario.direccion"  class="general"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <input type="button" value="Aceptar" ng-click="editarDatos()" name="btnAceptar" id='btnAceptar' class="boton"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <?php require_once dirname(__FILE__) . '/../general/mensajes.tmpl.php' ?>
