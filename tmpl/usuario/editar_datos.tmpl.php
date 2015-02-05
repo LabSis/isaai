@@ -27,15 +27,7 @@
                                             Nombre de usuario:
                                         </td>
                                         <td>
-                                            <input type="text" name="txtNombreUsuario" ng-model="usuario.nombreUsuario" class="general" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td >
-                                            Clave:
-                                        </td>
-                                        <td>
-                                            <input type="password" name="txtClave" value="" class="general"/>
+                                            <input type="text" name="txtNombreUsuario" ng-model="usuario.nombreUsuario" class="general" disabled/>
                                         </td>
                                     </tr>
                                     <tr>

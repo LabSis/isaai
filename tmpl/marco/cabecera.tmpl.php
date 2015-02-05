@@ -5,7 +5,7 @@
         <div id="seccionUsuario">
             <?php if ($sesion->activo() == true): ?>
                 <p id="botonUsuario">
-                    <?php echo $sesion->get_usuario()->get_nombre(); ?>
+                    <?php echo $sesion->get_usuario()->get_nombre_usuario(); ?>
                 </p>
                 <ul id="menuSeccionUsuario">
                     <li>
@@ -14,10 +14,9 @@
                         </a>
                     </li>
                     <li>
-                        Administrar cuentas
-                    </li>
-                    <li>
-                        Cambiar rol
+                        <a href="<?php echo $global_ruta_web . "/src/ctrl/usuario/cambiar_contrasenia.ctrl.php"; ?>">
+                            Cambiar contraseña
+                        </a>
                     </li>
                     <li>
                         <a href="<?php echo $global_ruta_web . "/src/ctrl/cerrar_sesion.ctrl.php"; ?>">
