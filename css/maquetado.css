@@ -113,10 +113,12 @@ header #cabeceraMensajes{
     font-weight: normal;
     padding:5px;
 }
+/* Main */
 main{
     z-index: 4;
     width: 100%;
 }
+/* Menu Principal */
 #menuPrincipal{
     overflow: hidden;
     width: 15%;
@@ -139,11 +141,30 @@ main{
     list-style-type: none;
 }
 #menuPrincipal ul li .icono{
-    /*float:right;*/
     padding-right:10px;
 }
+
+#menuPrincipal ul li ul{
+    display:none;
+}  
+/*
+#menuPrincipal ul li:hover{
+    display:block;
+}
+*/
+#menuPrincipal ul li ul li:first-child{
+    box-shadow: inset 0px 3px 6px rgba(0,0,0,0.4);
+}
+#menuPrincipal ul li ul li:last-child{
+    box-shadow: inset 0px -3px 6px rgba(0,0,0,0.4);
+}
+#menuPrincipal ul li ul li, #menuPrincipal ul li ul li:only-child{
+    box-shadow: inset 3px 0px 6px -3px rgba(0,0,0,0.4), inset -3px 0px 6px -3px rgba(0,0,0,0.4);
+}
+
 #menuPrincipal ul li{
     overflow-x: hidden;
+    transition:all 1s;
 }
 #menuPrincipal ul li:not(:first-child){
     border-top: 1px solid rgba(255,255,255,0.2)
@@ -159,7 +180,6 @@ main{
     display: block;
 }
 #menuPrincipal ul li:hover{
-    font-weight: bold;
     cursor:pointer;
 }
 #menuPrincipal #seccionOcultarMostrarMenu{
@@ -168,6 +188,7 @@ main{
     bottom:50px;
     color:#444;
 }
+/* Contenido Principal */
 #contenido{
     transition: width 0.2s;
     float:left;

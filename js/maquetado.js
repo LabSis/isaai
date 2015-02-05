@@ -15,7 +15,7 @@ $(document).ready(function() {
             $("#menuSeccionUsuario").css("opacity", "0.0");
         }
     });
-    //ocultar mostrar menu
+    //ocultar mostrar menu lateralmente
     if ($("#menuPrincipal").hasClass("oculto")) {
         $("#contenido").addClass("expandido");
         $("#seccionOcultarMostrarMenu").children(".icono").removeClass("fa-arrow-left");
@@ -53,6 +53,16 @@ $(document).ready(function() {
             console.log(r);
         });
     });
+    //mostrar ocultar submenues
+    $("#menuPrincipal ul li").hover(
+        function(){
+            $(this).children("ul").slideDown("slow");
+        },
+        function(){
+            $(this).children("ul").delay("slow").slideUp("slow");
+        }
+    );
+    
     //recalculo las dimensiones del maquetado
     resize();
 });
