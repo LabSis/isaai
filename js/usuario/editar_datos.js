@@ -16,7 +16,7 @@ function ControladorEditarDatos($scope, $http) {
                     mensaje.setTipo(TipoMensaje.prototype.exito);
                 } else {
                     mensaje.setContenido("Error al intentar editar los datos");
-                    mensaje.setTipo(TipoMensaje.prototype.exito);
+                    mensaje.setTipo(TipoMensaje.prototype.error);
                 }
                 mensaje.mostrar();
             }

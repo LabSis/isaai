@@ -148,7 +148,7 @@ class Usuario {
         return $conexion->insertar_simple($sql);
     }
 
-    public static function modificar($usuario) {
+    public static function actualizar($usuario) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $datos = array(
             "nombre_usuario" => $usuario->get_nombre_usuario(),

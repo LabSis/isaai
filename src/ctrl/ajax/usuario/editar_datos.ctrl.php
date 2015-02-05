@@ -20,7 +20,7 @@ if ($sesion->activo()) {
         $json_usuario = json_decode($datos, true);
         $usuario_editado = new Usuario();
         $usuario_editado->set_id($usuario_sesion->get_id());
-        //no debe actualiar el nombre de usuario...
+        //no debe actualizar el nombre de usuario...
         //$usuario_editado->set_nombre_usuario($json_usuario['nombreUsuario']);
         //$usuario_editado->set_rol($json_usuario['id']);
         $usuario_editado->set_nombre($json_usuario['nombre']);
@@ -31,13 +31,16 @@ if ($sesion->activo()) {
         $usuario_editado->set_fecha_alta($json_usuario['fechaAlta']);
         $usuario_editado->set_fecha_baja($json_usuario['fechaBaja']);
         
-        $ok = Usuario::modificar($usuario_editado);
+        $ok = Usuario::actualizar($usuario_editado);
         
         if($ok){
             $sesion->actualizar();
         }
         $resultado_actualizacion = ($ok)?"true":"false";
         $salida .= '"resultado" : "' . $resultado_actualizacion . '"}, ' . PHP_EOL;
+        //coloco el nombre de usuario que existe en la sesion, pues el usaurio 
+        //no puede cambiar su nombre de usuario, ni siquiera usando js injenction...
+        $usuario_editado->set_nombre_usuario($usuario_sesion->get_nombre_usuario());
         $salida .= '"datos":' . to_json($usuario_editado);
          
     }
