@@ -18,18 +18,18 @@
                     </h2>
                     <div class='contenidoSeccion'>
                         <form action="<?php echo $global_ruta_web; ?>/src/ctrl/componente/componentes.ctrl.php" method="post">
-                            <table>
+                            <table class="panelOrdenacion">
                                 <tr>
                                     <td>
                                         Tipo de componente:
-                                        <select name="slcTipoComponente">
+                                        <select name="slcTipoComponente" class="general">
                                             <?php foreach ($template_slc_componentes as $valor_slc_componente => $nombre_slc_componente): ?>
                                                 <option value="<?php echo $valor_slc_componente; ?>"><?php echo $nombre_slc_componente; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="submit" value="Consultar"/>
+                                        <input type="submit" value="Consultar" class="boton"/>
                                     </td>
                                 </tr>
                             </table>

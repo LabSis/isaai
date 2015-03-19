@@ -9,3 +9,10 @@
 #tablaComponentes tbody td{
     padding:2px 4px;
 }
+.panelOrdenacion{
+    margin-left: 2.5%;
+}
+.panelPaginacion{
+    margin-right: 2.5%;
+    float:right;
+}

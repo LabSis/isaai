@@ -33,7 +33,8 @@
     </div>
     <div id="cabeceraMensajes">
         <h2 id="mensajesAlerta">
-            Máquina nueva agregada: roadrunner, 17:33 27/10/14
+            
+            <i class="fa fa-exclamation-triangle" id="iconoAlerta"></i>
         </h2>
     </div>
 </header>

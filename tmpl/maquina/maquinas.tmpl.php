@@ -21,26 +21,11 @@
                     <div class='contenidoSeccion'>
                         <div ng-app="" ng-controller="ControladorMaquinas">
                             <div ng-show='maquinas.length > 0'>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            Páginas:
-                                            <div class="pagina" ng-repeat="p in paginado">
-                                                <a ng-click="paginar(p)">
-                                                    <span style="font-weight: bold" ng-if="p == params.paginaActual">
-                                                        {{ p}}
-                                                    </span>
-                                                    <span ng-if="p != params.paginaActual">
-                                                        {{ p}}
-                                                    </span>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                <table class="panelOrdenacion">
                                     <tr>
                                         <td>
                                             Orden:
-                                            <select ng-model="criterioOrdenacionSeleccionado" 
+                                            <select class="general" ng-model="criterioOrdenacionSeleccionado" 
                                                     ng-options="criterioOrdenacion as criterioOrdenacion.valor for criterioOrdenacion in criteriosOrdenacion"
                                                     ng-change="ordenar()">
                                             </select>
@@ -71,7 +56,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="maquina in maquinas| orderBy : ordenTabla : ordenInvertido">
+                                        <tr ng-repeat="maquina in maquinas | orderBy : ordenTabla : ordenInvertido">
                                             <td>
                                                 {{ maquina.id}}
                                             </td>
@@ -95,6 +80,26 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                <table class="panelPaginacion">
+                                    <tr>
+                                        <td>
+                                            Páginas:
+                                        </td>
+                                        <td>
+                                            <div class="pagina" ng-repeat="p in paginado">
+                                                <a ng-click="paginar(p)">
+                                                    <span style="font-weight: bold" ng-if="p == params.paginaActual">
+                                                        {{ p}}
+                                                    </span>
+                                                    <span ng-if="p != params.paginaActual">
+                                                        {{ p}}
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="clearer"></div>
                             </div>
                             <div class='mensaje mensajeAlerta' ng-hide='maquinas.length > 0'>
                                 No exiten máquinas, sincronize manualmente para agregar las máquinas al sistema
