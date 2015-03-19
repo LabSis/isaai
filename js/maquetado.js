@@ -1,6 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function () {
     //ocultar menu usuario
-    $("#botonUsuario").click(function() {
+    $("#botonUsuario").click(function () {
         if (parseInt($("#menuSeccionUsuario").css("opacity")) == 0) {
             $("#menuSeccionUsuario").css("top", "55px");
             $("#menuSeccionUsuario").css("opacity", "1.0");
@@ -9,7 +9,7 @@ $(document).ready(function() {
             $("#menuSeccionUsuario").css("opacity", "0.0");
         }
     });
-    $("html").click(function() {
+    $("html").click(function () {
         if (parseInt($("#menuSeccionUsuario").css("opacity")) > 0) {
             $("#menuSeccionUsuario").css("top", "45px");
             $("#menuSeccionUsuario").css("opacity", "0.0");
@@ -25,7 +25,7 @@ $(document).ready(function() {
         $("#seccionOcultarMostrarMenu").children(".icono").removeClass("fa-arrow-right");
         $("#seccionOcultarMostrarMenu").children(".icono").addClass("fa-arrow-left");
     }
-    $("#seccionOcultarMostrarMenu").click(function() {
+    $("#seccionOcultarMostrarMenu").click(function () {
         var accion;
         if ($("#menuPrincipal").hasClass("oculto")) {
             //mostrar
@@ -49,24 +49,28 @@ $(document).ready(function() {
                 accion: accion
             },
             type: "POST"
-        }).done(function(r) {
+        }).done(function (r) {
             console.log(r);
         });
     });
     //mostrar ocultar submenues
-    $("#menuPrincipal ul li").hover(
-        function(){
-            $(this).children("ul").slideDown("slow");
-        },
-        function(){
-            $(this).children("ul").delay("slow").slideUp("slow");
-        }
+    $("#menuPrincipal ul li").mouseover(
+            function () {
+                var $this = $(this);
+                if (!$this.is(".extendido")) {
+                    $this.addClass("extendido");
+                    $this.children("ul").slideDown("slow", function () {
+                    }).delay("2500").slideUp("slow", function () {
+                        $this.removeClass("extendido");
+                    });
+                }
+            }
     );
-    
+
     //recalculo las dimensiones del maquetado
     resize();
 });
-$(window).resize(function() {
+$(window).resize(function () {
     resize();
 });
 function resize() {
