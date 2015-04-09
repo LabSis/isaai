@@ -20,9 +20,9 @@ class PlacaVideoOcs implements ComponenteMaterializable {
         for ($i = 0; $i < count($resultados); $i++) {
             $placa_video = new PlacaVideo();
             $placa_video->set_id(null);
-            $placa_video->set_chipset($resultados[0]['chipset']);
-            $placa_video->set_memoria($resultados[0]['memory']);
-            $placa_video->set_nombre($resultados[0]['name']);
+            $placa_video->set_chipset($resultados[$i]['chipset']);
+            $placa_video->set_memoria($resultados[$i]['memory']);
+            $placa_video->set_nombre($resultados[$i]['name']);
             $placas_video[] = $placa_video;
         }
         return $placas_video;

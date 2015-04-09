@@ -12,8 +12,8 @@ class BiosOcs implements ComponenteMaterializable {
     public static function materializar($id_maquina) {
         $conexion = Conexion::get_instacia(CONEXION_OCS);
         $condicion = $id_maquina->get_condicion_unicidad_sql();
-        $consulta = "SELECT smanufacturer, bmanufacturer, smodel, assettag,"
-                . " bversion, ssn FROM bios AS b INNER JOIN hardware AS hardware ON "
+        $consulta = "SELECT b.smanufacturer, b.bmanufacturer, b.smodel, b.assettag,"
+                . " b.bversion, b.ssn FROM bios AS b INNER JOIN hardware AS hardware ON "
                 . " b.hardware_id = hardware.id WHERE {$condicion}";
         $resultado = $conexion->consultar_simple($consulta);
         $bios = new Bios();

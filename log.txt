@@ -1,0 +1,14 @@
+{
+"config":{"accion": "consultar"},
+"datos":{
+"id":3,
+"nombreUsuario": "milagros",
+"nombre": "Milagros",
+"apellido": "Zea Cárdenas",
+"email": "milyzc@gmail.com",
+"telefono": "3512978043",
+"direccion": "",
+"fechaAlta": "2014-12-19 11:30:21",
+"fechaBaja": ""
+}
+}

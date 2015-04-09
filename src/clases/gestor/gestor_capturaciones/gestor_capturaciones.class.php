@@ -78,6 +78,12 @@ class GestorCapturaciones {
         $lista_maquinas[] = $lista_maquinas_ocs;
         $lista_maquinas[] = $lista_maquinas_isaai;
         $lista_maquinas[] = $lista_maquinas_nuevas;
+        echo 'maquinas isaai';
+        Out::print_array($lista_maquinas_isaai);
+        echo 'maquinas ocs';
+        Out::print_array($lista_maquinas_ocs);
+        echo 'maquinas nuevas';
+        Out::print_array($lista_maquinas_nuevas);
         return $lista_maquinas;
     }
 
