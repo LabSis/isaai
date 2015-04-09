@@ -19,8 +19,8 @@ class PlacaSonidoOcs implements ComponenteMaterializable {
         for ($i = 0; $i < count($resultados); $i++) {
             $placa_sonido = new PlacaSonido();
             $placa_sonido->set_id(null);
-            $placa_sonido->set_nombre($resultados[0]['name']);
-            $placa_sonido->set_fabricante($resultados[0]['manufacturer']);
+            $placa_sonido->set_nombre($resultados[$i]['name']);
+            $placa_sonido->set_fabricante($resultados[$i]['manufacturer']);
             $placas_sonido[] = $placa_sonido;
         }
         return $placas_sonido;

@@ -16,8 +16,14 @@ class CargadorListaIsaai implements CargadorLista {
      */
     public function cargar_lista($excluidos) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
-        $consulta = "SELECT m1.id, m1.fecha_sincronizacion, m1.fecha_cambio FROM maquinas AS m1 WHERE m1.fecha_sincronizacion = "
-                . "(SELECT MAX(m2.fecha_sincronizacion) FROM maquinas AS m2 WHERE m2.id = m1.id)";
+        $consulta = "SELECT m1.id, m1.fecha_sincronizacion, m1.fecha_cambio "
+                . "FROM maquinas AS m1 "
+                . "WHERE m1.fecha_sincronizacion = "
+                . "("
+                . "SELECT MAX(m2.fecha_sincronizacion) "
+                . "FROM maquinas AS m2 "
+                . "WHERE m2.id = m1.id"
+                . ")";
         // $consulta = "SELECT id, fecha_sincronizacion, fecha_cambio FROM maquinas AS m WHERE fecha_cambio = "
         //. "(SELECT MAX(fecha_cambio) FROM maquinas WHERE id = m.id)";
         $resultados = $conexion->consultar_simple($consulta);

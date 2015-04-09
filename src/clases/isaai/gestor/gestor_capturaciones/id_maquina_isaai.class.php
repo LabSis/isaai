@@ -39,5 +39,4 @@ class IdMaquinaIsaai extends IdMaquina {
         return $this->_id_hash;
     }
 
-//put your code here
 }

@@ -38,6 +38,7 @@ class IdMaquinaOcs extends IdMaquina {
     }
 
     private static function cargar_parametros_considerados() {
+        //$_parametros_considerados es estatico porque el hecho de crearlo y leer el archivo de config cada vez relentiza mucho el sistema
         self::$_parametros_considerados = array();
         $lectura_config_ocs_ini = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/isaai/config/config_ocs.ini', true);
         $conjunto_parametros = $lectura_config_ocs_ini["unicidad"];
@@ -65,6 +66,7 @@ class IdMaquinaOcs extends IdMaquina {
             $nombre_campo_ocs = self::$correspondencias_tabla_ocs[strtoupper($parametro)];
             $mapa_valores[$nombre_campo_ocs] = $registro_maquina_unica[strtoupper($nombre_campo_ocs)];
         }
+        //este mapa contiene los valores de los campos de cada registro correspondientes a hardware del ocs
         $this->_mapa_valores = $mapa_valores;
     }
 
@@ -72,6 +74,7 @@ class IdMaquinaOcs extends IdMaquina {
         $mapa_valores = $this->_mapa_valores;
         $condicion = " 1=1 ";
         foreach ($mapa_valores as $campo => $valor) {
+            //supone que la tabla sigue llamandose hardware
             $condicion .= " AND hardware.{$campo} = '{$valor}'";
         }
         $this->_condicion_unicidad = $condicion;
