@@ -18,8 +18,6 @@ if (isset($_GET['id']) && isset($_GET['fecha_cambio'])) {
         $id_maquina_isaai = new IdMaquinaIsaai($id_maquina, $fecha_cambio);
         $capturador_isaai = new CapturadorIsaai();
         $maquina = $capturador_isaai->obtener_maquina($id_maquina_isaai);
-
-        Out::print_array($maquina);
         
         $template_componentes = array();
         $bios = $maquina->get_bios();

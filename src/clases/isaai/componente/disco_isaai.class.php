@@ -24,7 +24,7 @@ class DiscoIsaai implements ComponenteMaterializable {
                 . "d.tipo, d.firmware, d.tamanio, d.numero_serial, d.fecha_cambio FROM discos AS d "
                 . "INNER JOIN maquinas AS maquina ON "
                 . "d.id_maquina = maquina.id AND d.fecha_cambio = maquina.fecha_cambio "
-                     . " WHERE d.fecha_cambio = ("
+                     . " WHERE maquina.id = '{$id_maquina->get_id_hash()}' AND d.fecha_cambio = ("
                      . " SELECT MAX(d2.fecha_cambio) FROM discos AS d2 "
                      . " WHERE d2.id_maquina = maquina.id"
                      . ")";
