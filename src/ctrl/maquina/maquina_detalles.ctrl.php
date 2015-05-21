@@ -10,7 +10,7 @@ if (isset($_GET['id']) && isset($_GET['fecha_cambio'])) {
     $consulta = "SELECT fecha_cambio, id FROM maquinas WHERE id = '{$id_maquina}' "
             . "ORDER BY fecha_cambio DESC";
     $resultados = $conexion->consultar_simple($consulta);
-
+    
     $estados = [];
     foreach ($resultados as $resultado) {
 
@@ -19,6 +19,8 @@ if (isset($_GET['id']) && isset($_GET['fecha_cambio'])) {
         $capturador_isaai = new CapturadorIsaai();
         $maquina = $capturador_isaai->obtener_maquina($id_maquina_isaai);
 
+        Out::print_array($maquina);
+        
         $template_componentes = array();
         $bios = $maquina->get_bios();
         $template_componentes['Bios'][] = array(

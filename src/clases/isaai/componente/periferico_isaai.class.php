@@ -17,6 +17,7 @@ class PerifericoIsaai implements ComponenteMaterializable {
                 . "INNER JOIN maquinas AS maquina ON "
                 . "p.id_maquina = maquina.id AND p.fecha_cambio = maquina.fecha_cambio "
                 . "WHERE {$condicion}";
+        Out::println("Consulta de perifericos: " . $consulta);
         $resultados = $conexion->consultar_simple($consulta);
         $perifericos = array();
         if (empty($resultados)) {
@@ -24,10 +25,11 @@ class PerifericoIsaai implements ComponenteMaterializable {
                     . "p.descripcion, p.interfaz, p.fecha_cambio FROM perifericos AS p "
                     . "INNER JOIN maquinas AS maquina ON "
                     . "p.id_maquina = maquina.id AND p.fecha_cambio = maquina.fecha_cambio "
-                    . "WHERE p.fecha_cambio = ("
+                    . "WHERE maquina.id = '{$id_maquina->get_id_hash()}' p.fecha_cambio = ("
                     . " SELECT MAX(p2.fecha_cambio) FROM perifericos AS p2 "
                     . " WHERE p2.id_maquina = maquina.id"
                     . ")";
+            Out::println("Consulta de perifericos 2: " . $consulta);
             $resultados = $conexion->consultar_simple($consulta);
         }
         for ($i = 0; $i < count($resultados); $i++) {

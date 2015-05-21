@@ -12,6 +12,7 @@ $(document).ready(function() {
                 btnSincronizar.html("<i class='fa fa-refresh fa-fw icono'></i><span class='spnTextMenu'>Sincronizar</span></a>");
                 sincronizando = false;
                 var cantMaquinasCambiadas = parseInt(respuesta);
+                console.log(respuesta);
                 if (parseInt($("#cabeceraMensajes").css("height")) != 0) {
                     $("#cabeceraMensajes").css("height", "0px");
                 } else {
