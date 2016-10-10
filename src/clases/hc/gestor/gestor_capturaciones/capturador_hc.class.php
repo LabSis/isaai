@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * Description of capturador_ocs
+ *
+ * @author Diego Barrionuevo
+ * @version 1.0
+ */
+class CapturadorHc implements Capturador {
+
+    public static function obtener_maquina($id_maquina_hc) {
+        //$id_maquina_hc->cargar_valores_unicidad();
+        //$id_maquina_hc->generar_condicion_unicidad_sql();
+        $conexion = Conexion::get_instacia(CONEXION_HC);
+        $resultados = $conexion->consultar_simple("SELECT * FROM maquinas WHERE ID = {$id_maquina_hc->get_id_hash()}");
+        $maquina = new Maquina();
+        //este get_id_hash fue generado previamente, en el proceso de cargadorlistaocs, por lo que aqui nunca lo genero...
+        //$id_maquina_ocs->generar_id_hash();
+        $maquina->set_id($id_maquina_hc->get_id_hash());
+        $maquina->set_nombre(null);
+        $resultado = $resultados[0];
+        $maquina->set_fecha_alta($resultado["fecha_alta"]);
+        $maquina->set_fecha_cambio(null); //fecha deberia ser null, porque el insertar deberia tomar la fecha actual
+        $maquina->set_fecha_sincronizacion($resultado["fecha_sincronizacion"]);
+        //el id no deberia ser null...
+        //deberia buscar en la base de datos isaai el id del so con ese nombre y version
+        $sistema_operativo = new SistemaOperativo(null, "Windows", "10");
+        $maquina->set_sistema_operativo($sistema_operativo);
+//        $discos = DiscoHc::materializar($id_maquina_hc);
+//        $maquina->set_discos($discos);
+//        $memorias = MemoriaHc::materializar($id_maquina_hc);
+//        $maquina->set_memorias($memorias);
+        $procesadores = ProcesadorHc::materializar($id_maquina_hc);
+        $maquina->set_procesadores($procesadores);
+        return $maquina;
+    }
+
+}

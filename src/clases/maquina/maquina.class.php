@@ -293,10 +293,15 @@ class Maquina {
             $componente_materializable = $componentes_materializables[$clave_componente];
             if (is_array($datos_componente)) {
                 for ($i = 0; $i < count($datos_componente); $i++) {
-                    $ok &= $componente_materializable::desmaterializar($this, $datos_componente[$i]);
+                    if (is_null($datos_componente[$i]) == false) {
+                        $ok &= $componente_materializable::desmaterializar($this, $datos_componente[$i]);
+                        echo $ok;
+                    }
                 }
             } else {
-                $ok &= $componente_materializable::desmaterializar($this, $datos_componente);
+                if (is_null($datos_componente) == false) {
+                    $ok &= $componente_materializable::desmaterializar($this, $datos_componente);
+                }
             }
         }
         if ($ok) {
@@ -312,7 +317,7 @@ class Maquina {
         $consulta = "UPDATE maquinas SET fecha_sincronizacion = '{$this->_fecha_sincronizacion}' "
                 . "WHERE id='{$this->_id}' AND fecha_sincronizacion = '{$ultima_fecha_sincronizacion}'";
         //. "(SELECT MAX(fecha_sincronizacion) FROM maquinas AS WHERE id = '{$this->_id}')";
-                //Out::println($consulta);
+        //Out::println($consulta);
         return $conexion->actualizar_simple($consulta);
     }
 

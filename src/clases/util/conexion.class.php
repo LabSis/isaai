@@ -303,9 +303,12 @@ class Conexion {
      * caso contrario.
      */
     public function insertar_simple($insercion) {
+        echo $insercion;
         $this->autoconectar();
         if (!$this->_conexion->query($insercion)) {
             $this->error("Error al ejecutar inserción [{$insercion}]");
+            print_r ($this->errores());
+            echo "Error insercion!";
             return false;
         }
         $this->_id_insercion = $this->_conexion->insert_id;
@@ -313,6 +316,7 @@ class Conexion {
         if ($this->_modo_autoconexion) {
             $this->cerrar();
         }
+        echo "insercion exitosa!";
         return true;
     }
 

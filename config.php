@@ -37,7 +37,9 @@ date_default_timezone_set('America/Argentina/Cordoba');
 $global_paquetes = array('', 'util', 'componente', 'maquina', 'usuario',
     'gestor', 'gestor/gestor_capturaciones', 'gestor/gestor_comparaciones',
     'isaai', 'isaai/componente', 'isaai/gestor', 'isaai/gestor/gestor_capturaciones',
-    'ocs', 'ocs/componente', 'ocs/gestor', 'ocs/gestor/gestor_capturaciones', 'socket',
+    'ocs', 'ocs/componente', 'ocs/gestor', 'ocs/gestor/gestor_capturaciones', 
+    'hc', 'hc/componente', 'hc/gestor', 'hc/gestor/gestor_capturaciones', 
+    'socket',
     'gestor/gestor_comunicaciones', 'gestor/gestor_comunicaciones/alertadores',
     'sesion');
 
@@ -65,6 +67,8 @@ function __autoload($nombre_clase) {
 session_start();
 
 define('CONEXION_ISAAI', 'isaai');
-define('CONEXION_OCS', 'ocs');
+//define('CONEXION_OCS', 'ocs');
+define('CONEXION_HC', 'hc');
 Conexion::agregar_instancia(CONEXION_ISAAI, Conexion::init('localhost', 'root', '', 'isaai', true));
-Conexion::agregar_instancia(CONEXION_OCS, Conexion::init('localhost', 'root', '', 'ocsweb', true));
+//Conexion::agregar_instancia(CONEXION_OCS, Conexion::init('localhost', 'root', '', 'ocsweb_gcm', true));
+Conexion::agregar_instancia(CONEXION_HC, Conexion::init('localhost', 'root', '', 'hc_bd', true));
