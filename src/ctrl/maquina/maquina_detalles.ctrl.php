@@ -10,7 +10,7 @@ if (isset($_GET['id']) && isset($_GET['fecha_cambio'])) {
     $consulta = "SELECT fecha_cambio, id FROM maquinas WHERE id = '{$id_maquina}' "
             . "ORDER BY fecha_cambio DESC";
     $resultados = $conexion->consultar_simple($consulta);
-    
+
     $estados = [];
     foreach ($resultados as $resultado) {
 
@@ -18,17 +18,19 @@ if (isset($_GET['id']) && isset($_GET['fecha_cambio'])) {
         $id_maquina_isaai = new IdMaquinaIsaai($id_maquina, $fecha_cambio);
         $capturador_isaai = new CapturadorIsaai();
         $maquina = $capturador_isaai->obtener_maquina($id_maquina_isaai);
-        
+
         $template_componentes = array();
         $bios = $maquina->get_bios();
-        $template_componentes['Bios'][] = array(
-            "Nombre" => $bios->get_nombre(),
-            "Fabricante" => $bios->get_fabricante(),
-            "Modelo" => $bios->get_modelo(),
-            "Asset tag" => $bios->get_asset_tag(),
-            "Versión" => $bios->get_version(),
-            "Número serie" => $bios->get_numero_serial()
-        );
+        if (!is_null($bios)) {
+            $template_componentes['Bios'][] = array(
+                "Nombre" => $bios->get_nombre(),
+                "Fabricante" => $bios->get_fabricante(),
+                "Modelo" => $bios->get_modelo(),
+                "Asset tag" => $bios->get_asset_tag(),
+                "Versión" => $bios->get_version(),
+                "Número serie" => $bios->get_numero_serial()
+            );
+        }
         $discos = $maquina->get_discos();
         foreach ($discos as $disco) {
             $template_componentes['Disco'][] = array(
@@ -103,19 +105,19 @@ if (isset($_GET['id']) && isset($_GET['fecha_cambio'])) {
         }
         $estados[$fecha_cambio] = $template_componentes;
     }
-    
+
     //Sincronizaciones
     //no tiene sentido guardar en la base de datos fechas de sincronizaciones si no reportaron cambio alguno...
     /*
-    $consulta = "SELECT id, fecha_cambio, fecha_sincronizacion FROM maquinas "
-            . " WHERE id = '{$id_maquina}' "
-            . " ORDER BY fecha_sincronizacion ASC";
-    //echo $consulta;
-    $resultados = $conexion->consultar_simple($consulta);
-    $template_sincronzaciones = array();
-    foreach ($resultados as $resultado) {
-        $template_sincronzaciones[] = $resultado['fecha_sincronizacion'];
-    }
-    */
+      $consulta = "SELECT id, fecha_cambio, fecha_sincronizacion FROM maquinas "
+      . " WHERE id = '{$id_maquina}' "
+      . " ORDER BY fecha_sincronizacion ASC";
+      //echo $consulta;
+      $resultados = $conexion->consultar_simple($consulta);
+      $template_sincronzaciones = array();
+      foreach ($resultados as $resultado) {
+      $template_sincronzaciones[] = $resultado['fecha_sincronizacion'];
+      }
+     */
 }
 require_once $global_ruta_servidor . '/tmpl/maquina/maquina_detalles.tmpl.php';

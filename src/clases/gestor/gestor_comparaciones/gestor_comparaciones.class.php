@@ -42,12 +42,16 @@ class GestorComparaciones {
         for ($i = 0; $i < count($maquinas_actuales); $i++) {
             $maquina_actual = $maquinas_actuales[$i];
             $maquina_anterior = $maquinas_anteriores[$i];
+//            Out::print_array($maquina_anterior);
+//            Out::print_array($maquina_actual);
             $comparador = new ComparadorMaquinas();
             if ($comparador->verificar_igualdad($maquina_actual, $maquina_anterior) == false) {
+                Out::println("NO SON IGUALES");
                 $cambio = new Cambio();
                 $cambio->set_maquina_anterior($maquina_anterior);
                 $cambio->set_maquina_actual($maquina_actual);
                 $cambio->set_componentes_cambiados($comparador->get_componentes_cambiados());
+//                Out::print_array($cambio->get_componentes_cambiados());
                 $cambios[] = $cambio;
                 //Actualizo las maquinas con los componentes actuales en la base de datos isaai
                 //Solo actualizo las fechas cuando el ocs este funcionando y tirando datos actules, es decir

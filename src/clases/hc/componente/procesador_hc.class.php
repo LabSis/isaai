@@ -15,10 +15,9 @@ class ProcesadorHc implements ComponenteMaterializable {
 FROM componentes_x_maquinas AS cxm 
 INNER JOIN componentes AS c ON c.id = cxm.id_componente 
 INNER JOIN caracteristicas_x_componentes AS cxc ON cxc.id_componente = c.id 
-INNER JOIN caracteristicas_x_componentes_x_maquinas AS cxcxm ON cxcxm.id_caracteristica = cxc.id_caracteristica 
-INNER JOIN maquinas AS maquina ON maquina.id = cxcxm.id_maquina 
-WHERE 1=1 AND maquina.id = '1' AND c.nombre = 'procesador' ";
-        echo $consulta;
+INNER JOIN caracteristicas_x_componentes_x_maquinas AS cxcxm ON cxcxm.id_caracteristica = cxc.id 
+INNER JOIN maquinas AS maquina ON maquina.id = cxm.id_maquina 
+WHERE {$condicion} AND c.nombre = 'procesador' ";
         $resultados = $conexion->consultar_simple($consulta);
         $procesadores = array();
         $procesador = new Procesador();
@@ -30,7 +29,7 @@ WHERE 1=1 AND maquina.id = '1' AND c.nombre = 'procesador' ";
                 $procesador->set_tipo($valor);
             } else if ($caracteristica === "velocidad") {
                 $procesador->set_velocidad($valor);
-            } else if ($caracteristica === "cantidad_procesadores") {
+            } else if ($caracteristica === "cantidad_nucleos") {
                 $procesador->set_numero($valor);
             }
         }

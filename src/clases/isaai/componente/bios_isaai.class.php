@@ -25,14 +25,17 @@ class BiosIsaai implements ComponenteMaterializable {
             //obtener la ultima bios, dada la max fecha de cambio
             $resultado = $conexion->consultar_simple($consulta);
         }
-        $bios = new Bios();
-        $bios->set_id(null);
-        $bios->set_nombre($resultado[0]['nombre']);
-        $bios->set_fabricante($resultado[0]['fabricante']);
-        $bios->set_modelo($resultado[0]['modelo']);
-        $bios->set_asset_tag($resultado[0]['asset_tag']);
-        $bios->set_version($resultado[0]['version']);
-        $bios->set_numero_serial($resultado[0]['numero_serial']);
+        $bios = null;
+        if (!empty($resultado)) {
+            $bios = new Bios();
+            $bios->set_id(null);
+            $bios->set_nombre($resultado[0]['nombre']);
+            $bios->set_fabricante($resultado[0]['fabricante']);
+            $bios->set_modelo($resultado[0]['modelo']);
+            $bios->set_asset_tag($resultado[0]['asset_tag']);
+            $bios->set_version($resultado[0]['version']);
+            $bios->set_numero_serial($resultado[0]['numero_serial']);
+        }
         return $bios;
     }
 
