@@ -27,10 +27,12 @@ class CapturadorHc implements Capturador {
         //deberia buscar en la base de datos isaai el id del so con ese nombre y version
         $sistema_operativo = new SistemaOperativo(null, "Windows", "10");
         $maquina->set_sistema_operativo($sistema_operativo);
-//        $discos = DiscoHc::materializar($id_maquina_hc);
-//        $maquina->set_discos($discos);
-//        $memorias = MemoriaHc::materializar($id_maquina_hc);
-//        $maquina->set_memorias($memorias);
+        $discos = DiscoHc::materializar($id_maquina_hc);
+        $maquina->set_discos($discos);
+        Out::print_array($discos);
+        $memorias = MemoriaHc::materializar($id_maquina_hc);
+        $maquina->set_memorias($memorias);
+        Out::print_array($memorias);
         $procesadores = ProcesadorHc::materializar($id_maquina_hc);
         $maquina->set_procesadores($procesadores);
         return $maquina;

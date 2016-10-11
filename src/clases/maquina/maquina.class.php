@@ -304,7 +304,7 @@ class Maquina {
                 }
             }
         }
-        if ($ok) {
+        if ($ok && false) {
             $conexion->transaccion_confirmar();
         } else {
             $conexion->transaccion_revertir();
