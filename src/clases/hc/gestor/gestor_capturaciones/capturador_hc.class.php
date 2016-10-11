@@ -29,10 +29,10 @@ class CapturadorHc implements Capturador {
         $maquina->set_sistema_operativo($sistema_operativo);
         $discos = DiscoHc::materializar($id_maquina_hc);
         $maquina->set_discos($discos);
-        Out::print_array($discos);
+//        Out::print_array($discos);
         $memorias = MemoriaHc::materializar($id_maquina_hc);
         $maquina->set_memorias($memorias);
-        Out::print_array($memorias);
+//        Out::print_array($memorias);
         $procesadores = ProcesadorHc::materializar($id_maquina_hc);
         $maquina->set_procesadores($procesadores);
         return $maquina;

@@ -295,7 +295,6 @@ class Maquina {
                 for ($i = 0; $i < count($datos_componente); $i++) {
                     if (is_null($datos_componente[$i]) == false) {
                         $ok &= $componente_materializable::desmaterializar($this, $datos_componente[$i]);
-                        echo $ok;
                     }
                 }
             } else {
@@ -304,7 +303,7 @@ class Maquina {
                 }
             }
         }
-        if ($ok && false) {
+        if ($ok) {
             $conexion->transaccion_confirmar();
         } else {
             $conexion->transaccion_revertir();

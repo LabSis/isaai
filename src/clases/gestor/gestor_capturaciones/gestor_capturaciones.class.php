@@ -81,8 +81,8 @@ class GestorCapturaciones {
                 }
             }
         }
-        Out::println($cantidad_agregadas);
-        Out::println("Compare: $cantidad_comparaciones de las cuales " . count($lista_maquinas_isaai) . " podrían haber cambiado.");
+//        Out::println($cantidad_agregadas);
+//        Out::println("Compare: $cantidad_comparaciones de las cuales " . count($lista_maquinas_isaai) . " podrían haber cambiado.");
         $lista_maquinas[] = $lista_maquinas_hc;
         $lista_maquinas[] = $lista_maquinas_isaai;
         $lista_maquinas[] = $lista_maquinas_nuevas;

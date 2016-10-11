@@ -303,12 +303,12 @@ class Conexion {
      * caso contrario.
      */
     public function insertar_simple($insercion) {
-        Out::println($insercion);
+//        Out::println($insercion);
         $this->autoconectar();
         if (!$this->_conexion->query($insercion)) {
             $this->error("Error al ejecutar inserción [{$insercion}]");
-            Out::println("Error al insertar!");
-            Out::print_array($this->errores());
+//            Out::println("Error al insertar!");
+//            Out::print_array($this->errores());
             return false;
         }
         $this->_id_insercion = $this->_conexion->insert_id;
@@ -316,7 +316,7 @@ class Conexion {
         if ($this->_modo_autoconexion) {
             $this->cerrar();
         }
-        Out::println("Éxito al insertar!");
+//        Out::println("Éxito al insertar!");
         return true;
     }
 

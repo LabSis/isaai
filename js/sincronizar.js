@@ -25,7 +25,7 @@ $(document).ready(function() {
                 } else {
                     if (isNaN(cantMaquinasCambiadas)) {
                         //console.log(respuesta);
-                        msj = "Muchas máquinas han cambiado";
+                        msj = "Problemas al sincronizar, intente nuevamente.";
                     } else {
                         msj = cantMaquinasCambiadas + " máquinas han cambiado";
                     }
