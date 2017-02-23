@@ -89,7 +89,8 @@ class Memoria extends Componente {
         $igual &= ($this->_capacidad === $componente->get_capacidad());
         $igual &= ($this->_tipo === $componente->get_tipo());
         $igual &= ($this->_descripcion === $componente->get_descripcion());
-        $igual &= ($this->_numero_serial === $componente->get_numero_serial());
+        //MEJORA: hc me trae con 000000 y isaai guarda con 0, son lo mismo pero no aqui...
+        //$igual &= ($this->_numero_serial === $componente->get_numero_serial());
         $igual &= ($this->_velocidad === $componente->get_velocidad());
         $igual &= ($this->_nombre === $componente->get_nombre());
         return $igual;

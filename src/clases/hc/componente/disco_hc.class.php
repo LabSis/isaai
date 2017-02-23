@@ -13,20 +13,22 @@ class DiscoHc implements ComponenteMaterializable {
         $discos = array();
         $conexion = Conexion::get_instacia(CONEXION_HC);
         $condicion = $id_maquina->get_condicion_unicidad_sql();
-        $consulta = "SELECT cxm.id AS id 
+        $consulta = "SELECT cxm.id AS id, cxm.id_maquina AS id_maquina, 
+            cxm.id_componente AS id_componente, cxm.posicion AS posicion 
             FROM componentes_x_maquinas AS cxm
 INNER JOIN componentes AS c ON cxm.id_componente = c.id 
 INNER JOIN maquinas AS maquina ON maquina.id = cxm.id_maquina 
 WHERE {$condicion} AND c.nombre = 'discos_duros' ";
         $resultados = $conexion->consultar_simple($consulta);
         foreach ($resultados as $resultado) {
-            $id = $resultado["id"];
+            $id_maquina = $resultado["id_maquina"];
+            $id_componente = $resultado["id_componente"];
+            $posicion = $resultado["posicion"];
             $consulta = "SELECT cxc.nombre AS caracteristica, cxcxm.valor AS valor  
 FROM caracteristicas_x_componentes_x_maquinas AS cxcxm 
 INNER JOIN caracteristicas_x_componentes AS cxc ON cxc.id = cxcxm.id_caracteristica 
-INNER JOIN componentes_x_maquinas AS cxm ON cxm.id = cxcxm.id_componente_x_maquina 
-INNER JOIN maquinas AS maquina ON maquina.id = cxm.id_maquina 
-WHERE {$condicion} AND cxcxm.id_componente_x_maquina = {$id} ";
+INNER JOIN maquinas AS maquina ON maquina.id = cxcxm.id_maquina 
+WHERE {$condicion} AND cxcxm.id_maquina = {$id_maquina} AND cxcxm.id_componente = {$id_componente} AND cxcxm.posicion = {$posicion}";
             $subresultados = $conexion->consultar_simple($consulta);
             $disco = new Disco();
             $disco->set_id(null);

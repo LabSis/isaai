@@ -71,4 +71,4 @@ define('CONEXION_ISAAI', 'isaai');
 define('CONEXION_HC', 'hc');
 Conexion::agregar_instancia(CONEXION_ISAAI, Conexion::init('localhost', 'root', '', 'isaai', true));
 //Conexion::agregar_instancia(CONEXION_OCS, Conexion::init('localhost', 'root', '', 'ocsweb_gcm', true));
-Conexion::agregar_instancia(CONEXION_HC, Conexion::init('localhost', 'root', '', 'hc_bd', true));
+Conexion::agregar_instancia(CONEXION_HC, Conexion::init('192.168.27.101', 'diego', '12345678', 'hc_bd', true));

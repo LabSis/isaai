@@ -17,6 +17,7 @@ class CapturadorHc implements Capturador {
         //este get_id_hash fue generado previamente, en el proceso de cargadorlistaocs, por lo que aqui nunca lo genero...
         //$id_maquina_ocs->generar_id_hash();
         $maquina->set_id($id_maquina_hc->get_id_hash());
+        //MEJORA: deberia buscar el nombre.
         $maquina->set_nombre("PC");
         $resultado = $resultados[0];
         $maquina->set_fecha_alta($resultado["fecha_alta"]);
@@ -24,7 +25,7 @@ class CapturadorHc implements Capturador {
         $maquina->set_fecha_cambio($resultado["fecha_sincronizacion"]);
         $maquina->set_fecha_sincronizacion($resultado["fecha_sincronizacion"]);
         //el id no deberia ser null...
-        //deberia buscar en la base de datos isaai el id del so con ese nombre y version
+        //MEJORA: deberia buscar en la base de datos isaai el id del so con ese nombre y version
         $sistema_operativo = new SistemaOperativo(null, "Windows", "10");
         $maquina->set_sistema_operativo($sistema_operativo);
         $discos = DiscoHc::materializar($id_maquina_hc);

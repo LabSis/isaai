@@ -44,13 +44,25 @@ class ComparadorMaquinas {
 
     private function verificar_cambios($maquina1_componentes, $maquina2_componentes) {
         $igual = true;
-        for ($i = 0; $i < count($maquina1_componentes); $i++) {
-            //Es necesario agregar también los componentes nuevos!
-            //es decir, el caso en que count($maquina1_componentes) > count($maquina2_componentes)
-            if (isset($maquina1_componentes[$i]) && isset($maquina2_componentes[$i])) {
-                if (!$maquina1_componentes[$i]->equals($maquina2_componentes[$i])) {
+        if (count($maquina1_componentes) === count($maquina2_componentes)) {
+            for ($i = 0; $i < count($maquina1_componentes); $i++) {
+                //Es necesario agregar también los componentes nuevos!
+                //es decir, el caso en que count($maquina1_componentes) > count($maquina2_componentes)
+                if (isset($maquina1_componentes[$i]) && isset($maquina2_componentes[$i])) {
+                    if (!$maquina1_componentes[$i]->equals($maquina2_componentes[$i])) {
+                        $this->_componentes_cambiados[] = $maquina1_componentes[$i];
+                        $igual = false;
+                    }
+                }
+            }
+        } else {
+            //si no coincide la cantidad de componentes son distintas y agrego los todos los nuevos componentes como cambiados
+            $igual = false;
+            for ($i = 0; $i < count($maquina1_componentes); $i++) {
+                //Es necesario agregar también los componentes nuevos!
+                //es decir, el caso en que count($maquina1_componentes) > count($maquina2_componentes)
+                if (isset($maquina1_componentes[$i])) {
                     $this->_componentes_cambiados[] = $maquina1_componentes[$i];
-                    $igual = false;
                 }
             }
         }
