@@ -1,4 +1,3 @@
-<?php echo $nombre_tempate_componente; ?>
 <?php if (strtolower($nombre_tempate_componente) === "disco" && strtolower($nombre_propiedad) === "tamaño"): ?>
     <span class="unidades">
         (bytes)

@@ -59,7 +59,19 @@ class SistemaOperativo {
         );
         return $conexion->insertar("sistemas_operativos", $datos);
     }
-    
+
+    public function existe() {
+        $conexion = Conexion::get_instacia(CONEXION_ISAAI);
+        $consulta = "SELECT id FROM sistemas_operativos WHERE nombre='{$this->_nombre}' AND version='{$this->_version}'";
+        $resultados = $conexion->consultar_simple($consulta);
+        if(empty($resultados)){
+            return false;
+        }else{
+            $this->_id = $resultados[0]["id"];
+            return true;
+        }
+    }
+
     public function equals($sistema_operativo) {
         $igual = true;
         $igual &= $this->_nombre == $sistema_operativo->get_nombre();

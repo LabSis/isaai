@@ -272,8 +272,12 @@ class Maquina {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $conexion->transaccion_comenzar();
         $ok = true;
-        $ok &= $this->_sistema_operativo->insertar();
-        $id_sistema_operativo = $conexion->get_id_insercion();
+        if ($this->_sistema_operativo->existe()) {
+            $id_sistema_operativo = $this->_sistema_operativo->get_id();
+        } else {
+            $ok &= $this->_sistema_operativo->insertar();
+            $id_sistema_operativo = $conexion->get_id_insercion();
+        }
         //Es necesario corroboar la existencia de un sistema operativo asi uso el fk en vez de insertar uno nuevo
         $datos_insercion = array(
             'id' => $this->_id,
