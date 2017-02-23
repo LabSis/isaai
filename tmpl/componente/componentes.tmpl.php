@@ -38,9 +38,12 @@
                             <table class="general" id="tablaComponentes">
                                 <thead>
                                     <tr>
-                                        <?php foreach ($tamplate_nombres_columnas as $nombre_columna) : ?>
+                                        <?php foreach ($tamplate_nombres_columnas as $nombre_propiedad) : ?>
                                             <td>
-                                                <?php echo $nombre_columna; ?>
+                                                <?php echo $nombre_propiedad; ?>
+                                                <!-- unidades -->
+                                                <?php require $global_ruta_servidor . '/tmpl/general/unidades.tmpl.php'; ?>
+                                                <!-- /unidades -->
                                             </td>
                                         <?php endforeach; ?>
                                     </tr>
