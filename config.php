@@ -10,6 +10,24 @@ if (basename($_SERVER['PHP_SELF']) == 'config.php') {
     die('Acceso incorrecto a la aplicación.');
 }
 
+//Config de bases de datos:
+//BD HardwareCollector
+$config_bd_hc = array(
+    "ip_servidor" => "192.168.27.101",
+    "nombre_bd" => "hc_bd",
+    "usuario" => "diego",
+    "clave" => "12345678",
+    "mostrar_errores" => false
+);
+//BD ISAAI
+$config_bd_isaai = array(
+    "ip_servidor" => "localhost",
+    "nombre_bd" => "isaai",
+    "usuario" => "root",
+    "clave" => "",
+    "mostrar_errores" => false
+);
+
 //Impido el almacenamiento de la caché
 header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
 header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
@@ -28,7 +46,7 @@ if ($global_modo_desarrollo) {
 //Rutas usadas
 $global_ruta_servidor = dirname(__FILE__);
 $global_ruta_web = 'http://' . $_SERVER['HTTP_HOST'] . substr(dirname(__FILE__), strpos(dirname(__FILE__), "htdocs") + strlen("htdocs"));
-$global_ruta_web = str_replace("\\","/", $global_ruta_web);
+$global_ruta_web = str_replace("\\", "/", $global_ruta_web);
 
 //Configura la zona horaria
 date_default_timezone_set('America/Argentina/Cordoba');
@@ -37,8 +55,8 @@ date_default_timezone_set('America/Argentina/Cordoba');
 $global_paquetes = array('', 'util', 'componente', 'maquina', 'usuario',
     'gestor', 'gestor/gestor_capturaciones', 'gestor/gestor_comparaciones',
     'isaai', 'isaai/componente', 'isaai/gestor', 'isaai/gestor/gestor_capturaciones',
-    'ocs', 'ocs/componente', 'ocs/gestor', 'ocs/gestor/gestor_capturaciones', 
-    'hc', 'hc/componente', 'hc/gestor', 'hc/gestor/gestor_capturaciones', 
+    'ocs', 'ocs/componente', 'ocs/gestor', 'ocs/gestor/gestor_capturaciones',
+    'hc', 'hc/componente', 'hc/gestor', 'hc/gestor/gestor_capturaciones',
     'socket',
     'gestor/gestor_comunicaciones', 'gestor/gestor_comunicaciones/alertadores',
     'sesion');
@@ -67,8 +85,7 @@ function __autoload($nombre_clase) {
 session_start();
 
 define('CONEXION_ISAAI', 'isaai');
-//define('CONEXION_OCS', 'ocs');
 define('CONEXION_HC', 'hc');
-Conexion::agregar_instancia(CONEXION_ISAAI, Conexion::init('localhost', 'root', '', 'isaai', true));
-//Conexion::agregar_instancia(CONEXION_OCS, Conexion::init('localhost', 'root', '', 'ocsweb_gcm', true));
-Conexion::agregar_instancia(CONEXION_HC, Conexion::init('192.168.27.101', 'diego', '12345678', 'hc_bd', true));
+
+Conexion::agregar_instancia(CONEXION_ISAAI, Conexion::init($config_bd_isaai["ip_servidor"], $config_bd_isaai["usuario"], $config_bd_isaai["clave"], $config_bd_isaai["nombre_bd"], $config_bd_isaai["mostrar_errores"]));
+Conexion::agregar_instancia(CONEXION_HC, Conexion::init($config_bd_hc["ip_servidor"], $config_bd_hc["usuario"], $config_bd_hc["clave"], $config_bd_hc["nombre_bd"], $config_bd_hc["mostrar_errores"]));

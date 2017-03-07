@@ -2,13 +2,13 @@
 "config":{"accion": "consultar"},
 "datos":{
 "id":1,
-"nombreUsuario": "diego",
-"nombre": "Diego",
-"apellido": "Barrionuevo",
-"email": "santosdiegob@gmail.com",
-"telefono": "03517323132",
+"nombreUsuario": "admin",
+"nombre": "Administrador",
+"apellido": "",
+"email": "",
+"telefono": "",
 "direccion": "",
-"fechaAlta": "2015-05-21 16:10:47",
+"fechaAlta": "2017-03-07 14:24:14",
 "fechaBaja": ""
 }
 }

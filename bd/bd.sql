@@ -203,17 +203,11 @@ CREATE TABLE IF NOT EXISTS roles_x_tipo_cambio(
 	ON UPDATE RESTRICT
 )ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
-INSERT INTO sistemas_operativos VALUES (1,'Windows','1');
-
 INSERT INTO roles (id, nombre, descripcion) VALUES (1, "Administrador", NULL);
 INSERT INTO roles (id, nombre, descripcion) VALUES (2, "Operador", NULL);
 INSERT INTO roles (id, nombre, descripcion) VALUES (3, "Técnico", NULL);
 
-INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("diego","123",1,"Diego","Barrionuevo","santosdiegob@gmail.com","03517323132",NOW());
-INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("german","123",1,"Germán","Parisi","germannparisi@gmail.com","03515192675",NOW());
-INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("milagros","123",1,"Milagros","Zea Cárdenas","milyzc@gmail.com","03512610201",NOW());
-INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("josefina","123",2,"Josefina","Apaza","milyzc@gmail.com","03512610201",NOW());
-INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("Juan","123",3,"Juan","Paris","germannparisi@gmail.com","03515192675",NOW());
+INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("admin","4dm1n",1,"Administrador","",NULL,NULL,NOW());
 
 INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Cualquier cambio", "Todos los cambios, sean máquinas nuevas o modificaciones en las máquinas actuales");
 INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Nuevas", "Sólo máquinas agregadas al sistema ISAAI");
