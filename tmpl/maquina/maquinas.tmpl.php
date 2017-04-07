@@ -102,7 +102,7 @@
                                 <div class="clearer"></div>
                             </div>
                             <div class='mensaje mensajeAlerta' ng-hide='maquinas.length > 0'>
-                                No exiten máquinas, sincronize manualmente para agregar las máquinas al sistema
+                                No existen máquinas, sincronice manualmente para agregar las máquinas al sistema
                             </div>
                         </div>
                     </div>

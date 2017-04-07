@@ -10,7 +10,7 @@ if ($sesion->activo()) {
     $datos = $_REQUEST['datos'];
     $usuario_sesion = $sesion->get_usuario();
     $json_datos_usuario = json_decode($datos, true);
-    if ($json_datos_usuario['claveActual'] === $usuario_sesion->get_clave_usuario()) {
+    if (md5($json_datos_usuario['claveActual']) === $usuario_sesion->get_clave_usuario()) {
         if ($json_datos_usuario['nuevaClave'] !== $json_datos_usuario['claveActual']) {
             if ($json_datos_usuario['nuevaClave'] === $json_datos_usuario['repeticionNuevaClave']) {
                 //todo bien, trato de actualizar en la base de datos

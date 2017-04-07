@@ -1,6 +1,9 @@
 DROP DATABASE IF EXISTS isaai;
 CREATE DATABASE isaai;
 USE isaai;
+
+GRANT ALL ON isaai.* TO 'isaai'@'localhost' IDENTIFIED BY 'isaai_sis_*';
+
 CREATE TABLE IF NOT EXISTS roles(
 	id INT NOT NULL AUTO_INCREMENT,
 	nombre VARCHAR(20) NOT NULL,
@@ -207,7 +210,7 @@ INSERT INTO roles (id, nombre, descripcion) VALUES (1, "Administrador", NULL);
 INSERT INTO roles (id, nombre, descripcion) VALUES (2, "Operador", NULL);
 INSERT INTO roles (id, nombre, descripcion) VALUES (3, "Técnico", NULL);
 
-INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("admin","4dm1n",1,"Administrador","",NULL,NULL,NOW());
+INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, fecha_alta)  VALUES ("admin",MD5("4dm1n"),1,"Administrador","",NULL,NULL,NOW());
 
 INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Cualquier cambio", "Todos los cambios, sean máquinas nuevas o modificaciones en las máquinas actuales");
 INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Nuevas", "Sólo máquinas agregadas al sistema ISAAI");

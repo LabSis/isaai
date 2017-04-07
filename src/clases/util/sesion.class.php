@@ -64,7 +64,7 @@ class Sesion {
         $consulta = "SELECT id, nombre_usuario, clave_usuario, id_rol, nombre, apellido, email, telefono, direccion, fecha_alta, fecha_baja "
                 . "FROM usuarios "
                 . "WHERE ( nombre_usuario = '{$nombre_usuario}' OR email = '{$nombre_usuario}' ) "
-                . "AND clave_usuario = '{$clave_usuario}'";
+                . "AND clave_usuario = MD5('{$clave_usuario}')";
         $resultado = $conexion->consultar_simple($consulta);
         if (!empty($resultado)) {
             $usuario = new Usuario();

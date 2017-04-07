@@ -152,7 +152,7 @@ class Usuario {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $datos = array(
             "nombre_usuario" => $usuario->get_nombre_usuario(),
-            "clave_usuario" => $usuario->get_clave_usuario(),
+            "clave_usuario" => md5($usuario->get_clave_usuario()),
             "nombre" => $usuario->get_nombre(),
             "apellido" => $usuario->get_apellido(),
             "id_rol" => (($usuario->get_rol() != null) ? $usuario->get_rol()->get_id() : null),
