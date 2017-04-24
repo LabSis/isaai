@@ -59,7 +59,8 @@ $global_paquetes = array('', 'util', 'componente', 'maquina', 'usuario',
     'ocs', 'ocs/componente', 'ocs/gestor', 'ocs/gestor/gestor_capturaciones',
     'hc', 'hc/componente', 'hc/gestor', 'hc/gestor/gestor_capturaciones',
     'socket',
-    'gestor/gestor_comunicaciones', 'gestor/gestor_comunicaciones/alertadores');
+    'gestor/gestor_comunicaciones', 'gestor/gestor_comunicaciones/alertadores',
+    'sesion');
 
 function __autoload($nombre_clase) {
     global $global_paquetes;

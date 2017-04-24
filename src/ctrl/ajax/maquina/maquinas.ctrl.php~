@@ -42,7 +42,7 @@ if (!empty($resultados)) {
     $salida = '{"config":{'.PHP_EOL;
     $salida .= '"cantidadResultados": "'.$cantidad_resultados.'",' . PHP_EOL;
     $salida .= '"cantidadPaginas": "'.$cantidad_paginas.'",' . PHP_EOL;
-    $salida .= '"consulta": "'.$consulta.'"';
+    //$salida .= '"consulta": "'.$consulta.'"';
     $salida .= '},' . PHP_EOL;
     $salida .= '"datos":' . PHP_EOL;
     //datos de maquinas

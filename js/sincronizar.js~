@@ -34,6 +34,10 @@ $(document).ready(function() {
                 setTimeout(function() {
                     $("#cabeceraMensajes").css("height", "0px");
                 }, 5000);
+                $.ajax({
+                    url: rutaWeb + "/src/ctrl/maquina/maquinas.ctrl.php",
+                    type: "GET"
+                });
             });
         }
         sincronizando = true;
