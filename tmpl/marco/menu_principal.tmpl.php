@@ -33,12 +33,6 @@
             </a>
             <ul>
                 <li>
-                    <a href="#">
-                        <i class="fa fa-gears fa-fw icono"></i>
-                        <span class="spnTextMenu">Generales</span>
-                    </a>
-                </li>
-                <li>
                     <a href="<?php echo $global_ruta_web; ?>/src/ctrl/config/config_roles_x_tipo_cambio.ctrl.php">
                         <i class="fa fa-users fa-fw icono"></i>
                         <span class="spnTextMenu">Usuarios</span>

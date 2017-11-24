@@ -36,7 +36,7 @@
                                     <thead>
                                         <tr>
                                             <td ng-click="ordenarCabecera('id')">
-                                                Id máquina
+                                                Nro máquina
                                             </td>
                                             <td ng-click="ordenarCabecera('nombre')">
                                                 Nombre
@@ -45,13 +45,16 @@
                                                 Sistema Operativo
                                             </td>
                                             <td ng-click="ordenarCabecera('fechaAlta')">
-                                                Fecha alta
+                                                Fecha de alta
                                             </td>
                                             <td ng-click="ordenarCabecera('fechaSincronizacion')">
-                                                Fecha última sincronización
+                                                Fecha de última sincronización
                                             </td>
                                             <td ng-click="ordenarCabecera('fechaCambio')">
-                                                Fecha cambio
+                                                Fecha de cambio
+                                            </td>
+                                            <td>
+                                                Acciones
                                             </td>
                                         </tr>
                                     </thead>
@@ -61,9 +64,8 @@
                                                 {{ maquina.id}}
                                             </td>
                                             <td>
-                                                <a href="<?php echo $global_ruta_web; ?>/src/ctrl/maquina/maquina_detalles.ctrl.php?id={{ maquina.id}}&fecha_cambio={{ maquina.fechaCambio}}">
-                                                    {{ maquina.nombre}}
-                                                </a>
+                                                {{ maquina.nombre}}
+                                                
                                             </td>
                                             <td>
                                                 {{ maquina.nombreSistemaOperativo}}
@@ -76,6 +78,11 @@
                                             </td>
                                             <td>
                                                 {{ maquina.fechaCambio}}
+                                            </td>
+                                            <td>
+                                                <a href="<?php echo $global_ruta_web; ?>/src/ctrl/maquina/maquina_detalles.ctrl.php?id={{ maquina.id}}&fecha_cambio={{ maquina.fechaCambio}}">                        
+                                                    <i class="fa fa-eye fa-fw icono"></i>                            
+                                                </a>
                                             </td>
                                         </tr>
                                     </tbody>

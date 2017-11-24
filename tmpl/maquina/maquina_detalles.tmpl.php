@@ -54,7 +54,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Fecha sincornización:
+                                        Fecha de sincronización:
                                     </td>
                                     <td>
                                         <!-- Habria que setear la ultima fecha de sincronizacion -->
