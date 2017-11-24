@@ -13,10 +13,10 @@ if (basename($_SERVER['PHP_SELF']) == 'config.php') {
 //Config de bases de datos:
 //BD HardwareCollector
 $config_bd_hc = array(
-    "ip_servidor" => "172.16.8.13",
-    "nombre_bd" => "hc_bd",
-    "usuario" => "hc_bd",
-    "clave" => "HardCollect",
+    "ip_servidor" => "localhost",
+    "nombre_bd" => "hc",
+    "usuario" => "root",
+    "clave" => "root",
     "mostrar_errores" => true
 );
 //BD ISAAI
@@ -24,7 +24,7 @@ $config_bd_isaai = array(
     "ip_servidor" => "localhost",
     "nombre_bd" => "isaai",
     "usuario" => "root",
-    "clave" => "toor",
+    "clave" => "root",
     "mostrar_errores" => true
 );
 
@@ -86,6 +86,7 @@ session_start();
 
 define('CONEXION_ISAAI', 'isaai');
 define('CONEXION_HC', 'hc');
+define('URL_API_AULAS', 'http://localhost/labsis_api_aulas/');
 
 Conexion::agregar_instancia(CONEXION_ISAAI, Conexion::init($config_bd_isaai["ip_servidor"], $config_bd_isaai["usuario"], $config_bd_isaai["clave"], $config_bd_isaai["nombre_bd"], $config_bd_isaai["mostrar_errores"]));
 Conexion::agregar_instancia(CONEXION_HC, Conexion::init($config_bd_hc["ip_servidor"], $config_bd_hc["usuario"], $config_bd_hc["clave"], $config_bd_hc["nombre_bd"], $config_bd_hc["mostrar_errores"]));

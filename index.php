@@ -5,8 +5,10 @@ $sesion = Sesion::get_instancia();
 if($sesion->activo()){
     Util::ir('src/ctrl/maquina/maquinas.ctrl.php');
 }
-if (isset($_POST['btnIngresar'])) {
-    if ($sesion->iniciar_sesion($_POST["txtNombre"], $_POST["txtClave"]) == true) {
+if (filter_has_var(INPUT_POST, 'btnIngresar')) {
+    $usuario = filter_input(INPUT_POST, 'txtNombre', FILTER_SANITIZE_STRING);
+//    $clave = filter_input(INPUT_POST, 'txtClave', FILTER_SANITIZE_STRING);
+    if ($sesion->iniciar_sesion_api_aulas($usuario, $clave) === true) {
         Util::ir($global_ruta_web . "/src/ctrl/maquina/maquinas.ctrl.php");
     } else {
         $sesion->cargar_mensaje("Problemas al validar usuario", Sesion::TIPO_MENSAJE_ERROR);
