@@ -45,8 +45,8 @@ if ($global_modo_desarrollo) {
 
 //Rutas usadas
 $global_ruta_servidor = dirname(__FILE__);
-//$global_ruta_web = 'http://' . $_SERVER['HTTP_HOST'] . substr(dirname(__FILE__), strpos(dirname(__FILE__), "htdocs") + strlen("htdocs"));
-$global_ruta_web = 'http://' . $_SERVER['HTTP_HOST'] . '/isaai';
+$global_ruta_web = 'http://' . $_SERVER['HTTP_HOST'] . substr(dirname(__FILE__), strpos(dirname(__FILE__), "htdocs") + strlen("htdocs"));
+//$global_ruta_web = 'http://' . $_SERVER['HTTP_HOST'] . '/isaai';
 $global_ruta_web = str_replace("\\", "/", $global_ruta_web);
 
 //Configura la zona horaria

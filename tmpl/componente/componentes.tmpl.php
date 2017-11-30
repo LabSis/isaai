@@ -24,7 +24,8 @@
                                         Tipo de componente:
                                         <select name="slcTipoComponente" class="general">
                                             <?php foreach ($template_slc_componentes as $valor_slc_componente => $nombre_slc_componente): ?>
-                                                <option value="<?php echo $valor_slc_componente; ?>"><?php echo $nombre_slc_componente; ?></option>
+                                                <option value="<?php echo $valor_slc_componente; ?>" 
+												<?php echo ($valor_slc_componente ==  $tipo_componente) ? ' selected="selected"' : '';?> > <?php echo $nombre_slc_componente; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </td>

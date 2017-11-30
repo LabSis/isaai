@@ -247,14 +247,17 @@ class Sesion {
     }
 
     public function iniciar_sesion_api_aulas($nombre_usuario, $clave_usuario) {
-        $url = "${URL_API_AULAS}?usuario={$nombre_usuario}&clave={$clave}";
-        $sesion = curl_init();
-        curl_setopt($sesion, CURLOPT_URL, $url);
-        curl_setopt($sesion, CURLOPT_HTTPGET, true);
-        curl_setopt($sesion, CURLOPT_HEADER, false);
-        curl_setopt($sesion, CURLOPT_RETURNTRANSFER, true);
-        $resultado = curl_exec($sesion);
-        $resultado = json_decode($resultado);
+        $url = "http://localhost/labsis_api_aulas/?usuario={$nombre_usuario}&clave={$clave_usuario}";
+        $process = curl_init($url);
+		print_r($process);
+		var_dump($process);
+        curl_setopt($process, CURLOPT_HTTPGET, true);
+        curl_setopt($process, CURLOPT_HEADER, false);
+        curl_setopt($process, CURLOPT_RETURNTRANSFER, true);		
+		var_dump($process);
+		print_r($process);
+        $raw = curl_exec($process);
+        $resultado = json_decode($raw);
         if (!property_exists($resultado, "estado")) {
             return FALSE;
         }    
@@ -277,7 +280,7 @@ class Sesion {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $consulta = "SELECT id, nombre_usuario, id_rol, nombre, apellido, email, telefono, direccion, fecha_alta, fecha_baja "
                 . "FROM usuarios "
-                . "WHERE ( nombre_usuario = '{$nombre_usuario}' OR email = '{$nombre_usuario}' ) ";s
+                . "WHERE ( nombre_usuario = '{$nombre_usuario}' OR email = '{$nombre_usuario}' ) ";
         $resultado = $conexion->consultar_simple($consulta);
         if (!empty($resultado)) {
             $usuario = new Usuario();
