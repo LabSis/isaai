@@ -21,8 +21,6 @@ if ($sesion->activo()) {
         $usuario_editado = new Usuario();
         $usuario_editado->set_id($usuario_sesion->get_id());
         //no debe actualizar el nombre de usuario...
-        //$usuario_editado->set_nombre_usuario($json_usuario['nombreUsuario']);
-        //$usuario_editado->set_rol($json_usuario['id']);
         $usuario_editado->set_nombre($json_usuario['nombre']);
         $usuario_editado->set_apellido($json_usuario['apellido']);
         $usuario_editado->set_email($json_usuario['email']);
@@ -41,8 +39,7 @@ if ($sesion->activo()) {
         //coloco el nombre de usuario que existe en la sesion, pues el usaurio 
         //no puede cambiar su nombre de usuario, ni siquiera usando js injenction...
         $usuario_editado->set_nombre_usuario($usuario_sesion->get_nombre_usuario());
-        $salida .= '"datos":' . to_json($usuario_editado);
-         
+        $salida .= '"datos":' . to_json($usuario_editado);         
     }
 }
 $salida .= '}' . PHP_EOL;
@@ -58,7 +55,7 @@ function to_json($usuario) {
     $usuario_json .= "{" . PHP_EOL;
     $usuario_json .= '"id":' . $usuario->get_id() . ',' . PHP_EOL;
     $usuario_json .= '"nombreUsuario": "' . $usuario->get_nombre_usuario() . '",' . PHP_EOL;
-    //$usuario_json .= '"id_rol": ' . $usuario->get_rol()->get_id() . ',' . PHP_EOL;
+    $usuario_json .= '"rol": ' . $usuario->get_rol()->get_nombre() . ',' . PHP_EOL;
     $usuario_json .= '"nombre": "' . $usuario->get_nombre() . '",' . PHP_EOL;
     $usuario_json .= '"apellido": "' . $usuario->get_apellido() . '",' . PHP_EOL;
     $usuario_json .= '"email": "' . $usuario->get_email() . '",' . PHP_EOL;

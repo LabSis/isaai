@@ -27,7 +27,7 @@
                                             Nombre de usuario:
                                         </td>
                                         <td>
-                                            <input type="text" name="txtNombreUsuario" ng-model="usuario.nombreUsuario" class="general" disabled/>
+                                            <input type="text" name="txtNombreUsuario" ng-model="usuario.nombreUsuario" class="general" disabled />
                                         </td>
                                     </tr>
                                     <tr>
@@ -51,11 +51,7 @@
                                             Rol:
                                         </td>
                                         <td>
-                                            <select class='general'>
-                                                <option>Administrador</option>
-                                                <option>Operador</option>
-                                                <option>Técnico</option>
-                                            </select>
+                                            <input type="text" name="txtRol" ng-model="usuario.rol" class="general" readonly />
                                         </td>
                                     </tr>
                                     <tr>
