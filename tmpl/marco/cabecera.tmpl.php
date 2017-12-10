@@ -6,9 +6,21 @@
             <?php if ($sesion->activo() == true): ?>
                 <p id="botonUsuario">
                     <?php echo $sesion->get_usuario()->get_nombre_usuario(); ?>
-                </p>
+                </p>				
                 <ul id="menuSeccionUsuario">
-                    <li>
+                    <?php if($sesion->get_usuario()->es_administrador()): ?>
+						<li>
+							<a href="<?php echo $global_ruta_web . "/src/ctrl/usuario/usuarios.ctrl.php"; ?>">
+								Mostrar usuarios
+							</a>
+						</li>
+						<li>
+							<a href="<?php echo $global_ruta_web . "/src/ctrl/usuario/crear_usuario.ctrl.php"; ?>">
+								Crear nuevo usuario
+							</a>
+						</li>						
+					<?php endif;?>
+					<li>
                         <a href="<?php echo $global_ruta_web . "/src/ctrl/usuario/editar_datos.ctrl.php"; ?>">
                             Editar datos
                         </a>

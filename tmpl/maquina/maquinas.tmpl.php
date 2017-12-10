@@ -64,8 +64,7 @@
                                                 {{ maquina.id}}
                                             </td>
                                             <td>
-                                                {{ maquina.nombre}}
-                                                
+                                                {{ maquina.nombre}}                                                
                                             </td>
                                             <td>
                                                 {{ maquina.nombreSistemaOperativo}}

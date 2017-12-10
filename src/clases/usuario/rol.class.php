@@ -42,6 +42,10 @@ class Rol {
     public function set_descripcion($_descripcion) {
         $this->_descripcion = $_descripcion;
     }
+	
+	public function es_administrador(){
+		return strcasecmp($this->_descripcion, "administrador") == 0;
+	}
 
     public static function materializar($_id) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);

@@ -107,5 +107,17 @@ class Util {
         }
         return $resultado;
     }
+	
+	public static function validar_nombre_usuario($nombre_usuario){
+		if(strlen($nombre_usuario) < 5) return FALSE;
+		//if(!preg_match("/^[a-zA-Z]+$/", $nombre_usuario)) return FALSE;	//verificar exp regular
+		return true; //implementar
+	}
+	
+	public static function validar_contrasenia($nombre_usuario){
+		if(strlen($nombre_usuario) < 6) return FALSE;
+		//if(!preg_match("/^[a-zA-Z]+$/", $nombre_usuario)) return FALSE;	//verificar exp regular
+		return true; //implementar
+	}
 
 }

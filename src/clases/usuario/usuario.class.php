@@ -121,6 +121,10 @@ class Usuario {
     public function set_fecha_alta($_fecha_alta) {
         $this->_fecha_alta = $_fecha_alta;
     }
+	
+	public function es_administrador(){
+		return $this->_rol.es_administrador();
+	}
 
     /**
      * Este método recibira un nuevo usuario como parametro y lo grabara en la 
@@ -129,10 +133,9 @@ class Usuario {
      */
     public static function insertar($nuevo_usuario) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
-//puedo generar la fecha de alta aca????
         $nombre_usuario = $nuevo_usuario->get_nombre_usuario();
         $clave_usuario = $nuevo_usuario->get_clave_usuario();
-        $id_rol = $nuevo_usuario->get_rol();
+        $id_rol = $nuevo_usuario->get_rol()->get_id();
         $nombre = $nuevo_usuario->get_nombre();
         $apellido = $nuevo_usuario->get_apellido();
         $email = is_null($nuevo_usuario->get_email()) ? null : $nuevo_usuario->get_email();
@@ -142,7 +145,7 @@ class Usuario {
 
         $sql = "INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, "
                 . "apellido, email, telefono, direccion, fecha_alta, fecha_baja) "
-                . "VALUES ('" . $nombre_usuario . "', '" . $clave_usuario . "', " . $id_rol . ", " . $nombre . ", "
+                . "VALUES ('" . $nombre_usuario . "', MD5('{$clave_usuario}'), " . $id_rol . ", " . $nombre . ", "
                 . $apellido . ", " . $email . ", " . $telefono . ", " . $direccion . ", " . $fecha_alta . ", NULL)";
 
         return $conexion->insertar_simple($sql);
@@ -163,6 +166,15 @@ class Usuario {
             "fecha_baja" => $usuario->get_fecha_baja(),
         );
         return $conexion->actualizar_unico("usuarios", $datos, "id", $usuario->get_id());
+    }
+	
+	public static function actualizar_rol($usuario) {
+        $conexion = Conexion::get_instacia(CONEXION_ISAAI);
+        $datos = array(
+            "nombre_usuario" => $usuario->get_nombre_usuario(),
+            "id_rol" => (($usuario->get_rol() != null) ? $usuario->get_rol()->get_id() : null),            
+        );
+        return $conexion->actualizar_unico("usuarios", $datos, "nombre_usuario", $usuario->nombre_usuario());
     }
 
     /**
