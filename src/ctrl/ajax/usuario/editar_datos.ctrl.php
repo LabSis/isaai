@@ -22,11 +22,12 @@ if ($sesion->activo()) {
         $usuario_editado->set_id($usuario_sesion->get_id());
         //no debe actualizar el nombre de usuario...
         $usuario_editado->set_nombre($json_usuario['nombre']);
+		$usuario_editado->set_rol($usuario_sesion->get_rol());
         $usuario_editado->set_apellido($json_usuario['apellido']);
         $usuario_editado->set_email($json_usuario['email']);
         $usuario_editado->set_telefono($json_usuario['telefono']);
         $usuario_editado->set_direccion($json_usuario['direccion']);
-        $usuario_editado->set_fecha_alta($json_usuario['fechaAlta']);
+        $usuario_editado->set_fecha_alta($usuario_sesion->get_fecha_alta());
         $usuario_editado->set_fecha_baja($json_usuario['fechaBaja']);
         
         $ok = Usuario::actualizar($usuario_editado);
@@ -55,7 +56,7 @@ function to_json($usuario) {
     $usuario_json .= "{" . PHP_EOL;
     $usuario_json .= '"id":' . $usuario->get_id() . ',' . PHP_EOL;
     $usuario_json .= '"nombreUsuario": "' . $usuario->get_nombre_usuario() . '",' . PHP_EOL;
-    $usuario_json .= '"rol": ' . $usuario->get_rol()->get_nombre() . ',' . PHP_EOL;
+    $usuario_json .= '"rol": "' . $usuario->get_rol()->get_nombre() . '",' . PHP_EOL;
     $usuario_json .= '"nombre": "' . $usuario->get_nombre() . '",' . PHP_EOL;
     $usuario_json .= '"apellido": "' . $usuario->get_apellido() . '",' . PHP_EOL;
     $usuario_json .= '"email": "' . $usuario->get_email() . '",' . PHP_EOL;

@@ -40,7 +40,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            Nombre:
+                                            Nombre (*):
                                         </td>
                                         <td>
                                             <input type="text" name="txtNombre" ng-model="usuario.nombre" class="general"/>
@@ -48,7 +48,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            Apellido:
+                                            Apellido (*):
                                         </td>
                                         <td>
                                             <input type="text" name="txtApellido" ng-model="usuario.apellido" class="general"/>
@@ -56,14 +56,12 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            Rol:
+                                            Rol (*):
                                         </td>
                                         <td>
-                                            <select class='general'>
-                                                <option>Administrador</option>
-                                                <option>Operador</option>
-                                                <option>Técnico</option>
-                                            </select>
+											<select class="general" ng-model="usuario.idRol" 
+														ng-options="rol.id as rol.nombre for rol in roles">
+											</select>		
                                         </td>
                                     </tr>
                                     <tr>

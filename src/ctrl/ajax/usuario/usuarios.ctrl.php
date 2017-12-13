@@ -3,7 +3,7 @@
 /*
  * Este controlador muestra la información referida a los usuarios del sistema.
  */
-require_once '../../../config.php';
+require_once '../../../../config.php';
 
 $sesion = Sesion::get_instancia();
 if(!$sesion->activo()){  
@@ -16,11 +16,10 @@ $criterio_ordenacion = isset($_REQUEST['criterioOrdenacion']) ? $_REQUEST['crite
 $orden = isset($_REQUEST['orden']) ? $_REQUEST['orden'] : 'ASC';
 
 $conexion = Conexion::get_instacia(CONEXION_ISAAI);
-$consulta = "SELECT u.id, u.nombre_usuario, r.id as id_rol"
-        . "FROM usuarios u"
+$consulta = "SELECT u.id, u.nombre_usuario, u.id_rol as id_rol "
+        . "FROM usuarios u "
         . "ORDER BY u.nombre_usuario ASC";
 $resultados = $conexion->consultar_simple($consulta);
-
 
 $tamanio_pagina = (int) (isset($_REQUEST['tamanioPagina']) ? $_REQUEST['tamanioPagina'] : 10);
 $cantidad_resultados = count($resultados);

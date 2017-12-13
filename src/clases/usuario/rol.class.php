@@ -44,7 +44,7 @@ class Rol {
     }
 	
 	public function es_administrador(){
-		return strcasecmp($this->_descripcion, "administrador") == 0;
+		return strcasecmp(strtolower($this->_nombre), "administrador") == 0;
 	}
 
     public static function materializar($_id) {

@@ -11,8 +11,8 @@ if(!$sesion->activo()){
 }
 $conexion = Conexion::get_instacia(CONEXION_ISAAI);
 $consulta = "SELECT r.id, r.nombre "
-        . "FROM roles r"
-        . "ORDER BY u.nombre_usuario ASC";
+        . "FROM roles r "
+        . "ORDER BY r.nombre ASC";
 $resultados = $conexion->consultar_simple($consulta);
 
 $salida = '';

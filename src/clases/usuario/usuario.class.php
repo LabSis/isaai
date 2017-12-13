@@ -123,7 +123,7 @@ class Usuario {
     }
 	
 	public function es_administrador(){
-		return $this->_rol.es_administrador();
+		return $this->_rol->es_administrador();
 	}
 
     /**
@@ -138,16 +138,15 @@ class Usuario {
         $id_rol = $nuevo_usuario->get_rol()->get_id();
         $nombre = $nuevo_usuario->get_nombre();
         $apellido = $nuevo_usuario->get_apellido();
-        $email = is_null($nuevo_usuario->get_email()) ? null : $nuevo_usuario->get_email();
-        $telefono = is_null($nuevo_usuario->get_telefono()) ? null : $nuevo_usuario->get_telefono();
-        $direccion = is_null($nuevo_usuario->get_direccion()) ? null : $nuevo_usuario->get_direccion();
+        $email = empty($nuevo_usuario->get_email()) ? 'NULL' : "'" . $nuevo_usuario->get_email() ."'";
+        $telefono = empty($nuevo_usuario->get_telefono()) ? 'NULL' : "'" . $nuevo_usuario->get_telefono() ."'";
+        $direccion = empty($nuevo_usuario->get_direccion()) ? 'NULL' : "'" . $nuevo_usuario->get_direccion() ."'";
         $fecha_alta = $nuevo_usuario->get_fecha_alta();
 
         $sql = "INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, "
                 . "apellido, email, telefono, direccion, fecha_alta, fecha_baja) "
-                . "VALUES ('" . $nombre_usuario . "', MD5('{$clave_usuario}'), " . $id_rol . ", " . $nombre . ", "
-                . $apellido . ", " . $email . ", " . $telefono . ", " . $direccion . ", " . $fecha_alta . ", NULL)";
-
+                . "VALUES ('" . $nombre_usuario . "', MD5('{$clave_usuario}'), " . $id_rol . ", '" . $nombre . "', '"
+                . $apellido . "', " . $email .	", " . $telefono . ", " . $direccion . ", " . $fecha_alta . ", NULL)";
         return $conexion->insertar_simple($sql);
     }
 
@@ -169,12 +168,15 @@ class Usuario {
     }
 	
 	public static function actualizar_rol($usuario) {
+		if ($usuario->get_rol() == NULL){
+			return FALSE;
+		}
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $datos = array(
-            "nombre_usuario" => $usuario->get_nombre_usuario(),
-            "id_rol" => (($usuario->get_rol() != null) ? $usuario->get_rol()->get_id() : null),            
+            "id_rol" => $usuario->get_rol()->get_id(),            
         );
-        return $conexion->actualizar_unico("usuarios", $datos, "nombre_usuario", $usuario->nombre_usuario());
+		$filtro = array('campo' => "nombre_usuario", 'filtro' => Conexion::FILTRO_BUSQUEDA_COINCIDIR_STRING_COMPLETO, 'valor' => $usuario->get_nombre_usuario());
+        return $conexion->actualizar("usuarios", $datos, array($filtro));
     }
 
     /**

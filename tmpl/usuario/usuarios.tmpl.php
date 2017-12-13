@@ -20,18 +20,7 @@
                     </h2>
                     <div class='contenidoSeccion'>
                         <div ng-app="" ng-controller="ControladorUsuarios">
-                            <div ng-show='maquinas.length > 0'>
-                                <table class="panelOrdenacion">
-                                    <tr>
-                                        <td>
-                                            Orden:
-                                            <select class="general" ng-model="criterioOrdenacionSeleccionado" 
-                                                    ng-options="criterioOrdenacion as criterioOrdenacion.valor for criterioOrdenacion in criteriosOrdenacion"
-                                                    ng-change="ordenar()">
-                                            </select>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <div ng-show='usuarios.length > 0'>
                                 <table class="general" id='tablaMaquinas' >
                                     <thead>
                                         <tr>
@@ -50,8 +39,8 @@
                                             </td>
                                             <td>
 												<select class="general" ng-model="usuario.idRol" 
-														ng-options="rol.nombre for rol in roles"
-														ng-change="actualizarRol(usuario.nombreUsuario, rol.id)">
+														ng-options="rol.id as rol.nombre for rol in roles"
+														ng-change="actualizarRol(usuario)">
 												</select>												
                                             </td>                                            
                                         </tr>

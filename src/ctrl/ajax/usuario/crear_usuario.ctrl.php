@@ -8,37 +8,32 @@ $sesion = Sesion::get_instancia();
 
 if ($sesion->activo()) {
     $usuario_sesion = $sesion->get_usuario();
-    $accion =  $_REQUEST['accion'];
+    $request = json_decode(file_get_contents('php://input'), true);
+	$accion = $request['accion'];
 	if($usuario_sesion->es_administrador()){ //solo un usuario admin puede crear usuarios.
 		if ($accion === 'consultar') {
 			$salida .= '"config":{"accion": "'.$accion.'"},' . PHP_EOL;
 			$salida .= '"datos":' . to_json($usuario_sesion);
 		} else if($accion === 'crear') {
-			$datos = $_REQUEST['datos'];
-			$salida .= '"config":{"accion": "'.$accion.'", ' . PHP_EOL;		
-			
-			$json_usuario = json_decode($datos, true);
+			$salida .= '"config":{"accion": "'.$accion.'"}, ' . PHP_EOL;					
+			$json_usuario = $request['datos'];
+			$ok = FALSE;
 			if (Util::validar_nombre_usuario($json_usuario['nombreUsuario']) 
 				and Util::validar_contrasenia($json_usuario['clave'])){
-				$rol = new Rol();
-				$rol->set_id($json_usuario['id']);
 				$nuevo_usuario = new Usuario();
 				$nuevo_usuario->set_nombre_usuario($json_usuario['nombreUsuario']);
-				$nuevo_usuario->set_clave($json_usuario['clave']);
-				$nuevo_usuario->set_rol($rol);
-				$nuevo_usuario->set_nombre($json_usuario['nombre']);
-				$nuevo_usuario->set_apellido($json_usuario['apellido']);
-				$nuevo_usuario->set_email($json_usuario['email']);
-				$nuevo_usuario->set_telefono($json_usuario['telefono']);
-				$nuevo_usuario->set_direccion($json_usuario['direccion']);
-				$nuevo_usuario->set_fecha_alta(Util::get_fecha_actual_formato_dd_mm_aaaa());
+				$nuevo_usuario->set_clave_usuario($json_usuario['clave']);
+				$nuevo_usuario->set_rol(new Rol($json_usuario['idRol'], NULL, NULL));
+				$nuevo_usuario->set_nombre(array_key_exists('nombre', $json_usuario) ? $json_usuario['nombre'] : NULL);
+				$nuevo_usuario->set_apellido(array_key_exists('apellido', $json_usuario) ? $json_usuario['apellido'] : NULL);
+				$nuevo_usuario->set_email(array_key_exists('email', $json_usuario) ? $json_usuario['email'] : NULL);
+				$nuevo_usuario->set_telefono(array_key_exists('telefono', $json_usuario) ? $json_usuario['telefono'] : NULL);
+				$nuevo_usuario->set_direccion(array_key_exists('direccion', $json_usuario) ? $json_usuario['direccion'] : NULL);
+				$nuevo_usuario->set_fecha_alta(Util::get_fecha_y_hora_actual_mysql());								
+				$ok = Usuario::insertar($nuevo_usuario);
 			}
-			
-			$ok = Usuario::insertar($nuevo_usuario);			
 			$resultado_insercion = ($ok)?"true":"false";
-			$salida .= '"resultado" : "' . $resultado_insercion . '"}, ' . PHP_EOL;
-			$salida .= '"datos":' . to_json($usuario_editado);
-			 
+			$salida .= '"resultado" : "' . $resultado_insercion . '" ' . PHP_EOL;
 		}
 	}
 }

@@ -1,14 +1,4 @@
 {
-"config":{"accion": "consultar"},
-"datos":{
-"id":1,
-"nombreUsuario": "admin",
-"nombre": "Administrador",
-"apellido": "",
-"email": "",
-"telefono": "",
-"direccion": "",
-"fechaAlta": "2017-03-07 14:24:14",
-"fechaBaja": ""
-}
+"config":{"accion": "crear"}, 
+"resultado" : "false" 
 }

@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS roles(
 
 CREATE TABLE IF NOT EXISTS usuarios(
 	id INT NOT NULL AUTO_INCREMENT,
-	nombre_usuario VARCHAR(20),
+	nombre_usuario VARCHAR(20) UNIQUE,
 	clave_usuario VARCHAR(255),
 	id_rol INT NOT NULL,
 	nombre VARCHAR(50) NOT NULL,
