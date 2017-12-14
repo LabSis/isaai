@@ -16,7 +16,7 @@
                     <h2 class='titulo tituloSeccion'>
                         Todos los componentes
                     </h2>
-                    <div class='contenidoSeccion'>
+                    <div class='contenidoSeccion' style="overflow-x: scroll">
                         <form action="<?php echo $global_ruta_web; ?>/src/ctrl/componente/componentes.ctrl.php" method="post">
                             <table class="panelOrdenacion">
                                 <tr>
@@ -25,7 +25,7 @@
                                         <select name="slcTipoComponente" class="general">
                                             <?php foreach ($template_slc_componentes as $valor_slc_componente => $nombre_slc_componente): ?>
                                                 <option value="<?php echo $valor_slc_componente; ?>" 
-												<?php echo ($valor_slc_componente ==  $tipo_componente) ? ' selected="selected"' : '';?> > <?php echo $nombre_slc_componente; ?></option>
+                                                <?php echo ($valor_slc_componente ==  $tipo_componente) ? ' selected="selected"' : '';?> > <?php echo $nombre_slc_componente; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </td>

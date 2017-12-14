@@ -1,4 +1,4 @@
 {
 "config":{"accion": "crear"}, 
-"resultado" : "false" 
+"resultado" : "true" 
 }

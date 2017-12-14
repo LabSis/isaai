@@ -146,7 +146,7 @@ class Usuario {
         $sql = "INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, "
                 . "apellido, email, telefono, direccion, fecha_alta, fecha_baja) "
                 . "VALUES ('" . $nombre_usuario . "', MD5('{$clave_usuario}'), " . $id_rol . ", '" . $nombre . "', '"
-                . $apellido . "', " . $email .	", " . $telefono . ", " . $direccion . ", " . $fecha_alta . ", NULL)";
+                . $apellido . "', " . $email .	", " . $telefono . ", " . $direccion . ", '" . $fecha_alta . "', NULL)";
         return $conexion->insertar_simple($sql);
     }
 

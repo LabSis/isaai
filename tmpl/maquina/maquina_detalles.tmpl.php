@@ -54,7 +54,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Fecha de sincronización:
+                                        Fecha de último inventario registrado:
                                     </td>
                                     <td>
                                         <!-- Habria que setear la ultima fecha de sincronizacion -->

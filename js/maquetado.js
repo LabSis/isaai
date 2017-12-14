@@ -1,12 +1,17 @@
 $(document).ready(function () {
     //ocultar menu usuario
+    $("#menuSeccionUsuario").hide();
     $("#botonUsuario").click(function () {
         if (parseInt($("#menuSeccionUsuario").css("opacity")) == 0) {
             $("#menuSeccionUsuario").css("top", "55px");
-            $("#menuSeccionUsuario").css("opacity", "1.0");
+            $("#menuSeccionUsuario").animate({opacity: "1.0"},{complete: function(){
+                    $(this).show();
+            }});
         } else {
             $("#menuSeccionUsuario").css("top", "45px");
-            $("#menuSeccionUsuario").css("opacity", "0.0");
+            $("#menuSeccionUsuario").animate({opacity: "0.0"},{complete: function(){
+                    $(this).hide();
+            }});
         }
     });
     $("html").click(function () {

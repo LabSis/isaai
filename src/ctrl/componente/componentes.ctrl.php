@@ -16,7 +16,7 @@ $template_slc_componentes = array(
     "9" => "Procesador"
 );
 
-$tipo_componente;
+$tipo_componente = "";
 $nombre_tempate_componente = "";
 if (isset($_POST['slcTipoComponente'])) {
     $tipo_componente = $_POST['slcTipoComponente'];

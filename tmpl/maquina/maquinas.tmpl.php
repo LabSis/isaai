@@ -48,7 +48,7 @@
                                                 Fecha de alta
                                             </td>
                                             <td ng-click="ordenarCabecera('fechaSincronizacion')">
-                                                Fecha de última sincronización
+                                                Fecha de último inventario registrado
                                             </td>
                                             <td ng-click="ordenarCabecera('fechaCambio')">
                                                 Fecha de cambio
