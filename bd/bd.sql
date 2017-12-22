@@ -207,14 +207,14 @@ INSERT INTO roles (id, nombre, descripcion) VALUES (3, "Técnico", NULL);
 INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Cualquier cambio", "Todos los cambios, sean máquinas nuevas o modificaciones en las máquinas actuales");
 INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Nuevas", "Sólo máquinas agregadas al sistema ISAAI");
 INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Procesadores", "Cambios de procesadores");
-INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Bios", "Cambios de bios");
 INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Discos", "Cambios de discos");
 INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Memorias", "Cambios de memorias");
-INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Monitores", "Cambios de monitores");
-INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Perifericos", "Cambios de perifericos");
-INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Placas de red", "Cambios de palcas de red");
-INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Placas de sonido", "Cambios de palcas de sonido");
-INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Placas de video", "Cambios de palcas video");
+-- INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Bios", "Cambios de bios");
+-- INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Monitores", "Cambios de monitores");
+-- INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Perifericos", "Cambios de perifericos");
+-- INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Placas de red", "Cambios de palcas de red");
+-- INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Placas de sonido", "Cambios de palcas de sonido");
+-- INSERT INTO tipos_cambio (nombre, descripcion) VALUES ("Placas de video", "Cambios de palcas video");
    
 /* Permisos del Administrador*/
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,1,false);
@@ -222,33 +222,33 @@ INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,2,fa
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,3,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,4,false);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,5,true);
-INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,6,true);
+/*INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,6,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,7,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,8,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,9,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,10,true);
-INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,11,true);
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (1,11,true);*/
 /* Permisos del Operador*/
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (2,1,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (2,2,false);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (2,3,false);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (2,4,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (2,5,false);
-INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (2,6,false);
+/*INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (2,6,false);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (2,7,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (2,8,false);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (2,9,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (2,10,false);
-INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (2,11,true);
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (2,11,true);*/
 /* Permisos del Técnico */
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,1,false);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,2,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,3,false);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,4,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,5,false);
-INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,6,true);
+/*INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,6,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,7,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,8,false);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,9,true);
 INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,10,false);
-INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,11,false);
+INSERT INTO roles_x_tipo_cambio (id_rol, id_tipo_cambio, permiso) VALUES (3,11,false);*/

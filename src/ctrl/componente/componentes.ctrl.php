@@ -4,7 +4,7 @@ require_once '../../../config.php';
 
 $template_componentes = array();
 
-$template_slc_componentes = array(
+/*$template_slc_componentes = array(
     "1" => "Bios",
     "2" => "Disco",
     "3" => "Memoria",
@@ -13,6 +13,11 @@ $template_slc_componentes = array(
     "6" => "Placa de red",
     "7" => "Placa de sonido",
     "8" => "Placa de video",
+    "9" => "Procesador"
+);*/
+$template_slc_componentes = array(
+    "2" => "Disco",
+    "3" => "Memoria",
     "9" => "Procesador"
 );
 

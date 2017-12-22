@@ -127,7 +127,7 @@ class Usuario {
 	}
 	
 	public function es_usuario($nombre_usuario){
-		return strcasecmp(strtolower($this->_nombre), strtolower($nombre_usuario)) === 0;
+		return strcasecmp(strtolower($this->_nombre_usuario), strtolower($nombre_usuario)) === 0;
 	}
 
     /**
