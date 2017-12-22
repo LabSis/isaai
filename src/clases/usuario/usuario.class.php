@@ -125,6 +125,10 @@ class Usuario {
 	public function es_administrador(){
 		return $this->_rol->es_administrador();
 	}
+	
+	public function es_usuario($nombre_usuario){
+		return strcasecmp(strtolower($this->_nombre), strtolower($nombre_usuario)) === 0;
+	}
 
     /**
      * Este método recibira un nuevo usuario como parametro y lo grabara en la 
@@ -134,19 +138,11 @@ class Usuario {
     public static function insertar($nuevo_usuario) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
         $nombre_usuario = $nuevo_usuario->get_nombre_usuario();
-        $clave_usuario = $nuevo_usuario->get_clave_usuario();
-        $id_rol = $nuevo_usuario->get_rol()->get_id();
-        $nombre = $nuevo_usuario->get_nombre();
-        $apellido = $nuevo_usuario->get_apellido();
-        $email = empty($nuevo_usuario->get_email()) ? 'NULL' : "'" . $nuevo_usuario->get_email() ."'";
-        $telefono = empty($nuevo_usuario->get_telefono()) ? 'NULL' : "'" . $nuevo_usuario->get_telefono() ."'";
-        $direccion = empty($nuevo_usuario->get_direccion()) ? 'NULL' : "'" . $nuevo_usuario->get_direccion() ."'";
-        $fecha_alta = $nuevo_usuario->get_fecha_alta();
+        $id_rol = $nuevo_usuario->get_rol()->get_id();        
+        $fecha_alta = Util::get_fecha_y_hora_actual_mysql();
 
-        $sql = "INSERT INTO usuarios (nombre_usuario, clave_usuario, id_rol, nombre, "
-                . "apellido, email, telefono, direccion, fecha_alta, fecha_baja) "
-                . "VALUES ('" . $nombre_usuario . "', MD5('{$clave_usuario}'), " . $id_rol . ", '" . $nombre . "', '"
-                . $apellido . "', " . $email .	", " . $telefono . ", " . $direccion . ", '" . $fecha_alta . "', NULL)";
+        $sql = "INSERT INTO usuarios (nombre_usuario, id_rol, fecha_alta, fecha_baja) "
+                . "VALUES ('{$nombre_usuario}', {$id_rol}, '{$fecha_alta}', NULL)";
         return $conexion->insertar_simple($sql);
     }
 
@@ -215,18 +211,48 @@ class Usuario {
             $usuario = new Usuario();
             $usuario->set_id($resultado[0]['id']);
             $usuario->set_nombre_usuario($resultado[0]['nombre_usuario']);
-            $usuario->set_clave_usuario($resultado[0]['clave_usuario']);
             $usuario->set_rol(Rol::materializar($resultado[0]['id_rol']));
-            $usuario->set_nombre($resultado[0]['nombre']);
-            $usuario->set_apellido($resultado[0]['apellido']);
-            $usuario->set_email($resultado[0]['email']);
-            $usuario->set_telefono($resultado[0]['telefono']);
-            $usuario->set_direccion($resultado[0]['direccion']);
             $usuario->set_fecha_alta($resultado[0]['fecha_alta']);
             $usuario->set_fecha_baja($resultado[0]['fecha_baja']);
             return $usuario;
         }
         return null;
     }
-
+	
+	public static function cantidad_administradores() {
+        $conexion = Conexion::get_instacia(CONEXION_ISAAI);
+        $consulta = "SELECT COUNT(usuarios.id) as cant_administradores "
+                . "FROM usuarios "
+				. "JOIN roles "
+				. "ON usuarios.id_rol = roles.id "
+                . "WHERE LOWER(roles.nombre) LIKE 'administrador'";
+        $resultado = $conexion->consultar_simple($consulta);
+        if (empty($resultado)) {
+            return 0;
+        }
+		$cant_administradores = $resultado[0]['cant_administradores'];
+		if($cant_administradores > 0){
+			return $cant_administradores;
+		}
+		return 0;
+    }
+	
+	public static function cantidad_administradores_excepto($nombre_usuario) {
+        $conexion = Conexion::get_instacia(CONEXION_ISAAI);
+        $consulta = "SELECT COUNT(usuarios.id) as cant_administradores "
+                . "FROM usuarios "
+				. "JOIN roles "
+				. "ON usuarios.id_rol = roles.id "
+                . "WHERE LOWER(roles.nombre) LIKE 'administrador' "
+				. "AND LOWER(usuarios.nombre_usuario) NOT LIKE LOWER('{$nombre_usuario}')";
+        $resultado = $conexion->consultar_simple($consulta);
+        if (empty($resultado)) {
+            return 0;
+        }
+		$cant_administradores = $resultado[0]['cant_administradores'];
+		if($cant_administradores > 0){
+			return $cant_administradores;
+		}
+		return 0;
+    }
 }

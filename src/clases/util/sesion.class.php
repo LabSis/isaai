@@ -247,51 +247,48 @@ class Sesion {
     }
 
     public function iniciar_sesion_api_aulas($nombre_usuario, $clave_usuario) {
-        $url = "http://localhost/labsis_api_aulas/?usuario={$nombre_usuario}&clave={$clave_usuario}";
+        $url = RUTA_API_AULAS."/validar_usuario.php/?usuario={$nombre_usuario}&clave={$clave_usuario}";
         $process = curl_init($url);
-		print_r($process);
-		var_dump($process);
         curl_setopt($process, CURLOPT_HTTPGET, true);
         curl_setopt($process, CURLOPT_HEADER, false);
-        curl_setopt($process, CURLOPT_RETURNTRANSFER, true);		
-		var_dump($process);
-		print_r($process);
+        curl_setopt($process, CURLOPT_RETURNTRANSFER, true);				
         $raw = curl_exec($process);
-        $resultado = json_decode($raw);
+        $resultado = json_decode($raw);		
         if (!property_exists($resultado, "estado")) {
             return FALSE;
         }    
-        $estado = $resultado->estado;
-        if ($estado === "ok") {
-            $usuario_valida = $resultado->datos->exito;
-            if(!$usuario_valido){
-                return FALSE;
-            }
-            $usuario = $this->obtener_usuario($nombre_usuario);
-            if($usuario !== FALSE){            
-                $this->set_usuario($usuario);
-                return TRUE;
-            }
+        $estado = $resultado->estado;		
+        if ($estado !== "ok") {
+			return FALSE;
+		}
+        $usuario_valido = $resultado->datos->exito;
+        if(!$usuario_valido){
+            return FALSE;
+        }						
+        $usuario = $this->obtener_usuario($nombre_usuario);
+        if($usuario === FALSE){
+			$usuario = new Usuario();
+			$usuario->set_nombre_usuario($nombre_usuario);
+			$usuario->set_rol(Usuario::cantidad_administradores() === 0 ? Rol::materializar(1) : Rol::materializar(2));
+            if(!Usuario::insertar($usuario)){					
+				return FALSE;
+			}
         }
-        return false;
+		$this->set_usuario($usuario);
+		return TRUE;        
     }
 
     public function obtener_usuario($nombre_usuario) {
         $conexion = Conexion::get_instacia(CONEXION_ISAAI);
-        $consulta = "SELECT id, nombre_usuario, id_rol, nombre, apellido, email, telefono, direccion, fecha_alta, fecha_baja "
+        $consulta = "SELECT id, nombre_usuario, id_rol, fecha_alta, fecha_baja "
                 . "FROM usuarios "
-                . "WHERE ( nombre_usuario = '{$nombre_usuario}' OR email = '{$nombre_usuario}' ) ";
-        $resultado = $conexion->consultar_simple($consulta);
+                . "WHERE ( nombre_usuario = '{$nombre_usuario}')";
+        $resultado = $conexion->consultar_simple($consulta);		
         if (!empty($resultado)) {
             $usuario = new Usuario();
             $usuario->set_id($resultado[0]['id']);
             $usuario->set_nombre_usuario($resultado[0]['nombre_usuario']);
             $usuario->set_rol(Rol::materializar($resultado[0]['id_rol']));
-            $usuario->set_nombre($resultado[0]['nombre']);
-            $usuario->set_apellido($resultado[0]['apellido']);
-            $usuario->set_email($resultado[0]['email']);
-            $usuario->set_telefono($resultado[0]['telefono']);
-            $usuario->set_direccion($resultado[0]['direccion']);
             $usuario->set_fecha_alta($resultado[0]['fecha_alta']);
             $usuario->set_fecha_baja($resultado[0]['fecha_baja']);            
             return $usuario;

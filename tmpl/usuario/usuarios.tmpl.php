@@ -40,7 +40,7 @@
                                             <td>
 												<select class="general" ng-model="usuario.idRol" 
 														ng-options="rol.id as rol.nombre for rol in roles"
-														ng-change="actualizarRol(usuario)">
+														ng-change="actualizarRol(usuario, '{{usuario.idRol}}')">
 												</select>												
                                             </td>                                            
                                         </tr>

@@ -57,8 +57,8 @@ function ControladorUsuarios($scope, $http) {
         $scope.ordenInvertido = !$scope.ordenInvertido;
     };
 	
-	$scope.actualizarRol = function(usuario){
-		console.log('nombreUsuario', usuario);
+	$scope.actualizarRol = function(usuario, idRolOriginal){
+		console.log(idRolOriginal)
 		var rutaWeb = $("#dataRutaWeb").html().trim();
         $http.post(rutaWeb + "/src/ctrl/ajax/usuario/actualizar_rol.ctrl.php", JSON.stringify({datos:usuario})).success(function(respuesta) {
             if (respuesta !== null) {
@@ -66,7 +66,10 @@ function ControladorUsuarios($scope, $http) {
                     mensaje.setContenido("Se actualizó el rol del usuario con éxito");
                     mensaje.setTipo(TipoMensaje.prototype.exito);
                 } else {
-                    mensaje.setContenido("Error al tratar de actualizar rol");
+					usuario.idRol = idRolOriginal;
+                    mensaje.setContenido("Error al tratar de actualizar rol.\
+					<br>Verifique:<br>*Al menos debe quedar un Administrador.\
+					<br>*Ud. como administrador tiene que esperar a que otro adminstrador le cambie de rol.");
                     mensaje.setTipo(TipoMensaje.prototype.error);
                 }
                 mensaje.mostrar();

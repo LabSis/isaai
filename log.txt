@@ -1,4 +1,15 @@
 {
-"config":{"accion": "crear"}, 
-"resultado" : "true" 
+"config":{"accion": "consultar"},
+"datos":{
+"id":1,
+"nombreUsuario": "mili_zc",
+"rol": "Operador",
+"nombre": "",
+"apellido": "",
+"email": "",
+"telefono": "",
+"direccion": "",
+"fechaAlta": "0000-00-00 00:00:00",
+"fechaBaja": ""
+}
 }

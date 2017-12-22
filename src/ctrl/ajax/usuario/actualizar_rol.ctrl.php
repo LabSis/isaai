@@ -20,9 +20,11 @@ $resultado = "false";
 $usuario = new Usuario();
 $usuario->set_nombre_usuario($json_datos_usuario['nombreUsuario']);
 $usuario->set_rol(new Rol($json_datos_usuario['idRol'], null, null));
-//$conexion = Conexion::get_instacia(CONEXION_ISAAI);
-if(Usuario::actualizar_rol($usuario)){
-	$resultado = "true";
+if(Usuario::cantidad_administradores_excepto($usuario->get_nombre_usuario()) >= 1 
+	&& !$usuario->es_usuario($sesion->get_usuario()->get_nombre_usuario())){
+	if(Usuario::actualizar_rol($usuario)){
+		$resultado = "true";
+	}	
 }
 $salida .= '"resultado": "' . $resultado . '"' . PHP_EOL;
 $salida .= '}';

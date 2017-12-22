@@ -11,25 +11,10 @@
                     <?php if($sesion->get_usuario()->es_administrador()): ?>
 						<li>
 							<a href="<?php echo $global_ruta_web . "/src/ctrl/usuario/usuarios.ctrl.php"; ?>">
-								Mostrar usuarios
+								Usuarios
 							</a>
-						</li>
-						<li>
-							<a href="<?php echo $global_ruta_web . "/src/ctrl/usuario/crear_usuario.ctrl.php"; ?>">
-								Crear nuevo usuario
-							</a>
-						</li>						
+						</li>					
 					<?php endif;?>
-					<li>
-                        <a href="<?php echo $global_ruta_web . "/src/ctrl/usuario/editar_datos.ctrl.php"; ?>">
-                            Editar datos
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $global_ruta_web . "/src/ctrl/usuario/cambiar_contrasenia.ctrl.php"; ?>">
-                            Cambiar contraseña
-                        </a>
-                    </li>
                     <li>
                         <a href="<?php echo $global_ruta_web . "/src/ctrl/cerrar_sesion.ctrl.php"; ?>">
                             Cerrar sesión
@@ -44,8 +29,7 @@
         </div>
     </div>
     <div id="cabeceraMensajes">
-        <h2 id="mensajesAlerta">
-            
+        <h2 id="mensajesAlerta">           
             <i class="fa fa-exclamation-triangle" id="iconoAlerta"></i>
         </h2>
     </div>

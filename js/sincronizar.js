@@ -9,7 +9,6 @@ $(document).ready(function() {
                 url: rutaWeb + "/src/ctrl/ajax/sincronizar.ctrl.php",
                 type: "POST"
             }).done(function(respuesta) {
-                console.log(respuesta);
                 btnSincronizar.html("<i class='fa fa-refresh fa-fw icono'></i><span class='spnTextMenu'>Sincronizar</span></a>");
                 sincronizando = false;
                 var cantMaquinasCambiadas = parseInt(respuesta);
